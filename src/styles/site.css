@@ -1,0 +1,202 @@
+@font-face { font-family: 'Fraunces'; src: url('/fonts/fraunces.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Fraunces'; src: url('/fonts/fraunces-kursiv.woff2') format('woff2'); font-weight: 100 900; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Geist'; src: url('/fonts/geist.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+img { max-width: 100%; }
+
+/* Neue Website: ein geführter Essay.
+   Schwarz für den Auftakt (Eindruck), Weiß für den Essay (Ordnung),
+   Schwarz für den Schluss (Wirkung). Reines Schwarz und Weiß, drei Grautöne.
+   Fraunces trägt Überschriften und Lesetext, Geist die kleinen Hinweise am Rand. */
+
+body {
+  --schwarz: #000;
+  --weiss: #fff;
+  --grau-1: #5f5f5f;
+  --grau-2: #9d9d9d;
+  --grau-3: #e2e2e2;
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --grotesk: 'Geist', 'Helvetica Neue', Arial, sans-serif;
+  --rand: max(20px, 4.5vw);
+
+  background: var(--weiss);
+  color: var(--schwarz);
+  font-family: var(--serif);
+  font-weight: 350;
+  font-size: 19px;
+  line-height: 1.62;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.seite a, body a { color: inherit; }
+:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+
+.unsichtbar {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* Navigation: Differenzmodus trägt auf Schwarz und Weiß */
+.nav {
+  position: fixed; inset: 0 0 auto; z-index: 30;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: calc(18px + env(safe-area-inset-top, 0px)) max(var(--rand), env(safe-area-inset-right, 0px)) 18px max(var(--rand), env(safe-area-inset-left, 0px));
+  mix-blend-mode: difference; color: #fff;
+  font-family: var(--grotesk); font-size: 14px; font-weight: 400;
+}
+.marke img { display: block; height: 32px; width: auto; filter: invert(1); }
+.navlink { padding-bottom: 2px; }
+
+/* Auftakt */
+.auftakt {
+  background: var(--schwarz); color: var(--weiss);
+  padding: 22vh max(var(--rand), env(safe-area-inset-right, 0px)) 8vh max(var(--rand), env(safe-area-inset-left, 0px));
+}
+.auftaktFuss {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px;
+  margin-top: 9vh; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, 0.22);
+  font-family: var(--grotesk); font-size: 15px; font-weight: 300; line-height: 1.55;
+}
+.auftaktFuss p:first-child { grid-column: 1 / span 5; max-width: 44ch; }
+.auftaktFuss .leise { grid-column: 9 / span 4; }
+.leise { color: var(--grau-2); }
+
+/* Essay: Titelspalte, Lesespalte, Randspalte */
+.essay { padding: 0 max(var(--rand), env(safe-area-inset-right, 0px)) 0 max(var(--rand), env(safe-area-inset-left, 0px)); }
+.kapitel {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px;
+  padding-block: clamp(88px, 15vh, 180px);
+  border-bottom: 1px solid var(--grau-3);
+}
+.kapitel:last-child { border-bottom: 0; }
+.titel {
+  grid-column: 1 / -1;
+  font-weight: 300; font-size: clamp(44px, 7.4vw, 124px); line-height: 0.98;
+  letter-spacing: -0.02em; margin-bottom: clamp(40px, 7vh, 88px);
+  text-wrap: balance; max-width: 14ch;
+}
+.text { grid-column: 2 / span 6; min-width: 0; }
+.text > p + p, .text > p + *, .text > * + p { margin-top: 1.1em; }
+.gross { font-size: clamp(25px, 2.5vw, 34px); line-height: 1.28; font-weight: 300; letter-spacing: -0.005em; }
+.rand {
+  grid-column: 9 / span 4; min-width: 0; align-self: start; position: sticky; top: 96px;
+  font-family: var(--grotesk); font-size: 14px; line-height: 1.55; color: var(--grau-1); font-weight: 400;
+}
+.rand > * + * { margin-top: 28px; }
+
+/* Gewachsen / Geordnet */
+.vn { margin: 48px 0 0; }
+.schalter { display: inline-flex; border: 1px solid var(--schwarz); font-family: var(--grotesk); font-size: 14px; }
+.schalter button {
+  font: inherit; background: transparent; color: var(--schwarz); border: 0; padding: 9px 16px; cursor: pointer;
+}
+.schalter button[aria-pressed='true'] { background: var(--schwarz); color: var(--weiss); }
+.teile { list-style: none; margin-top: 24px; border-top: 1px solid var(--grau-3); }
+.teile li {
+  display: grid; padding: 16px 0; border-bottom: 1px solid var(--grau-3);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i) * 45ms);
+}
+.vorher, .nachher { grid-area: 1 / 1; transition: opacity 0.45s, filter 0.45s; }
+.nachher { opacity: 0; font-size: 20px; }
+.teile li:nth-child(1) { transform: translateX(6%) rotate(-1.2deg); }
+.teile li:nth-child(2) { transform: translateX(-2%); }
+.teile li:nth-child(3) { transform: translateX(14%) rotate(0.8deg); }
+.teile li:nth-child(4) { transform: translateX(3%) rotate(-0.6deg); }
+.teile li:nth-child(5) { transform: translateX(9%); }
+.teile li:nth-child(6) { transform: translateX(-1%) rotate(1deg); }
+.teile li:nth-child(1) .vorher { font-style: italic; font-size: 26px; }
+.teile li:nth-child(2) .vorher { font-family: var(--grotesk); font-weight: 600; font-size: 15px; letter-spacing: 0.12em; }
+.teile li:nth-child(3) .vorher { font-family: 'Courier New', monospace; font-size: 15px; color: var(--grau-1); }
+.teile li:nth-child(4) .vorher { font-family: Georgia, serif; font-size: 22px; color: var(--grau-2); }
+.teile li:nth-child(5) .vorher { font-family: var(--grotesk); font-size: 13px; letter-spacing: 0.3em; }
+.teile li:nth-child(6) .vorher { font-weight: 700; font-size: 28px; color: var(--grau-1); }
+.geordnet li { transform: none !important; }
+.geordnet .vorher { opacity: 0; filter: blur(3px); }
+.geordnet .nachher { opacity: 1; }
+
+/* Sieben Fragen */
+.fragen { list-style: none; margin: 40px 0; border-top: 1px solid var(--grau-3); }
+.fragen li {
+  display: grid; grid-template-columns: 9em minmax(0, 1fr); gap: 16px; align-items: baseline;
+  padding: 18px 0; border-bottom: 1px solid var(--grau-3); transition: color 0.4s;
+}
+.fragenFokus li { color: var(--grau-2); }
+.fragenFokus li.scharf, .fragen li:hover { color: var(--schwarz); }
+.kategorie { font-family: var(--grotesk); font-size: 14px; }
+.frage { font-size: clamp(21px, 2vw, 27px); line-height: 1.25; font-weight: 300; }
+
+.zeitachse { list-style: none; border-left: 1px solid var(--schwarz); }
+.zeitachse li { position: relative; padding: 0 0 22px 18px; color: var(--grau-1); }
+.zeitachse li::before { content: ''; position: absolute; left: -4px; top: 6px; width: 7px; height: 7px; background: var(--schwarz); border-radius: 50%; }
+.zeitachse span { display: block; color: var(--schwarz); font-variant-numeric: tabular-nums; }
+
+/* Leistungsfelder */
+.feld + .feld { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--grau-3); }
+.feld h3 { font-weight: 300; font-size: clamp(30px, 3vw, 42px); line-height: 1.05; margin-bottom: 14px; letter-spacing: -0.01em; }
+.liefer { margin-top: 14px; font-family: var(--grotesk); font-size: 14px; color: var(--grau-1); }
+
+/* Person */
+.portrait { display: block; width: 100%; max-width: 360px; height: auto; aspect-ratio: 2 / 3; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.stationen { list-style: none; border-top: 1px solid var(--grau-3); }
+.stationen li { display: grid; grid-template-columns: 3.4em minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--grau-3); }
+.stationen span { color: var(--schwarz); font-variant-numeric: tabular-nums; }
+
+/* Schluss */
+.schluss {
+  background: var(--schwarz); color: var(--weiss);
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px;
+  padding: clamp(110px, 18vh, 220px) max(var(--rand), env(safe-area-inset-right, 0px)) 0 max(var(--rand), env(safe-area-inset-left, 0px));
+}
+.schlussSatz {
+  grid-column: 1 / span 11; font-weight: 300; font-size: clamp(42px, 6.6vw, 112px);
+  line-height: 1; letter-spacing: -0.02em; text-wrap: balance;
+}
+.schlussText { grid-column: 2 / span 6; margin-top: 64px; }
+.schlussText p + p { margin-top: 1.2em; }
+.knopf {
+  display: inline-block; background: var(--weiss); color: var(--schwarz) !important;
+  font-family: var(--grotesk); font-size: 15px; font-weight: 400; padding: 15px 26px; margin-top: 8px;
+}
+.knopf:hover { background: var(--grau-3); }
+.fuss {
+  grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px;
+  margin-top: clamp(110px, 16vh, 200px); padding: 24px 0 calc(24px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  font-family: var(--grotesk); font-size: 14px; color: var(--grau-2);
+}
+.fussLinks { display: flex; gap: 24px; }
+
+@media (max-width: 900px) {
+  .text, .schlussText { grid-column: 1 / -1; }
+  .rand { grid-column: 1 / -1; position: static; margin-top: 48px; }
+  .auftaktFuss p:first-child, .auftaktFuss .leise { grid-column: 1 / -1; }
+  .schlussSatz { grid-column: 1 / -1; }
+  .fragen li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .portrait { max-width: 260px; }
+  .marke img { height: 26px; }
+  body { font-size: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .teile li, .vorher, .nachher, .fragen li { transition: none; }
+}
+
+/* Rechtliches */
+.recht { max-width: 40rem; padding: 18vh max(var(--rand), env(safe-area-inset-right, 0px)) 12vh max(var(--rand), env(safe-area-inset-left, 0px)); }
+.recht h1 { font-weight: 300; font-size: clamp(44px, 6vw, 80px); line-height: 1; letter-spacing: -0.02em; }
+.recht h2 { font-weight: 400; font-size: 24px; margin-top: 2.2em; }
+.recht p { margin-top: 0.9em; }
+.recht .unter { font-family: var(--grotesk); font-size: 15px; color: var(--grau-1); margin-top: 1.2em; }
+.recht .zurueck { font-family: var(--grotesk); font-size: 14px; margin-top: 3em; display: flex; gap: 24px; }
+
+/* Punkteschrift im Auftakt */
+.schriftfeld { position: relative; width: 100%; }
+.schriftfeld canvas { position: absolute; inset: 0; display: block; touch-action: pan-y; }
+.ersatz {
+  font-family: var(--serif); font-weight: 300; font-size: clamp(40px, 12vw, 240px);
+  line-height: 0.96; letter-spacing: -0.01em; color: #fff; transition: opacity 0.4s;
+}

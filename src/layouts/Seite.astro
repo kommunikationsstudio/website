@@ -1,0 +1,61 @@
+---
+import '../styles/site.css'
+
+interface Props {
+  titel?: string
+  beschreibung?: string
+}
+
+const {
+  titel = 'kommunikations.studio · Wahrnehmung gestalten',
+  beschreibung = 'Studio für strategische Kommunikation, visuelle Identität und digitale Präsenz. Sebastian Knust, Rhein-Main und Mittelhessen.',
+} = Astro.props
+
+// Bis zur Freigabe bleibt die Seite aus den Suchmaschinen heraus.
+const freigegeben = import.meta.env.PUBLIC_FREIGEGEBEN === 'true'
+const kanonisch = new URL(Astro.url.pathname, Astro.site)
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': 'https://www.kommunikations.studio/#studio',
+      name: 'kommunikations.studio',
+      url: 'https://www.kommunikations.studio',
+      slogan: 'Wahrnehmung gestalten. Vom Eindruck zur Wirkung.',
+      email: 'kontakt@kommunikations.studio',
+      areaServed: ['Rhein-Main', 'Mittelhessen', 'Hessen'],
+      founder: { '@id': 'https://www.kommunikations.studio/#sebastian' },
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://www.kommunikations.studio/#sebastian',
+      name: 'Sebastian Knust',
+      worksFor: { '@id': 'https://www.kommunikations.studio/#studio' },
+    },
+  ],
+}
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{titel}</title>
+    <meta name="description" content={beschreibung} />
+    <link rel="canonical" href={kanonisch} />
+    {!freigegeben && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/geist.woff2" as="font" type="font/woff2" crossorigin />
+    <meta property="og:title" content={titel} />
+    <meta property="og:description" content={beschreibung} />
+    <meta property="og:locale" content="de_DE" />
+    <meta name="theme-color" content="#000000" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

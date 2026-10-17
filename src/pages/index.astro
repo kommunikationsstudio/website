@@ -1,0 +1,213 @@
+---
+import Seite from '../layouts/Seite.astro'
+
+// Der Auftritt als geführter Essay: Auftakt auf Schwarz (Eindruck),
+// Essay auf Weiß (Ordnung), Schluss auf Schwarz (Wirkung).
+
+const FRAGEN = [
+  ['Typografie', 'Welche Schrift trägt Ihre Haltung, und in welchem Maß?'],
+  ['Bildsprache', 'Was zeigen Sie, in welchem Licht, aus welcher Nähe?'],
+  ['Bewegung', 'Wo hilft Bewegung beim Verstehen?'],
+  ['Tonalität', 'Wie klingt Ihr Unternehmen, wenn es spricht?'],
+  ['Dramaturgie', 'In welcher Reihenfolge lernt Ihr Gegenüber Sie kennen?'],
+  ['Atmosphäre', 'Welches Klima bleibt nach dem ersten Besuch?'],
+  ['Rhythmus', 'Wo braucht es Pause, wo Verdichtung?'],
+]
+
+const STATIONEN = [
+  ['2012', 'Aldiana in Ägypten, auf Kreta und in Andalusien: Marketing und Social Media'],
+  ['2014', 'Kempinski Hotel Frankfurt Gravenbruch: Ausbildung, Sales, erste Gestaltung'],
+  ['2018', 'Villa Rothschild und Falkenstein Grand: Marketing, Fotografie, Video'],
+  ['2021', 'Sellwerk und Kalify: Vertrieb, Aufbau einer Markenidentität'],
+  ['2022', 'Steigenberger Frankfurter Hof: Marketing Manager Luxury'],
+  ['2024', 'Interne Kommunikation im öffentlichen Sektor'],
+]
+
+const MAIL = 'kontakt@kommunikations.studio'
+
+const TEILE = [
+  ['Logo aus der Gründungszeit', 'Ein Zeichen mit Herkunft und klarer Form'],
+  ['Website vom Baukasten', 'Eine Website, die durch Ihr Angebot führt'],
+  ['Bilder aus der Datenbank', 'Eigene Bilder von Ihren Räumen und Menschen'],
+  ['Drei Schriften, vier Grautöne', 'Eine Schrift, ein Raster, ein Maß'],
+  ['Ein Ton im Angebot, ein anderer online', 'Eine Stimme an jedem Kontaktpunkt'],
+  ['Stellenanzeige ohne Gesicht', 'Ein Arbeitgeber, den Bewerber wiedererkennen'],
+]
+---
+<Seite>
+      <header class="nav">
+        <a href="#anfang" class="marke" aria-label="kommunikations.studio, zum Anfang">
+                    <img src="/logo-ks-master.svg" alt="" width={150} height={36} />
+        </a>
+        <a href="#gespraech" class="navlink">Erstgespräch</a>
+      </header>
+
+      <section id="anfang" class="auftakt">
+        <h1 class="unsichtbar">Wahrnehmung gestalten.</h1>
+        <div class="schriftfeld" data-schriftfeld aria-hidden="true">
+          <div class="ersatz" data-ersatz><div>Wahrnehmung</div><div>gestalten.</div></div>
+          <canvas></canvas>
+        </div>
+        <div class="auftaktFuss">
+          <p>
+            kommunikations.studio gestaltet, wie Unternehmen wahrgenommen werden:
+            Positionierung, Erscheinungsbild, Sprache und digitale Präsenz aus einer Hand.
+          </p>
+          <p class="leise">Sebastian Knust, Rhein-Main und Mittelhessen</p>
+        </div>
+      </section>
+
+      <main class="essay">
+        <section class="kapitel" aria-labelledby="k-eindruck">
+          <h2 id="k-eindruck" class="titel">Vom Eindruck</h2>
+          <div class="text">
+            <p class="gross">
+              Ein Unternehmen wird gesehen, lange bevor es verstanden wird.
+            </p>
+            <p>
+              Ein Blick auf die Website, eine Visitenkarte, der erste Satz einer E-Mail: Daraus
+              entsteht in Sekunden ein Urteil. Dieses Urteil entscheidet, ob Ihre Qualität bei den
+              Menschen ankommt, für die Sie arbeiten.
+            </p>
+          </div>
+          <aside class="rand">
+            <p>Mein Ziel für jeden Auftritt: Der erste Eindruck und Ihre tatsächliche Qualität sagen dasselbe.</p>
+          </aside>
+        </section>
+
+        <section class="kapitel" aria-labelledby="k-spannung">
+          <h2 id="k-spannung" class="titel">Gewachsen, Stück für Stück</h2>
+          <div class="text">
+            <p>
+              Viele Unternehmen sind besser, als sie wirken. Ihr Auftritt ist über Jahre entstanden,
+              jedes Teil mit gutem Grund und zu seiner Zeit. Zusammen ergeben sie ein unscharfes Bild.
+              Meine Arbeit beginnt dort, wo diese Teile wieder zu einer Haltung werden.
+            </p>
+            <figure class="vn" data-vorher-nachher>
+              <div class="schalter" role="group" aria-label="Zustand des Auftritts">
+                <button type="button" aria-pressed="true" data-zustand="gewachsen">Gewachsen</button>
+                <button type="button" aria-pressed="false" data-zustand="geordnet">Geordnet</button>
+              </div>
+              <ul class="teile" aria-live="polite">
+                {TEILE.map(([vorher, nachher]) => (
+                  <li><span class="vorher">{vorher}</span><span class="nachher">{nachher}</span></li>
+                ))}
+              </ul>
+            </figure>
+          </div>
+        </section>
+
+        <section class="kapitel" aria-labelledby="k-methode">
+          <h2 id="k-methode" class="titel">Sieben Fragen</h2>
+          <div class="text">
+            <p>
+              Briefings sprechen in Wünschen: aufgeräumter, mutiger, mehr Gewicht. Ich übersetze jeden
+              Wunsch mit meiner Wahrnehmungsanalyse in sieben Fragen, auf die es klare Antworten gibt.
+            </p>
+            <ol class="fragen" data-fokusliste>
+              {FRAGEN.map(([k, f]) => (
+                <li><span class="kategorie">{k}</span><span class="frage">{f}</span></li>
+              ))}
+            </ol>
+            <p>Erst wenn diese Antworten stehen, beginnt die Gestaltung.</p>
+          </div>
+          <aside class="rand">
+            <ol class="zeitachse">
+              <li><span>0 bis 3 Sekunden</span>Eindruck. Atmosphäre, Ton und Schrift entscheiden, ob jemand bleibt.</li>
+              <li><span>3 bis 15 Sekunden</span>Verdichtung. Bilder, Struktur und Rhythmus formen ein Bild von Ihnen.</li>
+              <li><span>danach</span>Wirkung. Ein Satz und ein Gefühl, die nach dem Besuch bleiben.</li>
+            </ol>
+          </aside>
+        </section>
+
+        <section class="kapitel" aria-labelledby="k-leistung">
+          <h2 id="k-leistung" class="titel">Was daraus entsteht</h2>
+          <div class="text">
+            <div class="feld">
+              <h3>Positionierung</h3>
+              <p>
+                Wofür Sie stehen, für wen Sie arbeiten und was Sie unterscheidet. So klar
+                formuliert, dass sich jede weitere Entscheidung daran messen lässt.
+              </p>
+              <p class="liefer">Wahrnehmungsanalyse, Positionierung, Markenkern, Sprachleitfaden</p>
+            </div>
+            <div class="feld">
+              <h3>Erscheinungsbild</h3>
+              <p>
+                Zeichen, Schrift, Raster und Bild als ein System, von der Visitenkarte bis zur
+                Website. Ich gestalte und entwickle selbst.
+              </p>
+              <p class="liefer">Corporate Design, Logo und Zeichensystem, Webdesign und Entwicklung, Geschäftsausstattung</p>
+            </div>
+            <div class="feld">
+              <h3>Inhalte</h3>
+              <p>
+                Text, Fotografie und Video, die Ihre Haltung zeigen. Nach außen für Kundschaft und
+                Bewerber, nach innen für Ihr Team.
+              </p>
+              <p class="liefer">Content-Produktion, Social Media, Employer Branding, interne Kommunikation</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="kapitel" aria-labelledby="k-haltung">
+          <h2 id="k-haltung" class="titel">Wer hier arbeitet</h2>
+          <div class="text">
+            <p>
+              Ich bin Sebastian Knust und komme aus der internationalen Luxushotellerie. In einem
+              Fünf-Sterne-Haus zählt der erste Satz am Telefon so viel wie die Fassade. Diese
+              Schule prägt meine Arbeit bis heute.
+            </p>
+            <p>
+              Danach habe ich Marken geführt, Kampagnen entwickelt, Agenturen gesteuert und Inhalte
+              selbst fotografiert, gefilmt und geschrieben. Heute bringe ich diese Erfahrung zu
+              Unternehmen, die klarer wahrgenommen werden wollen.
+            </p>
+            <p class="gross">
+              Ich arbeite mit digitalen Werkzeugen, auch mit KI. Das Urteil darüber, wie Ihr
+              Unternehmen wirken soll, treffen wir gemeinsam.
+            </p>
+          </div>
+          <aside class="rand">
+                        <img class="portrait" src="/sebastian.jpg" alt="Sebastian Knust" width={1344} height={2016} loading="lazy" />
+            <ol class="stationen">
+              {STATIONEN.map(([jahr, was]) => (
+                <li><span>{jahr}</span>{was}</li>
+              ))}
+            </ol>
+          </aside>
+        </section>
+      </main>
+
+      <section id="gespraech" class="schluss" aria-labelledby="k-wirkung">
+        <h2 id="k-wirkung" class="schlussSatz">
+          Zur Wirkung. Beginnen wir mit dem Eindruck, den Sie heute hinterlassen.
+        </h2>
+        <div class="schlussText">
+          <p>
+            Im ersten Gespräch schauen wir 45 Minuten gemeinsam auf Ihren Auftritt. Sie gehen mit
+            drei konkreten Beobachtungen, unabhängig davon, ob wir danach zusammenarbeiten.
+          </p>
+          <p>
+            <a class="knopf" href={`mailto:${MAIL}?subject=Erstgespr%C3%A4ch`}>Erstgespräch anfragen</a>
+          </p>
+          <p class="leise">oder direkt an {MAIL}</p>
+        </div>
+        <footer class="fuss">
+          <span>kommunikations.studio, Sebastian Knust</span>
+          <span class="fussLinks">
+            <a href="/impressum">Impressum</a>
+            <a href="/datenschutz">Datenschutz</a>
+          </span>
+        </footer>
+      </section>
+</Seite>
+
+<script>
+  import { schriftfeld } from '../scripts/schriftfeld'
+  import { fokusliste, vorherNachher } from '../scripts/essay'
+
+  document.querySelectorAll<HTMLElement>('[data-schriftfeld]').forEach(schriftfeld)
+  document.querySelectorAll<HTMLElement>('[data-fokusliste]').forEach(fokusliste)
+  document.querySelectorAll<HTMLElement>('[data-vorher-nachher]').forEach(vorherNachher)
+</script>
