@@ -7,32 +7,63 @@ interface Props {
 }
 
 const {
-  titel = 'kommunikations.studio · Wahrnehmung gestalten',
-  beschreibung = 'Studio für strategische Kommunikation, visuelle Identität und digitale Präsenz. Sebastian Knust, Rhein-Main und Mittelhessen.',
+  titel = 'Wahrnehmung gestalten | kommunikations.studio',
+  beschreibung = 'Positionierung, Erscheinungsbild und Inhalte für Unternehmen in Rhein-Main und Mittelhessen. Sebastian Knust übersetzt vage Wünsche in konkrete Gestaltung. Erstgespräch kostenfrei.',
 } = Astro.props
 
 // Bis zur Freigabe bleibt die Seite aus den Suchmaschinen heraus.
 const freigegeben = import.meta.env.PUBLIC_FREIGEGEBEN === 'true'
 const kanonisch = new URL(Astro.url.pathname, Astro.site)
 
+const STUDIO = 'https://www.kommunikations.studio/#studio'
+const PERSON = 'https://www.kommunikations.studio/#sebastian'
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
       '@type': 'ProfessionalService',
-      '@id': 'https://www.kommunikations.studio/#studio',
+      '@id': STUDIO,
       name: 'kommunikations.studio',
       url: 'https://www.kommunikations.studio',
+      logo: 'https://www.kommunikations.studio/logo-ks-master.svg',
+      image: 'https://www.kommunikations.studio/og.png',
       slogan: 'Wahrnehmung gestalten. Vom Eindruck zur Wirkung.',
+      description: beschreibung,
       email: 'kontakt@kommunikations.studio',
+      telephone: '+49 156 78540600',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Felizitas-Massenkeil-Str. 9',
+        postalCode: '65549',
+        addressLocality: 'Limburg an der Lahn',
+        addressRegion: 'Hessen',
+        addressCountry: 'DE',
+      },
       areaServed: ['Rhein-Main', 'Mittelhessen', 'Hessen'],
-      founder: { '@id': 'https://www.kommunikations.studio/#sebastian' },
+      knowsAbout: ['Positionierung', 'Corporate Design', 'Webdesign', 'Markenkommunikation', 'Employer Branding', 'Interne Kommunikation', 'Wahrnehmungsanalyse'],
+      founder: { '@id': PERSON },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Leistungen',
+        itemListElement: ['Positionierung', 'Erscheinungsbild', 'Inhalte'].map((name) => ({
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name },
+        })),
+      },
     },
     {
       '@type': 'Person',
-      '@id': 'https://www.kommunikations.studio/#sebastian',
+      '@id': PERSON,
       name: 'Sebastian Knust',
-      worksFor: { '@id': 'https://www.kommunikations.studio/#studio' },
+      image: 'https://www.kommunikations.studio/sebastian.jpg',
+      worksFor: { '@id': STUDIO },
+    },
+    {
+      '@type': 'WebSite',
+      name: 'kommunikations.studio',
+      url: 'https://www.kommunikations.studio',
+      inLanguage: 'de-DE',
+      publisher: { '@id': STUDIO },
     },
   ],
 }
@@ -52,6 +83,14 @@ const jsonLd = {
     <meta property="og:title" content={titel} />
     <meta property="og:description" content={beschreibung} />
     <meta property="og:locale" content="de_DE" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="kommunikations.studio" />
+    <meta property="og:url" content={kanonisch} />
+    <meta property="og:image" content={new URL('/og.png', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Wahrnehmung gestalten. Vom Eindruck zur Wirkung." />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#ffffff" />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>

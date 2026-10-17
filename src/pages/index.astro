@@ -1,5 +1,6 @@
 ---
 import Seite from '../layouts/Seite.astro'
+import { WOERTER } from '../data/woerter'
 
 // Jede Zeile: Kategorie, Floskel aus dem Briefing (Wort, das durchgestrichen wird),
 // Satz drumherum, Übersetzung des Studios und die Frage dahinter.
@@ -42,7 +43,7 @@ const erste = KATEGORIEN[0]
       <div class="dekodierer durch da" data-dekodierer aria-live="off">
         <div class="zeile">
           <span class="wer">Aus dem Briefing</span>
-          <p class="briefing" data-briefing>{erste.vor}<s>{erste.wort}</s>{erste.nach}</p>
+          <p class="briefing"><span data-briefing>{erste.vor}<s>{erste.wort}</s>{erste.nach}</span></p>
         </div>
         <div class="zeile">
           <span class="wer"><span class="kat" data-kat>{erste.kat}</span></span>
@@ -55,6 +56,13 @@ const erste = KATEGORIEN[0]
             </div>
           </div>
         </div>
+        <form class="eigenes zeile" data-eigenes>
+          <label class="wer" for="eigenes-wort">Ihr Wort</label>
+          <div class="eigenes-feld">
+            <input id="eigenes-wort" name="wort" type="text" autocomplete="off" maxlength="40" placeholder="zum Beispiel seriöser" />
+            <button type="submit">Übersetzen</button>
+          </div>
+        </form>
       </div>
 
       <div class="these">
@@ -143,7 +151,7 @@ const erste = KATEGORIEN[0]
     </footer>
   </section>
 
-  <script define:vars={{ KATEGORIEN }}>
+  <script define:vars={{ KATEGORIEN, WOERTER }}>
     const box = document.querySelector('[data-dekodierer]')
     const briefing = box.querySelector('[data-briefing]')
     const antwort = box.querySelector('[data-antwort]')
@@ -181,5 +189,39 @@ const erste = KATEGORIEN[0]
 
     punkte.forEach((p) => p.addEventListener('click', () => zeigen(Number(p.dataset.punkt), true)))
     if (!ruhig) uhr = setTimeout(weiter, 4200)
+
+    // Eigenes Wort: Stamm suchen, im Dekodierer zeigen, Wechsel anhalten
+    const ENDUNGEN = ['eren', 'erer', 'eres', 'erem', 'ere', 'er', 'en', 'es', 'em', 'e']
+    function finden(eingabe) {
+      const w = eingabe.toLowerCase().replace(/[^a-zäöüß ]/g, ' ').replace(/\b(mehr|etwas|viel|noch|sehr|bitte|wir|wollen|soll|sein|wirken)\b/g, ' ').trim().split(/\s+/).pop() || ''
+      const kandidaten = [w, ...ENDUNGEN.filter((e) => w.endsWith(e) && w.length - e.length >= 3).map((e) => w.slice(0, -e.length))]
+      for (const k of kandidaten) {
+        const treffer = WOERTER.find(([staemme]) => staemme.includes(k))
+        if (treffer) return treffer
+      }
+      return null
+    }
+    const form = document.querySelector('[data-eigenes]')
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      const roh = form.wort.value.trim()
+      if (!roh) { form.wort.focus(); return }
+      clearTimeout(uhr)
+      const treffer = finden(roh)
+      punkte.forEach((p) => p.setAttribute('aria-current', 'false'))
+      const nomen = /^\p{Lu}/u.test(roh.replace(/^(mehr|etwas|viel)\s+/i, ''))
+      const kern = roh.replace(/^(mehr|etwas|viel)\s+/i, '')
+      const s = Object.assign(document.createElement('s'), { textContent: nomen ? kern : roh })
+      if (nomen) briefing.replaceChildren('„Wir brauchen mehr ', s, '.“')
+      else briefing.replaceChildren('„Wir wollen ', s, ' wirken.“')
+      kat.textContent = treffer ? treffer[1] : 'Im Gespräch'
+      antwort.textContent = treffer ? treffer[2] : 'Dieses Wort übersetze ich gern mit Ihnen gemeinsam. Das erste Gespräch ist kostenfrei.'
+      box.classList.remove('da', 'durch')
+      requestAnimationFrame(() => {
+        box.classList.add('durch')
+        uhr = setTimeout(() => box.classList.add('da'), ruhig ? 0 : 700)
+      })
+      box.scrollIntoView({ block: 'start', behavior: ruhig ? 'auto' : 'smooth' })
+    })
   </script>
 </Seite>
