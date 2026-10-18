@@ -2,22 +2,22 @@
 import Seite from '../layouts/Seite.astro'
 import { WOERTER } from '../data/woerter'
 
-// Jede Zeile: Kategorie, Floskel aus dem Briefing (Wort, das durchgestrichen wird),
-// Satz drumherum, Übersetzung des Studios und die Frage dahinter.
+// Jede Kategorie: Floskel aus dem Briefing, Übersetzung, Frage dahinter.
+// art bestimmt, wie das Wort in der Achsen-Bühne sich selbst vorführt.
 const KATEGORIEN = [
-  { kat: 'Typografie', vor: '„Wir wollen ', wort: 'moderner', nach: ' wirken.“', antwort: 'Die Schrift wechselt zur Grotesk. Klarheit steht vor Tradition.', frage: 'Welche Schrift trägt Ihre Haltung, und in welchem Maß?' },
-  { kat: 'Bildsprache', vor: '„Bitte etwas ', wort: 'emotionaler', nach: '.“', antwort: 'Eigene Aufnahmen bei Tageslicht. Menschen statt Symbolbilder.', frage: 'Was zeigen Sie, in welchem Licht, aus welcher Nähe?' },
-  { kat: 'Bewegung', vor: '„Die Seite soll ', wort: 'lebendiger', nach: ' sein.“', antwort: 'Eine einzige Bewegung, die zeigt, worauf es ankommt.', frage: 'Wo hilft Bewegung beim Verstehen?' },
-  { kat: 'Tonalität', vor: '„Wir müssen ', wort: 'professioneller', nach: ' klingen.“', antwort: 'Kurze Hauptsätze, Sie-Ansprache, jedes Wort mit einer Aufgabe.', frage: 'Wie klingt Ihr Unternehmen, wenn es spricht?' },
-  { kat: 'Dramaturgie', vor: '„', wort: 'Alles', nach: ' soll auf die Startseite.“', antwort: 'Eine Reihenfolge, in der Ihr Gegenüber Sie Schritt für Schritt kennenlernt.', frage: 'In welcher Reihenfolge lernt Ihr Gegenüber Sie kennen?' },
-  { kat: 'Atmosphäre', vor: '„Es soll ', wort: 'hochwertiger', nach: ' aussehen.“', antwort: 'Weniger Elemente, mehr Raum, ein einziges Raster für alles.', frage: 'Welches Klima bleibt nach dem ersten Besuch?' },
-  { kat: 'Rhythmus', vor: '„Wir brauchen einen ', wort: 'frischen', nach: ' Auftritt.“', antwort: 'Pausen dort, wo Ihr Angebot Gewicht braucht.', frage: 'Wo braucht es Pause, wo Verdichtung?' },
+  { kat: 'Typografie', art: 'typografie', vor: '„Wir wollen ', wort: 'moderner', nach: ' wirken.“', antwort: 'Die Schrift wechselt zur Grotesk. Klarheit steht vor Tradition.', frage: 'Welche Schrift trägt Ihre Haltung, und in welchem Maß?' },
+  { kat: 'Bildsprache', art: 'bildsprache', vor: '„Bitte etwas ', wort: 'emotionaler', nach: '.“', antwort: 'Eigene Aufnahmen bei Tageslicht. Menschen statt Symbolbilder.', frage: 'Was zeigen Sie, in welchem Licht, aus welcher Nähe?' },
+  { kat: 'Bewegung', art: 'bewegung', vor: '„Die Seite soll ', wort: 'lebendiger', nach: ' sein.“', antwort: 'Eine einzige Bewegung, die zeigt, worauf es ankommt.', frage: 'Wo hilft Bewegung beim Verstehen?' },
+  { kat: 'Tonalität', art: 'tonalitaet', vor: '„Wir müssen ', wort: 'professioneller', nach: ' klingen.“', antwort: 'Kurze Hauptsätze, Sie-Ansprache, jedes Wort mit einer Aufgabe.', frage: 'Wie klingt Ihr Unternehmen, wenn es spricht?' },
+  { kat: 'Dramaturgie', art: 'dramaturgie', vor: '„', wort: 'Alles', nach: ' soll auf die Startseite.“', antwort: 'Eine Reihenfolge, in der Ihr Gegenüber Sie Schritt für Schritt kennenlernt.', frage: 'In welcher Reihenfolge lernt Ihr Gegenüber Sie kennen?' },
+  { kat: 'Atmosphäre', art: 'atmosphaere', vor: '„Es soll ', wort: 'hochwertiger', nach: ' aussehen.“', antwort: 'Weniger Elemente, mehr Raum, ein einziges Raster für alles.', frage: 'Welches Klima bleibt nach dem ersten Besuch?' },
+  { kat: 'Rhythmus', art: 'rhythmus', vor: '„Wir brauchen einen ', wort: 'frischen', nach: ' Auftritt.“', antwort: 'Pausen dort, wo Ihr Angebot Gewicht braucht.', frage: 'Wo braucht es Pause, wo Verdichtung?' },
 ]
 
 const FELDER = [
-  { titel: 'Positionierung', text: 'Wofür Sie stehen, für wen Sie arbeiten und was Sie unterscheidet. So klar formuliert, dass sich jede weitere Entscheidung daran messen lässt.', liefer: ['Wahrnehmungsanalyse', 'Positionierung und Markenkern', 'Sprachleitfaden'] },
-  { titel: 'Erscheinungsbild', text: 'Zeichen, Schrift, Raster und Bild als ein System, von der Visitenkarte bis zur Website. Ich gestalte und entwickle selbst.', liefer: ['Corporate Design', 'Logo und Zeichensystem', 'Webdesign und Entwicklung'] },
-  { titel: 'Inhalte', text: 'Text, Fotografie und Video, die Ihre Haltung zeigen. Nach außen für Kundschaft und Bewerber, nach innen für Ihr Team.', liefer: ['Content-Produktion', 'Employer Branding', 'Interne Kommunikation'] },
+  { titel: 'positionierung', text: 'Wofür Sie stehen, für wen Sie arbeiten und was Sie unterscheidet. So klar formuliert, dass sich jede weitere Entscheidung daran messen lässt.', liefer: ['Wahrnehmungsanalyse', 'Positionierung und Markenkern', 'Sprachleitfaden'] },
+  { titel: 'erscheinungsbild', text: 'Zeichen, Schrift, Raster und Bild als ein System, von der Visitenkarte bis zur Website. Ich gestalte und entwickle selbst.', liefer: ['Corporate Design', 'Logo und Zeichensystem', 'Webdesign und Entwicklung'] },
+  { titel: 'inhalte', text: 'Text, Fotografie und Video, die Ihre Haltung zeigen. Nach außen für Kundschaft und Bewerber, nach innen für Ihr Team.', liefer: ['Content-Produktion', 'Employer Branding', 'Interne Kommunikation'] },
 ]
 
 const STATIONEN = [
@@ -29,101 +29,99 @@ const STATIONEN = [
   ['2024', 'Interne Kommunikation im öffentlichen Sektor'],
 ]
 
+const AUSSAGE = 'Briefings sprechen in Wünschen. Ich übersetze jeden Wunsch in konkrete Entscheidungen über Schrift, Bild, Sprache und Bewegung. Daraus entsteht ein Auftritt, der zeigt, was Ihr Unternehmen tatsächlich kann.'
 const MAIL = 'kontakt@kommunikations.studio'
 const erste = KATEGORIEN[0]
 ---
 <Seite>
-  <header class="kopf innen">
+  <header class="kopf">
     <a href="/" aria-label="kommunikations.studio, Startseite"><img src="/logo-ks-master.svg" alt="" width="150" height="36" /></a>
-    <a class="leise" href="#gespraech">Erstgespräch</a>
+    <a class="kopf-link" href="#gespraech">erstgespräch</a>
   </header>
 
   <main>
-    <section class="innen" aria-labelledby="these">
-      <div class="dekodierer durch da" data-dekodierer aria-live="off">
-        <div class="zeile">
-          <span class="wer">Aus dem Briefing</span>
-          <p class="briefing"><span data-briefing>{erste.vor}<s>{erste.wort}</s>{erste.nach}</span></p>
+    <section class="buehne" data-ton="dunkel" data-buehne>
+      <div class="buehne-innen">
+        <canvas class="buehne-flaeche" aria-hidden="true" data-schaerfe></canvas>
+        <h1 class="buehne-titel" data-titel><span>wahrnehmung</span> <span>gestalten.</span></h1>
+        <p class="buehne-unter" data-unter>vom eindruck zur wirkung.</p>
+        <p class="buehne-hinweis" data-hinweis>Bewegen Sie den Zeiger über die Worte. Scrollen stellt alles scharf.</p>
+      </div>
+    </section>
+
+    <section class="aussage innen" data-ton="dunkel" aria-label="Haltung">
+      <p data-woerter>{AUSSAGE.split(' ').map((w) => <span>{w} </span>)}</p>
+    </section>
+
+    <section class="achsen" data-ton="hell" data-achsen aria-labelledby="k-achsen">
+      <div class="achsen-buehne">
+        <h2 id="k-achsen" class="achsen-kopf innen">sieben fragen statt eines adjektivs</h2>
+        <div class="achsen-stapel">
+          {KATEGORIEN.map((k, i) => (
+            <article class="achse innen" data-achse={i} data-art={k.art}>
+              <p class="achse-wort" aria-label={k.kat}>{[...k.kat.toLowerCase()].map((b) => <span aria-hidden="true">{b}</span>)}</p>
+              <div class="achse-text">
+                <p class="achse-frage">{k.frage}</p>
+                <p class="achse-statt">statt <s>{k.wort}</s></p>
+              </div>
+            </article>
+          ))}
         </div>
-        <div class="zeile">
-          <span class="wer"><span class="kat" data-kat>{erste.kat}</span></span>
-          <div>
-            <p class="uebersetzung" data-antwort>{erste.antwort}</p>
-            <div class="punkte" role="group" aria-label="Beispiel wählen">
-              {KATEGORIEN.map((k, i) => (
-                <button type="button" aria-label={k.kat} aria-current={i === 0 ? 'true' : 'false'} data-punkt={i}></button>
-              ))}
-            </div>
-          </div>
+        <div class="achsen-fortschritt innen" aria-hidden="true"><span data-achsen-balken></span></div>
+      </div>
+    </section>
+
+    <section class="dekodierer innen" data-ton="hell" aria-labelledby="k-dekodierer" data-dekodierer>
+      <h2 id="k-dekodierer" class="abschnitt-titel">sie sagen ein wort. ich höre eine entscheidung.</h2>
+      <div class="deko">
+        <div class="deko-zeile">
+          <span class="deko-wer">Aus dem Briefing</span>
+          <p class="deko-briefing"><span data-briefing>{erste.vor}<s>{erste.wort}</s>{erste.nach}</span></p>
         </div>
-        <form class="eigenes zeile" data-eigenes>
-          <label class="wer" for="eigenes-wort">Ihr Wort</label>
-          <div class="eigenes-feld">
+        <div class="deko-zeile">
+          <span class="deko-wer" data-kat>{erste.kat}</span>
+          <p class="deko-antwort" data-antwort>{erste.antwort}</p>
+        </div>
+        <form class="deko-eigenes" data-eigenes>
+          <label class="deko-wer" for="eigenes-wort">Ihr Wort</label>
+          <div class="deko-feld">
             <input id="eigenes-wort" name="wort" type="text" autocomplete="off" maxlength="40" placeholder="zum Beispiel seriöser" />
-            <button type="submit">Übersetzen</button>
+            <button type="submit">übersetzen</button>
           </div>
         </form>
       </div>
-
-      <div class="these">
-        <h1 id="these">Wahrnehmung gestalten. Vom Eindruck zur Wirkung.</h1>
-        <p>
-          Briefings sprechen in Wünschen. Ich übersetze jeden Wunsch in konkrete Entscheidungen über
-          Schrift, Bild, Sprache und Bewegung. Daraus entsteht ein Auftritt, der zeigt, was Ihr
-          Unternehmen tatsächlich kann.
-        </p>
-      </div>
     </section>
 
-    <section class="abschnitt innen" aria-labelledby="k-methode">
-      <h2 id="k-methode">Sieben Fragen statt eines Adjektivs</h2>
-      <p class="einleitung">
-        Meine Wahrnehmungsanalyse zerlegt jeden Auftrag in sieben Fragen, auf die es klare Antworten
-        gibt. Erst wenn diese Antworten stehen, beginnt die Gestaltung.
-      </p>
-      <ol class="fragen">
-        {KATEGORIEN.map((k) => (
-          <li class="zeile">
-            <span class="wer">{k.kat}</span>
-            <div>
-              <p class="frage">{k.frage}</p>
-              <p class="floskel">statt <s>{k.wort}</s></p>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </section>
-
-    <section class="abschnitt innen" aria-labelledby="k-leistung">
-      <h2 id="k-leistung">Was daraus entsteht</h2>
-      <div class="felder">
-        {FELDER.map((f) => (
-          <article class="feld">
-            <h3>{f.titel}</h3>
+    <section class="felder innen" data-ton="dunkel" aria-labelledby="k-felder">
+      <h2 id="k-felder" class="abschnitt-titel">was daraus entsteht</h2>
+      {FELDER.map((f) => (
+        <article class="feld">
+          <h3 class="feld-titel" data-gewicht>{f.titel}</h3>
+          <div class="feld-text">
             <p>{f.text}</p>
             <ul>{f.liefer.map((l) => <li>{l}</li>)}</ul>
-          </article>
-        ))}
-      </div>
+          </div>
+        </article>
+      ))}
     </section>
 
-    <section class="abschnitt innen" aria-labelledby="k-person">
-      <h2 id="k-person">Wer hier arbeitet</h2>
-      <div class="person">
-        <figure class="portrait">
+    <section class="person innen" data-ton="hell" aria-labelledby="k-person">
+      <h2 id="k-person" class="abschnitt-titel">wer hier arbeitet</h2>
+      <div class="person-raster">
+        <figure class="portrait" data-portrait>
           <img src="/sebastian.jpg" alt="Sebastian Knust" width="1344" height="2016" loading="lazy" />
           <figcaption>Sebastian Knust, Limburg</figcaption>
         </figure>
         <div class="person-text">
-          <p>
+          <p class="person-eins">
             Ich komme aus der internationalen Luxushotellerie. In einem Fünf-Sterne-Haus zählt der
-            erste Satz am Telefon so viel wie die Fassade. Diese Schule prägt meine Arbeit bis heute.
+            erste Satz am Telefon so viel wie die Fassade.
           </p>
           <p>
-            Danach habe ich Marken geführt, Kampagnen entwickelt, Agenturen gesteuert und Inhalte
-            selbst fotografiert, gefilmt und geschrieben.
+            Diese Schule prägt meine Arbeit bis heute. Danach habe ich Marken geführt, Kampagnen
+            entwickelt, Agenturen gesteuert und Inhalte selbst fotografiert, gefilmt und geschrieben.
           </p>
-          <p class="stimme">
+          <p>
             Ich arbeite mit digitalen Werkzeugen, auch mit KI. Das Urteil darüber, wie Ihr
             Unternehmen wirken soll, treffen wir gemeinsam.
           </p>
@@ -133,95 +131,27 @@ const erste = KATEGORIEN[0]
         </div>
       </div>
     </section>
+
+    <section id="gespraech" class="schluss innen" data-ton="dunkel" aria-labelledby="k-gespraech">
+      <h2 id="k-gespraech" class="schluss-titel">beginnen wir mit dem eindruck, den sie heute hinterlassen.</h2>
+      <div class="schluss-text">
+        <p>
+          Das erste Gespräch ist kostenfrei. 45 Minuten schauen wir gemeinsam auf Ihren Auftritt, und
+          Sie gehen mit drei konkreten Beobachtungen, unabhängig davon, ob wir danach zusammenarbeiten.
+        </p>
+        <a class="knopf" href={`mailto:${MAIL}?subject=Erstgespr%C3%A4ch`} data-magnet><span>Erstgespräch anfragen</span></a>
+        <p class="adresse">oder direkt an <a href={`mailto:${MAIL}`}>{MAIL}</a></p>
+      </div>
+      <footer class="fuss">
+        <span>kommunikations.studio, Sebastian Knust, Limburg an der Lahn</span>
+        <nav aria-label="Rechtliches"><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a></nav>
+      </footer>
+    </section>
   </main>
 
-  <section id="gespraech" class="schluss innen" aria-labelledby="k-gespraech">
-    <h2 id="k-gespraech">Beginnen wir mit dem Eindruck, den Sie heute hinterlassen.</h2>
-    <div class="schluss-text">
-      <p>
-        Das erste Gespräch ist kostenfrei. 45 Minuten schauen wir gemeinsam auf Ihren Auftritt, und
-        Sie gehen mit drei konkreten Beobachtungen, unabhängig davon, ob wir danach zusammenarbeiten.
-      </p>
-      <a class="knopf" href={`mailto:${MAIL}?subject=Erstgespr%C3%A4ch`}>Erstgespräch anfragen</a>
-      <p class="adresse">oder direkt an <a href={`mailto:${MAIL}`}>{MAIL}</a></p>
-    </div>
-    <footer class="fuss">
-      <span>kommunikations.studio, Sebastian Knust</span>
-      <nav aria-label="Rechtliches"><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a></nav>
-    </footer>
-  </section>
-
-  <script define:vars={{ KATEGORIEN, WOERTER }}>
-    const box = document.querySelector('[data-dekodierer]')
-    const briefing = box.querySelector('[data-briefing]')
-    const antwort = box.querySelector('[data-antwort]')
-    const kat = box.querySelector('[data-kat]')
-    const punkte = [...box.querySelectorAll('[data-punkt]')]
-    const ruhig = matchMedia('(prefers-reduced-motion: reduce)').matches
-    let i = 0, uhr = 0
-
-    function setzen(n) {
-      const k = KATEGORIEN[n]
-      briefing.replaceChildren(k.vor, Object.assign(document.createElement('s'), { textContent: k.wort }), k.nach)
-      antwort.textContent = k.antwort
-      kat.textContent = k.kat
-      punkte.forEach((p, j) => p.setAttribute('aria-current', String(j === n)))
-    }
-
-    // Ein Takt: Briefing steht, das Wort wird durchgestrichen, die Übersetzung erscheint
-    function zeigen(n, sofort) {
-      clearTimeout(uhr)
-      i = n
-      if (ruhig || sofort) { setzen(n); box.classList.add('durch', 'da'); if (!ruhig) uhr = setTimeout(weiter, 5200); return }
-      box.classList.remove('da', 'durch')
-      uhr = setTimeout(() => {
-        setzen(n)
-        uhr = setTimeout(() => {
-          box.classList.add('durch')
-          uhr = setTimeout(() => {
-            box.classList.add('da')
-            uhr = setTimeout(weiter, 4200)
-          }, 700)
-        }, 900)
-      }, 450)
-    }
-    const weiter = () => zeigen((i + 1) % KATEGORIEN.length)
-
-    punkte.forEach((p) => p.addEventListener('click', () => zeigen(Number(p.dataset.punkt), true)))
-    if (!ruhig) uhr = setTimeout(weiter, 4200)
-
-    // Eigenes Wort: Stamm suchen, im Dekodierer zeigen, Wechsel anhalten
-    const ENDUNGEN = ['eren', 'erer', 'eres', 'erem', 'ere', 'er', 'en', 'es', 'em', 'e']
-    function finden(eingabe) {
-      const w = eingabe.toLowerCase().replace(/[^a-zäöüß ]/g, ' ').replace(/\b(mehr|etwas|viel|noch|sehr|bitte|wir|wollen|soll|sein|wirken)\b/g, ' ').trim().split(/\s+/).pop() || ''
-      const kandidaten = [w, ...ENDUNGEN.filter((e) => w.endsWith(e) && w.length - e.length >= 3).map((e) => w.slice(0, -e.length))]
-      for (const k of kandidaten) {
-        const treffer = WOERTER.find(([staemme]) => staemme.includes(k))
-        if (treffer) return treffer
-      }
-      return null
-    }
-    const form = document.querySelector('[data-eigenes]')
-    form.addEventListener('submit', (e) => {
-      e.preventDefault()
-      const roh = form.wort.value.trim()
-      if (!roh) { form.wort.focus(); return }
-      clearTimeout(uhr)
-      const treffer = finden(roh)
-      punkte.forEach((p) => p.setAttribute('aria-current', 'false'))
-      const nomen = /^\p{Lu}/u.test(roh.replace(/^(mehr|etwas|viel)\s+/i, ''))
-      const kern = roh.replace(/^(mehr|etwas|viel)\s+/i, '')
-      const s = Object.assign(document.createElement('s'), { textContent: nomen ? kern : roh })
-      if (nomen) briefing.replaceChildren('„Wir brauchen mehr ', s, '.“')
-      else briefing.replaceChildren('„Wir wollen ', s, ' wirken.“')
-      kat.textContent = treffer ? treffer[1] : 'Im Gespräch'
-      antwort.textContent = treffer ? treffer[2] : 'Dieses Wort übersetze ich gern mit Ihnen gemeinsam. Das erste Gespräch ist kostenfrei.'
-      box.classList.remove('da', 'durch')
-      requestAnimationFrame(() => {
-        box.classList.add('durch')
-        uhr = setTimeout(() => box.classList.add('da'), ruhig ? 0 : 700)
-      })
-      box.scrollIntoView({ block: 'start', behavior: ruhig ? 'auto' : 'smooth' })
-    })
+  <script type="application/json" id="daten" set:html={JSON.stringify({ KATEGORIEN, WOERTER })} />
+  <script>
+    import { start } from '../scripts/buehne'
+    start()
   </script>
 </Seite>
