@@ -13,8 +13,15 @@ export function dekodierer(KATEGORIEN: Kategorie[], WOERTER: Wort[], ruhig: bool
   const kat = box.querySelector<HTMLElement>('[data-kat]')!
   const form = box.querySelector<HTMLFormElement>('[data-eigenes]')!
   const feld = form.querySelector<HTMLInputElement>('input')!
-  let i = 0, uhr = 0, sichtbar = false, angehalten = false
+  const hinweis = form.querySelector<HTMLElement>('[data-hinweis-feld]')!
+  const ansage = box.querySelector<HTMLElement>('[data-ansage]')!
+  let i = 0, uhr = 0, sichtbar = false, angehalten = false, runden = 0
   box.classList.add('durch', 'da')
+
+  // Wer liest oder tippt, behält das aktuelle Beispiel
+  const anhalten = () => { angehalten = true; clearTimeout(uhr); box.classList.add('durch', 'da') }
+  box.addEventListener('focusin', anhalten)
+  box.addEventListener('pointerenter', (e) => { if ((e as PointerEvent).pointerType === 'mouse') anhalten() })
 
   const strich = (text: string) => Object.assign(document.createElement('s'), { textContent: text })
 
@@ -38,6 +45,8 @@ export function dekodierer(KATEGORIEN: Kategorie[], WOERTER: Wort[], ruhig: bool
   function weiter() {
     if (angehalten || !sichtbar) return
     i = (i + 1) % KATEGORIEN.length
+    // Nach einer vollen Runde bleibt das erste Beispiel stehen
+    if (i === 0 && ++runden >= 1) angehalten = true
     const k = KATEGORIEN[i]
     takt(() => {
       briefing.replaceChildren(k.vor, strich(k.wort), k.nach)
@@ -66,8 +75,15 @@ export function dekodierer(KATEGORIEN: Kategorie[], WOERTER: Wort[], ruhig: bool
   form.addEventListener('submit', (e) => {
     e.preventDefault()
     const roh = feld.value.trim()
-    if (!roh) { feld.focus(); return }
-    angehalten = true
+    if (!roh) {
+      feld.setAttribute('aria-invalid', 'true')
+      hinweis.textContent = 'Bitte geben Sie ein Wort ein, zum Beispiel seriöser.'
+      feld.focus()
+      return
+    }
+    feld.removeAttribute('aria-invalid')
+    hinweis.textContent = ''
+    anhalten()
     const treffer = finden(roh)
     const kern = roh.replace(/^(mehr|etwas|viel)\s+/i, '')
     const nomen = /^\p{Lu}/u.test(kern)
@@ -75,7 +91,8 @@ export function dekodierer(KATEGORIEN: Kategorie[], WOERTER: Wort[], ruhig: bool
       if (nomen) briefing.replaceChildren('„Wir brauchen mehr ', strich(kern), '.“')
       else briefing.replaceChildren('„Wir wollen ', strich(roh), ' wirken.“')
       kat.textContent = treffer ? treffer[1] : 'Im Gespräch'
-      antwort.textContent = treffer ? treffer[2] : 'Dieses Wort übersetze ich gern mit Ihnen gemeinsam. Das erste Gespräch ist kostenfrei.'
+      antwort.textContent = treffer ? treffer[2] : 'Dieses Wort übersetze ich gern mit Ihnen gemeinsam. Das Erstgespräch ist kostenfrei.'
+      ansage.textContent = `${kat.textContent}: ${antwort.textContent}`
     })
   })
 }

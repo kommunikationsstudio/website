@@ -1,0 +1,49 @@
+/* Variante Schärfe */
+
+.buehne { position: relative; }
+.lebt .buehne { height: 175svh; }
+.buehne-innen { position: relative; height: 100svh; min-height: 520px; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+.lebt .buehne-innen { position: sticky; top: 0; }
+.buehne-flaeche { position: absolute; inset: 0; width: 100%; height: 100%; display: none; cursor: crosshair; touch-action: pan-y; }
+.gl .buehne-flaeche { display: block; }
+.buehne-titel { padding: 0 var(--rechts) 0 var(--links); font-weight: 900; font-size: clamp(40px, 11vw, 230px); line-height: 0.86; letter-spacing: -0.035em; }
+.buehne-titel span { display: block; }
+.gl .buehne-titel { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.buehne-unter { position: absolute; left: var(--links); right: var(--rechts); bottom: clamp(28px, 7vh, 72px); display: flex; justify-content: space-between; align-items: end; gap: 16px 40px; flex-wrap: wrap; }
+.buehne-motto { font-weight: 500; font-size: clamp(22px, 2.6vw, 44px); letter-spacing: -0.02em; }
+.buehne-wofuer { max-width: 26rem; font-size: 16px; color: var(--grau); }
+html:not(.gl) .buehne-unter { position: static; padding: 40px var(--rechts) 0 var(--links); }
+
+.aussage { padding-block: clamp(100px, 22vh, 240px); }
+.aussage p { max-width: 21ch; font-weight: 600; font-size: clamp(34px, 5.6vw, 104px); line-height: 1.02; letter-spacing: -0.035em; font-variation-settings: 'wdth' 92; }
+
+/* Achsen, ohne Bewegung als Liste */
+.achsen-kopf { padding-top: clamp(80px, 14vh, 160px); font-weight: 600; font-size: clamp(18px, 1.5vw, 24px); color: var(--leise); }
+.achse { padding-block: clamp(40px, 8vh, 90px); border-bottom: 1px solid var(--linie); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 24px clamp(24px, 4vw, 64px); align-items: end; position: relative; }
+.achse-wort { font-weight: 900; font-size: clamp(48px, 9.6vw, 200px); line-height: 0.9; letter-spacing: -0.04em; font-variation-settings: 'wght' 900, 'wdth' 100; white-space: nowrap; position: relative; z-index: 1; }
+.achse-wort .b { display: inline-block; }
+.achse-text { display: grid; gap: 14px; padding-bottom: 0.5em; }
+.achse-frage { font-weight: 500; font-size: clamp(20px, 1.9vw, 30px); line-height: 1.2; letter-spacing: -0.015em; }
+.achse-statt { font-weight: 300; font-size: clamp(24px, 2.4vw, 40px); line-height: 1; letter-spacing: -0.02em; color: var(--leise); }
+.achse-statt s { text-decoration-thickness: 0.08em; color: var(--schrift); font-weight: 700; }
+.achse-bild { grid-column: 1 / -1; height: clamp(120px, 22vh, 240px); overflow: hidden; }
+.achse-bild img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 16%; filter: grayscale(1) contrast(1.1); }
+.achsen-fortschritt { display: none; }
+
+.lebt .achsen { height: 500svh; }
+.lebt .achsen-buehne { position: sticky; top: 0; height: 100svh; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; }
+.lebt .achsen-kopf { padding-top: clamp(76px, 12vh, 130px); }
+.lebt .achsen-stapel { position: relative; }
+.lebt .achse { position: absolute; inset: 0; border: 0; align-content: center; opacity: 0; pointer-events: none; padding-block: 0; }
+.lebt .achse.ist-da { pointer-events: auto; }
+.lebt .achse-text { opacity: 0; }
+.lebt .achse-bild { position: absolute; left: var(--links); right: var(--rechts); top: 50%; height: 46%; translate: 0 -50%; clip-path: inset(50% 0 50% 0); z-index: 0; }
+.lebt [data-art='bildsprache'] .achse-wort { color: var(--weiss); mix-blend-mode: difference; }
+.lebt .achsen-fortschritt { display: block; padding-bottom: clamp(24px, 5vh, 48px); }
+.achsen-fortschritt span { display: block; height: 2px; background: currentColor; transform-origin: left; transform: scaleX(0); }
+
+@media (max-width: 800px) {
+  .achse { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .achse-wort { font-size: 10.2vw; }
+  .lebt .achsen { height: 420svh; }
+}

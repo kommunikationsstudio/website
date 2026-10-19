@@ -1,0 +1,17 @@
+---
+import { FELDER, TITEL } from '../data/inhalt'
+interface Props { ton?: 'dunkel' | 'hell' }
+const { ton = 'dunkel' } = Astro.props
+---
+<section class="felder innen" data-ton={ton} aria-labelledby="k-felder">
+  <h2 id="k-felder" class="abschnitt-titel">{TITEL.felder}</h2>
+  {FELDER.map((f) => (
+    <article class="feld">
+      <h3 class="feld-titel" data-gewicht>{f.titel}</h3>
+      <div class="feld-text">
+        <p>{f.text}</p>
+        <ul>{f.liefer.map((l) => <li>{l}</li>)}</ul>
+      </div>
+    </article>
+  ))}
+</section>

@@ -1,0 +1,21 @@
+---
+import { PERSON, STATIONEN, TITEL } from '../data/inhalt'
+interface Props { ton?: 'dunkel' | 'hell' }
+const { ton = 'hell' } = Astro.props
+---
+<section class="person innen" data-ton={ton} aria-labelledby="k-person">
+  <h2 id="k-person" class="abschnitt-titel">{TITEL.person}</h2>
+  <div class="person-raster">
+    <figure class="portrait" data-portrait>
+      <img src="/sebastian.jpg" alt="Sebastian Knust" width="1344" height="2016" loading="lazy" />
+      <figcaption>Sebastian Knust, Limburg an der Lahn</figcaption>
+    </figure>
+    <div class="person-text">
+      <p class="person-eins">{PERSON[0]}</p>
+      {PERSON.slice(1).map((p) => <p>{p}</p>)}
+      <ol class="stationen">
+        {STATIONEN.map(([jahr, was]) => <li><span>{jahr}</span>{was}</li>)}
+      </ol>
+    </div>
+  </div>
+</section>

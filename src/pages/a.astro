@@ -1,0 +1,42 @@
+---
+import Seite from '../layouts/Seite.astro'
+import Kopf from '../components/Kopf.astro'
+import Achsen from '../components/Achsen.astro'
+import Dekodierer from '../components/Dekodierer.astro'
+import Felder from '../components/Felder.astro'
+import Ablauf from '../components/Ablauf.astro'
+import Person from '../components/Person.astro'
+import Schluss from '../components/Schluss.astro'
+import { AUSSAGE, MOTTO, WOFUER } from '../data/inhalt'
+import '../styles/a.css'
+---
+<Seite klasse="v-a">
+  <Kopf />
+  <main id="inhalt" tabindex="-1">
+    <section class="buehne" data-ton="dunkel" data-buehne>
+      <div class="buehne-innen" data-buehne-innen>
+        <canvas class="buehne-flaeche" aria-hidden="true" data-schaerfe></canvas>
+        <h1 class="buehne-titel"><span>wahrnehmung</span> <span>gestalten.</span></h1>
+        <div class="buehne-unter" data-unter>
+          <p class="buehne-motto">{MOTTO}</p>
+          <p class="buehne-wofuer">{WOFUER}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="aussage innen" data-ton="dunkel" aria-label="Haltung">
+      <p data-woerter>{AUSSAGE.split(' ').map((w) => <span>{w} </span>)}</p>
+    </section>
+
+    <Achsen />
+    <Dekodierer />
+    <Felder />
+    <Ablauf ton="hell" />
+    <Person ton="hell" />
+    <Schluss />
+  </main>
+  <script>
+    import { start } from '../scripts/a'
+    start()
+  </script>
+</Seite>

@@ -1,0 +1,17 @@
+---
+import { SCHRITTE, TITEL } from '../data/inhalt'
+interface Props { ton?: 'dunkel' | 'hell' }
+const { ton = 'dunkel' } = Astro.props
+---
+<section class="ablauf innen" data-ton={ton} aria-labelledby="k-ablauf">
+  <h2 id="k-ablauf" class="abschnitt-titel">{TITEL.ablauf}</h2>
+  <ol class="schritte">
+    {SCHRITTE.map((s, i) => (
+      <li class="schritt" data-schritt>
+        <span class="schritt-zahl" aria-hidden="true">{i + 1}</span>
+        <h3 class="schritt-titel">{s.titel}</h3>
+        <p>{s.text}</p>
+      </li>
+    ))}
+  </ol>
+</section>

@@ -4,15 +4,22 @@ import type { APIRoute } from 'astro'
 export const GET: APIRoute = ({ site }) => {
   const text = `# kommunikations.studio
 
-> Studio für Positionierung, Erscheinungsbild und Inhalte von Sebastian Knust in Limburg an der Lahn, tätig in Rhein-Main und Mittelhessen. Leitsatz: Wahrnehmung gestalten. Vom Eindruck zur Wirkung.
+> Studio für Positionierung, Erscheinungsbild und Inhalte von Sebastian Knust in Limburg an der Lahn, für kleine und mittlere Unternehmen in Rhein-Main und Mittelhessen. Leitsatz: Wahrnehmung gestalten. Vom Eindruck zur Wirkung.
 
-kommunikations.studio übersetzt vage Briefing-Wünsche wie „moderner“ oder „hochwertiger“ mit einer eigenen Wahrnehmungsanalyse in konkrete Entscheidungen über sieben Kategorien: Typografie, Bildsprache, Bewegung, Tonalität, Dramaturgie, Atmosphäre und Rhythmus.
+kommunikations.studio übersetzt Briefing-Floskeln wie „moderner“ oder „hochwertiger“ mit einer eigenen Wahrnehmungsanalyse in konkrete Entscheidungen über sieben Kategorien: Typografie, Bildsprache, Bewegung, Tonalität, Dramaturgie, Atmosphäre und Rhythmus.
 
 ## Leistungen
 
 - Positionierung: Wahrnehmungsanalyse, Positionierung und Markenkern, Sprachleitfaden
 - Erscheinungsbild: Corporate Design, Logo und Zeichensystem, Webdesign und Entwicklung
 - Inhalte: Content-Produktion, Employer Branding, interne Kommunikation
+
+## Ablauf
+
+1. Erstgespräch: 45 Minuten, kostenfrei, mit drei konkreten Beobachtungen
+2. Wahrnehmungsanalyse in sieben Kategorien, schriftlich
+3. Gestaltung und Umsetzung, Entwurf und Code aus einer Hand
+4. Übergabe aller Dateien mit Leitfaden
 
 ## Person
 
@@ -22,8 +29,12 @@ Sebastian Knust kommt aus der internationalen Luxushotellerie (unter anderem Kem
 
 - Erstgespräch: kostenfrei, 45 Minuten
 - E-Mail: kontakt@kommunikations.studio
+- Telefon: +49 156 78540600
+- Adresse: Felizitas-Massenkeil-Str. 9, 65549 Limburg an der Lahn
 - Website: ${site}
-- [Impressum](${new URL('/impressum', site)})
+- [Impressum](${new URL('/impressum/', site)})
+- [Datenschutz](${new URL('/datenschutz/', site)})
+- [Sitemap](${new URL('/sitemap.xml', site)})
 `
   return new Response(text, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } })
 }

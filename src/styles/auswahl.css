@@ -1,0 +1,14 @@
+.auswahl { padding-block: clamp(120px, 18vh, 200px) clamp(80px, 12vh, 140px); }
+.auswahl-titel { font-weight: 900; font-size: clamp(44px, 8vw, 160px); line-height: 0.88; letter-spacing: -0.045em; font-variation-settings: 'wght' 900, 'wdth' 85; max-width: 14ch; }
+.auswahl-einleitung { margin-top: 32px; max-width: 40rem; color: var(--leise); }
+.auswahl-liste { list-style: none; margin-top: clamp(48px, 9vh, 100px); border-top: 2px solid currentColor; }
+.variante { display: grid; grid-template-columns: 4rem minmax(0, 5fr) minmax(0, 6fr); gap: 8px 24px; align-items: baseline; padding-block: clamp(24px, 4vh, 44px); border-bottom: 1px solid var(--linie); text-decoration: none; }
+.variante-zahl { font-weight: 600; color: var(--leise); }
+.variante-name { font-weight: 300; font-size: clamp(44px, 7vw, 130px); line-height: 0.9; letter-spacing: -0.045em; transition: font-variation-settings 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); font-variation-settings: 'wght' 300, 'wdth' 100; }
+.variante:hover .variante-name, .variante:focus-visible .variante-name { font-variation-settings: 'wght' 900, 'wdth' 112; }
+.variante-zeile { grid-column: 3; grid-row: 1 / span 2; }
+.variante-fakten { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: 15px; color: var(--leise); }
+@media (max-width: 800px) {
+  .variante { grid-template-columns: 2rem minmax(0, 1fr); }
+  .variante-zeile, .variante-fakten { grid-column: 2; grid-row: auto; }
+}

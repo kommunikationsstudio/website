@@ -1,5 +1,5 @@
 // Bühne oben: die Worte erscheinen zuerst unscharf, wie ein erster Eindruck.
-// Mauszeiger und Scrollen stellen sie scharf. Reines WebGL, ohne Bibliothek.
+// Eine Linse am Zeiger und das Scrollen stellen sie scharf. Reines WebGL.
 
 const VERTEX = `
 attribute vec2 aPos;
@@ -35,15 +35,13 @@ void main() {
   vec2 m = vec2(uMaus.x * asp, uMaus.y);
 
   // Linse um den Zeiger: innen scharf, zum Rand weich auslaufend
-  float linse = (1.0 - smoothstep(0.06, 0.34, distance(p, m))) * uLinse;
+  float linse = (1.0 - smoothstep(0.10, 0.42, distance(p, m))) * uLinse;
   float s = clamp(max(uSchaerfe, linse), 0.0, 1.0);
   float u = 1.0 - s;
 
-  // Fließende Verzerrung, die mit der Schärfe verschwindet
   vec2 flow = vec2(fbm(p * 2.1 + vec2(uZeit * 0.05, 0.0)), fbm(p * 2.1 + vec2(3.7, uZeit * 0.06))) - 0.5;
   vec2 st = vUv + flow * 0.07 * u;
 
-  // Unschärfe als Scheibe von Abtastpunkten
   float r = 0.022 * u;
   float c = 0.0;
   for (int i = 0; i < 24; i++) {
@@ -55,10 +53,8 @@ void main() {
   c /= 24.0;
 
   float nebel = fbm(p * 1.4 + vec2(uZeit * 0.02, -uZeit * 0.015)) * 0.16 * u;
-  float hell = mix(0.62, 1.0, s);
+  float hell = mix(0.6, 1.0, s) + 0.08 * linse;
   float col = mix(nebel, hell, c);
-
-  // Filmkorn
   col += (hash(vUv * uRes + fract(uZeit * 7.0) * 91.0) - 0.5) * (0.05 + 0.07 * u);
   gl_FragColor = vec4(vec3(col), 1.0);
 }
@@ -69,7 +65,7 @@ export interface Buehne {
   stop(): void
 }
 
-export function schaerfe(canvas: HTMLCanvasElement, zeilen: string[], ruhig: boolean): Buehne | null {
+export function schaerfe(canvas: HTMLCanvasElement, zeilen: string[], hochkant: string[], ruhig: boolean, verloren: () => void): Buehne | null {
   const gl = canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' })
   if (!gl) return null
 
@@ -89,8 +85,7 @@ export function schaerfe(canvas: HTMLCanvasElement, zeilen: string[], ruhig: boo
   if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return null
   gl.useProgram(prog)
 
-  const buf = gl.createBuffer()
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf)
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW)
   const aPos = gl.getAttribLocation(prog, 'aPos')
   gl.enableVertexAttribArray(aPos)
@@ -111,33 +106,35 @@ export function schaerfe(canvas: HTMLCanvasElement, zeilen: string[], ruhig: boo
   const tafel = document.createElement('canvas')
   const ctx = tafel.getContext('2d')!
 
-  // Schrift auf die Tafel setzen: linksbündig, die längste Zeile füllt die Breite
+  // Schrift auf die Tafel: linksbündig, die längste Zeile füllt die Breite.
+  // Hochkant bricht das Wort in mehr Zeilen, damit es groß bleibt.
   function setzen(w: number, h: number) {
+    const reihe = w < h ? hochkant : zeilen
     tafel.width = w
     tafel.height = h
     ctx.fillStyle = '#000'
     ctx.fillRect(0, 0, w, h)
     ctx.fillStyle = '#fff'
-    ctx.textBaseline = 'alphabetic'
     const rand = Math.max(20, w * 0.045)
     ctx.font = `900 100px Archivo`
-    const breite = Math.max(...zeilen.map((z) => ctx.measureText(z).width))
+    const breite = Math.max(...reihe.map((z) => ctx.measureText(z).width))
     let groesse = ((w - rand * 2) / breite) * 100
-    groesse = Math.min(groesse, (h * 0.62) / (zeilen.length * 0.86))
+    groesse = Math.min(groesse, (h * 0.66) / (reihe.length * 0.86))
     ctx.font = `900 ${groesse}px Archivo`
     const zeilenhoehe = groesse * 0.86
-    const block = zeilenhoehe * zeilen.length
-    const oben = (h - block) / 2 + groesse * 0.74
-    zeilen.forEach((z, i) => ctx.fillText(z, rand - groesse * 0.04, oben + i * zeilenhoehe))
+    const oben = (h - zeilenhoehe * reihe.length) / 2 + groesse * 0.74
+    reihe.forEach((z, i) => ctx.fillText(z, rand - groesse * 0.04, oben + i * zeilenhoehe))
     gl!.bindTexture(gl!.TEXTURE_2D, tex)
     gl!.texImage2D(gl!.TEXTURE_2D, 0, gl!.LUMINANCE, gl!.LUMINANCE, gl!.UNSIGNED_BYTE, tafel)
   }
 
+  // Größe nur bei echter Änderung neu setzen; die Adressleiste mobiler Browser
+  // ändert die Höhe ständig, darum zählt dort nur die Breite
   let breite = 0, hoehe = 0
   function groesse() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
     const w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr)
-    if (w === breite && h === hoehe) return
+    if (w === breite && Math.abs(h - hoehe) < 120 * dpr) return
     breite = w
     hoehe = h
     canvas.width = w
@@ -147,9 +144,8 @@ export function schaerfe(canvas: HTMLCanvasElement, zeilen: string[], ruhig: boo
     setzen(w, h)
   }
 
-  // Zeiger: weich nachgeführt; ohne Maus wandert die Linse von selbst
-  const ziel = { x: 0.5, y: 0.5 }, maus = { x: 0.5, y: 0.5 }
-  let linse = 0, linseZiel = 0, letzteBewegung = -1e9, schaerfeWert = 0
+  const ziel = { x: 0.08, y: 0.55 }, maus = { x: 0.08, y: 0.55 }
+  let linse = 0, letzteBewegung = -1e9, schaerfeWert = 0
   const fein = matchMedia('(pointer: fine)').matches
   canvas.addEventListener('pointermove', (e) => {
     const r = canvas.getBoundingClientRect()
@@ -161,18 +157,28 @@ export function schaerfe(canvas: HTMLCanvasElement, zeilen: string[], ruhig: boo
 
   let sichtbar = true, laufend = true, rahmen = 0
   const start = performance.now()
+  const AUFTAKT = 2.4
+
   function zeichnen(jetzt: number) {
     const t = (jetzt - start) / 1000
     groesse()
     const aktiv = jetzt - letzteBewegung < 2500
-    if (!aktiv && !fein) {
-      ziel.x = 0.5 + Math.sin(t * 0.33) * 0.34
+    let linseZiel = aktiv ? 1 : 0
+    if (!aktiv && t < AUFTAKT) {
+      // Auftakt: die Linse fährt einmal über die Zeile und zeigt, was sie kann
+      const k = Math.min(1, t / AUFTAKT)
+      const e = 1 - Math.pow(1 - k, 3)
+      ziel.x = 0.06 + 0.9 * e
+      ziel.y = 0.56 - 0.12 * Math.sin(e * Math.PI)
+      linseZiel = k < 0.92 ? 1 : 0
+    } else if (!aktiv && !fein) {
+      ziel.x = 0.5 + Math.sin(t * 0.33) * 0.36
       ziel.y = 0.5 + Math.sin(t * 0.51 + 1.2) * 0.2
+      linseZiel = 1
     }
-    linseZiel = aktiv || !fein ? 1 : 0
-    maus.x += (ziel.x - maus.x) * 0.08
-    maus.y += (ziel.y - maus.y) * 0.08
-    linse += (linseZiel - linse) * 0.05
+    maus.x += (ziel.x - maus.x) * 0.14
+    maus.y += (ziel.y - maus.y) * 0.14
+    linse += (linseZiel - linse) * 0.06
     gl!.uniform2f(uMaus, maus.x, maus.y)
     gl!.uniform1f(uZeit, ruhig ? 0 : t)
     gl!.uniform1f(uSchaerfe, ruhig ? 1 : schaerfeWert)
@@ -181,10 +187,15 @@ export function schaerfe(canvas: HTMLCanvasElement, zeilen: string[], ruhig: boo
     rahmen = laufend && sichtbar && !ruhig ? requestAnimationFrame(zeichnen) : 0
   }
 
+  canvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); laufend = false; cancelAnimationFrame(rahmen); verloren() })
   new IntersectionObserver(([e]) => {
     sichtbar = e.isIntersecting
     if (sichtbar && laufend && !rahmen && !ruhig) rahmen = requestAnimationFrame(zeichnen)
   }).observe(canvas)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { cancelAnimationFrame(rahmen); rahmen = 0 }
+    else if (sichtbar && laufend && !ruhig && !rahmen) rahmen = requestAnimationFrame(zeichnen)
+  })
   window.addEventListener('resize', () => { if (ruhig) requestAnimationFrame(zeichnen) })
 
   requestAnimationFrame(zeichnen)

@@ -1,157 +1,32 @@
 ---
+// Auswahl: drei Varianten derselben Seite zum Vergleichen.
+// Nach der Entscheidung ersetzt die gewählte Variante diese Seite.
 import Seite from '../layouts/Seite.astro'
-import { WOERTER } from '../data/woerter'
+import Kopf from '../components/Kopf.astro'
+import '../styles/auswahl.css'
 
-// Jede Kategorie: Floskel aus dem Briefing, Übersetzung, Frage dahinter.
-// art bestimmt, wie das Wort in der Achsen-Bühne sich selbst vorführt.
-const KATEGORIEN = [
-  { kat: 'Typografie', art: 'typografie', vor: '„Wir wollen ', wort: 'moderner', nach: ' wirken.“', antwort: 'Die Schrift wechselt zur Grotesk. Klarheit steht vor Tradition.', frage: 'Welche Schrift trägt Ihre Haltung, und in welchem Maß?' },
-  { kat: 'Bildsprache', art: 'bildsprache', vor: '„Bitte etwas ', wort: 'emotionaler', nach: '.“', antwort: 'Eigene Aufnahmen bei Tageslicht. Menschen statt Symbolbilder.', frage: 'Was zeigen Sie, in welchem Licht, aus welcher Nähe?' },
-  { kat: 'Bewegung', art: 'bewegung', vor: '„Die Seite soll ', wort: 'lebendiger', nach: ' sein.“', antwort: 'Eine einzige Bewegung, die zeigt, worauf es ankommt.', frage: 'Wo hilft Bewegung beim Verstehen?' },
-  { kat: 'Tonalität', art: 'tonalitaet', vor: '„Wir müssen ', wort: 'professioneller', nach: ' klingen.“', antwort: 'Kurze Hauptsätze, Sie-Ansprache, jedes Wort mit einer Aufgabe.', frage: 'Wie klingt Ihr Unternehmen, wenn es spricht?' },
-  { kat: 'Dramaturgie', art: 'dramaturgie', vor: '„', wort: 'Alles', nach: ' soll auf die Startseite.“', antwort: 'Eine Reihenfolge, in der Ihr Gegenüber Sie Schritt für Schritt kennenlernt.', frage: 'In welcher Reihenfolge lernt Ihr Gegenüber Sie kennen?' },
-  { kat: 'Atmosphäre', art: 'atmosphaere', vor: '„Es soll ', wort: 'hochwertiger', nach: ' aussehen.“', antwort: 'Weniger Elemente, mehr Raum, ein einziges Raster für alles.', frage: 'Welches Klima bleibt nach dem ersten Besuch?' },
-  { kat: 'Rhythmus', art: 'rhythmus', vor: '„Wir brauchen einen ', wort: 'frischen', nach: ' Auftritt.“', antwort: 'Pausen dort, wo Ihr Angebot Gewicht braucht.', frage: 'Wo braucht es Pause, wo Verdichtung?' },
+const VARIANTEN = [
+  { pfad: '/a/', name: 'schärfe', zeile: 'Die Worte beginnen unscharf, wie ein erster Eindruck. Eine Linse am Zeiger und das Scrollen stellen sie scharf. Danach führen sieben Wörter vor, wofür sie stehen.', technik: 'Live gerendert in WebGL, sieben Achsen als Scroll-Bühne', ton: 'Schwarz mit weißen Kapiteln' },
+  { pfad: '/b/', name: 'belichtung', zeile: 'Ihr Bild entwickelt sich beim Scrollen wie in der Dunkelkammer. Die sieben Fragen laufen als Filmstreifen vorbei, jedes Bild wird belichtet, sobald es die Mitte erreicht.', technik: 'Fotografie als Hauptmotiv, bereit für eigene Filme', ton: 'Dunkel, ein heller Moment' },
+  { pfad: '/c/', name: 'raster', zeile: 'Reine Typografie auf Weiß. Die Schrift wird dort laut, wo der Zeiger ist. Die sieben Fragen stehen als Index, und jede Zeile wird beim Lesen auf ihre eigene Weise laut.', technik: 'Ohne WebGL, am schnellsten, Schweizer Raster', ton: 'Weiß mit schwarzem Schluss' },
 ]
-
-const FELDER = [
-  { titel: 'positionierung', text: 'Wofür Sie stehen, für wen Sie arbeiten und was Sie unterscheidet. So klar formuliert, dass sich jede weitere Entscheidung daran messen lässt.', liefer: ['Wahrnehmungsanalyse', 'Positionierung und Markenkern', 'Sprachleitfaden'] },
-  { titel: 'erscheinungsbild', text: 'Zeichen, Schrift, Raster und Bild als ein System, von der Visitenkarte bis zur Website. Ich gestalte und entwickle selbst.', liefer: ['Corporate Design', 'Logo und Zeichensystem', 'Webdesign und Entwicklung'] },
-  { titel: 'inhalte', text: 'Text, Fotografie und Video, die Ihre Haltung zeigen. Nach außen für Kundschaft und Bewerber, nach innen für Ihr Team.', liefer: ['Content-Produktion', 'Employer Branding', 'Interne Kommunikation'] },
-]
-
-const STATIONEN = [
-  ['2012', 'Aldiana in Ägypten, auf Kreta und in Andalusien: Marketing und Social Media'],
-  ['2014', 'Kempinski Hotel Frankfurt Gravenbruch: Ausbildung, Sales, erste Gestaltung'],
-  ['2018', 'Villa Rothschild und Falkenstein Grand: Marketing, Fotografie, Video'],
-  ['2021', 'Sellwerk und Kalify: Vertrieb, Aufbau einer Markenidentität'],
-  ['2022', 'Steigenberger Frankfurter Hof: Marketing Manager Luxury'],
-  ['2024', 'Interne Kommunikation im öffentlichen Sektor'],
-]
-
-const AUSSAGE = 'Briefings sprechen in Wünschen. Ich übersetze jeden Wunsch in konkrete Entscheidungen über Schrift, Bild, Sprache und Bewegung. Daraus entsteht ein Auftritt, der zeigt, was Ihr Unternehmen tatsächlich kann.'
-const MAIL = 'kontakt@kommunikations.studio'
-const erste = KATEGORIEN[0]
 ---
-<Seite>
-  <header class="kopf">
-    <a href="/" aria-label="kommunikations.studio, Startseite"><img src="/logo-ks-master.svg" alt="" width="150" height="36" /></a>
-    <a class="kopf-link" href="#gespraech">erstgespräch</a>
-  </header>
-
-  <main>
-    <section class="buehne" data-ton="dunkel" data-buehne>
-      <div class="buehne-innen">
-        <canvas class="buehne-flaeche" aria-hidden="true" data-schaerfe></canvas>
-        <h1 class="buehne-titel" data-titel><span>wahrnehmung</span> <span>gestalten.</span></h1>
-        <p class="buehne-unter" data-unter>vom eindruck zur wirkung.</p>
-        <p class="buehne-hinweis" data-hinweis>Bewegen Sie den Zeiger über die Worte. Scrollen stellt alles scharf.</p>
-      </div>
-    </section>
-
-    <section class="aussage innen" data-ton="dunkel" aria-label="Haltung">
-      <p data-woerter>{AUSSAGE.split(' ').map((w) => <span>{w} </span>)}</p>
-    </section>
-
-    <section class="achsen" data-ton="hell" data-achsen aria-labelledby="k-achsen">
-      <div class="achsen-buehne">
-        <h2 id="k-achsen" class="achsen-kopf innen">sieben fragen statt eines adjektivs</h2>
-        <div class="achsen-stapel">
-          {KATEGORIEN.map((k, i) => (
-            <article class="achse innen" data-achse={i} data-art={k.art}>
-              <p class="achse-wort" aria-label={k.kat}>{[...k.kat.toLowerCase()].map((b) => <span aria-hidden="true">{b}</span>)}</p>
-              <div class="achse-text">
-                <p class="achse-frage">{k.frage}</p>
-                <p class="achse-statt">statt <s>{k.wort}</s></p>
-              </div>
-            </article>
-          ))}
-        </div>
-        <div class="achsen-fortschritt innen" aria-hidden="true"><span data-achsen-balken></span></div>
-      </div>
-    </section>
-
-    <section class="dekodierer innen" data-ton="hell" aria-labelledby="k-dekodierer" data-dekodierer>
-      <h2 id="k-dekodierer" class="abschnitt-titel">sie sagen ein wort. ich höre eine entscheidung.</h2>
-      <div class="deko">
-        <div class="deko-zeile">
-          <span class="deko-wer">Aus dem Briefing</span>
-          <p class="deko-briefing"><span data-briefing>{erste.vor}<s>{erste.wort}</s>{erste.nach}</span></p>
-        </div>
-        <div class="deko-zeile">
-          <span class="deko-wer" data-kat>{erste.kat}</span>
-          <p class="deko-antwort" data-antwort>{erste.antwort}</p>
-        </div>
-        <form class="deko-eigenes" data-eigenes>
-          <label class="deko-wer" for="eigenes-wort">Ihr Wort</label>
-          <div class="deko-feld">
-            <input id="eigenes-wort" name="wort" type="text" autocomplete="off" maxlength="40" placeholder="zum Beispiel seriöser" />
-            <button type="submit">übersetzen</button>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <section class="felder innen" data-ton="dunkel" aria-labelledby="k-felder">
-      <h2 id="k-felder" class="abschnitt-titel">was daraus entsteht</h2>
-      {FELDER.map((f) => (
-        <article class="feld">
-          <h3 class="feld-titel" data-gewicht>{f.titel}</h3>
-          <div class="feld-text">
-            <p>{f.text}</p>
-            <ul>{f.liefer.map((l) => <li>{l}</li>)}</ul>
-          </div>
-        </article>
+<Seite titel="Auswahl | kommunikations.studio" klasse="v-auswahl" ton="hell">
+  <Kopf ziel="/a/" zielText="erste variante" />
+  <main id="inhalt" class="auswahl innen" tabindex="-1">
+    <h1 class="auswahl-titel">drei wege zur selben wirkung.</h1>
+    <p class="auswahl-einleitung">Alle drei Varianten tragen dieselben Inhalte, dieselbe Schrift und dieselben Farben. Sie unterscheiden sich in Haltung, Bewegung und Bild. Am besten auf einem Rechner mit Maus ansehen, danach auf dem Handy.</p>
+    <ol class="auswahl-liste">
+      {VARIANTEN.map((v, i) => (
+        <li>
+          <a class="variante" href={v.pfad}>
+            <span class="variante-zahl" aria-hidden="true">{String.fromCharCode(97 + i)}</span>
+            <span class="variante-name">{v.name}</span>
+            <span class="variante-zeile">{v.zeile}</span>
+            <span class="variante-fakten"><span>{v.technik}</span><span>{v.ton}</span></span>
+          </a>
+        </li>
       ))}
-    </section>
-
-    <section class="person innen" data-ton="hell" aria-labelledby="k-person">
-      <h2 id="k-person" class="abschnitt-titel">wer hier arbeitet</h2>
-      <div class="person-raster">
-        <figure class="portrait" data-portrait>
-          <img src="/sebastian.jpg" alt="Sebastian Knust" width="1344" height="2016" loading="lazy" />
-          <figcaption>Sebastian Knust, Limburg</figcaption>
-        </figure>
-        <div class="person-text">
-          <p class="person-eins">
-            Ich komme aus der internationalen Luxushotellerie. In einem Fünf-Sterne-Haus zählt der
-            erste Satz am Telefon so viel wie die Fassade.
-          </p>
-          <p>
-            Diese Schule prägt meine Arbeit bis heute. Danach habe ich Marken geführt, Kampagnen
-            entwickelt, Agenturen gesteuert und Inhalte selbst fotografiert, gefilmt und geschrieben.
-          </p>
-          <p>
-            Ich arbeite mit digitalen Werkzeugen, auch mit KI. Das Urteil darüber, wie Ihr
-            Unternehmen wirken soll, treffen wir gemeinsam.
-          </p>
-          <ol class="stationen">
-            {STATIONEN.map(([jahr, was]) => <li><span>{jahr}</span>{was}</li>)}
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <section id="gespraech" class="schluss innen" data-ton="dunkel" aria-labelledby="k-gespraech">
-      <h2 id="k-gespraech" class="schluss-titel">beginnen wir mit dem eindruck, den sie heute hinterlassen.</h2>
-      <div class="schluss-text">
-        <p>
-          Das erste Gespräch ist kostenfrei. 45 Minuten schauen wir gemeinsam auf Ihren Auftritt, und
-          Sie gehen mit drei konkreten Beobachtungen, unabhängig davon, ob wir danach zusammenarbeiten.
-        </p>
-        <a class="knopf" href={`mailto:${MAIL}?subject=Erstgespr%C3%A4ch`} data-magnet><span>Erstgespräch anfragen</span></a>
-        <p class="adresse">oder direkt an <a href={`mailto:${MAIL}`}>{MAIL}</a></p>
-      </div>
-      <footer class="fuss">
-        <span>kommunikations.studio, Sebastian Knust, Limburg an der Lahn</span>
-        <nav aria-label="Rechtliches"><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a></nav>
-      </footer>
-    </section>
+    </ol>
   </main>
-
-  <script type="application/json" id="daten" set:html={JSON.stringify({ KATEGORIEN, WOERTER })} />
-  <script>
-    import { start } from '../scripts/buehne'
-    start()
-  </script>
 </Seite>

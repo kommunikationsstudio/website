@@ -1,0 +1,10 @@
+---
+// Kopfzeile mit Sprunglink. Differenz-Mischung hält sie auf Schwarz und Weiß lesbar.
+interface Props { ziel?: string; zielText?: string }
+const { ziel = '#gespraech', zielText = 'erstgespräch' } = Astro.props
+---
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header class="kopf">
+  <a href="/" aria-label="kommunikations.studio, Startseite"><img src="/logo-ks-master.svg" alt="" width="150" height="36" /></a>
+  <a class="kopf-link" href={ziel}>{zielText}</a>
+</header>

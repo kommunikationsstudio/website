@@ -1,0 +1,59 @@
+---
+import Seite from '../layouts/Seite.astro'
+import Kopf from '../components/Kopf.astro'
+import Dekodierer from '../components/Dekodierer.astro'
+import Felder from '../components/Felder.astro'
+import Ablauf from '../components/Ablauf.astro'
+import Person from '../components/Person.astro'
+import Schluss from '../components/Schluss.astro'
+import { AUSSAGE, MOTTO, WOFUER, KATEGORIEN, TITEL } from '../data/inhalt'
+import '../styles/c.css'
+const woerter = ['wahrnehmung', 'gestalten.']
+---
+<Seite klasse="v-c" ton="hell">
+  <Kopf />
+  <main id="inhalt" tabindex="-1">
+    <section class="raster-start" data-ton="hell">
+      <div class="raster-linien" aria-hidden="true">{Array.from({ length: 12 }, () => <span />)}</div>
+      <h1 class="stimme innen" data-stimme aria-label="wahrnehmung gestalten.">
+        {woerter.map((w) => <span class="stimme-wort" aria-hidden="true">{[...w].map((b) => <span class="b">{b}</span>)}</span>)}
+      </h1>
+      <div class="raster-zeile innen">
+        <p class="raster-motto">{MOTTO}</p>
+        <p class="raster-wofuer">{WOFUER}</p>
+        <a class="raster-link" href="#gespraech">Erstgespräch, kostenfrei</a>
+      </div>
+    </section>
+
+    <section class="raster-aussage innen" data-ton="hell" aria-label="Haltung">
+      <p>{AUSSAGE}</p>
+    </section>
+
+    <section class="index innen" data-ton="hell" aria-labelledby="k-achsen" data-index>
+      <h2 id="k-achsen" class="abschnitt-titel">{TITEL.achsen}</h2>
+      <ol class="index-liste">
+        {KATEGORIEN.map((k, i) => (
+          <li class="index-zeile" data-zeile data-art={k.art}>
+            <span class="index-zahl" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="index-wort">{k.kat.toLowerCase()}</h3>
+            <div class="index-text">
+              <p class="index-frage">{k.frage}</p>
+              <p class="index-statt">statt <s>{k.wort}</s></p>
+            </div>
+            {k.art === 'bildsprache' && <img class="index-bild" src="/sebastian.jpg" alt="" width="1344" height="2016" loading="lazy" />}
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <Dekodierer ton="dunkel" />
+    <Felder ton="hell" />
+    <Ablauf ton="hell" />
+    <Person ton="hell" />
+    <Schluss />
+  </main>
+  <script>
+    import { start } from '../scripts/c'
+    start()
+  </script>
+</Seite>

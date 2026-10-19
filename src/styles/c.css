@@ -1,0 +1,62 @@
+/* Variante Raster: reine Typografie auf Weiß, ein Raster für alles */
+
+.raster-start { position: relative; min-height: 100svh; display: grid; grid-template-rows: 1fr auto; padding-top: 96px; overflow: hidden; }
+.raster-linien { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(12, 1fr); padding-inline: var(--links) var(--rechts); pointer-events: none; }
+.raster-linien span { border-left: 1px solid var(--linie); transform-origin: top; }
+.raster-linien span:last-child { border-right: 1px solid var(--linie); }
+.lebt .raster-linien span { animation: ziehen 1.1s cubic-bezier(0.65, 0, 0.35, 1) both; }
+.lebt .raster-linien span:nth-child(n) { animation-delay: calc(var(--i, 0) * 50ms); }
+@keyframes ziehen { from { transform: scaleY(0); } }
+
+.stimme { position: relative; align-self: center; font-size: clamp(48px, 13.4vw, 270px); line-height: 0.84; letter-spacing: -0.045em; font-weight: 200; }
+.stimme-wort { display: block; white-space: nowrap; }
+.stimme .b { display: inline-block; font-variation-settings: 'wght' var(--w, 200), 'wdth' var(--d, 100); }
+html:not(.js) .stimme .b { --w: 900; }
+
+.raster-zeile { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; padding-block: 28px clamp(28px, 6vh, 56px); align-items: end; }
+.raster-motto { grid-column: 1 / span 4; font-weight: 600; font-size: clamp(20px, 1.8vw, 30px); letter-spacing: -0.02em; }
+.raster-wofuer { grid-column: 5 / span 4; font-size: 16px; color: var(--leise); }
+.raster-link { grid-column: 10 / span 3; justify-self: end; font-weight: 700; font-size: 17px; text-decoration: none; border-bottom: 2px solid currentColor; padding-block: 6px 2px; }
+
+.raster-aussage { padding-block: clamp(100px, 20vh, 220px); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+.raster-aussage p { grid-column: 1 / span 9; font-weight: 500; font-size: clamp(30px, 4.2vw, 78px); line-height: 1.04; letter-spacing: -0.035em; }
+
+/* Index der sieben Achsen */
+.index { padding-block: clamp(60px, 12vh, 140px); }
+.index-liste { list-style: none; margin-top: clamp(32px, 6vh, 64px); border-top: 2px solid currentColor; }
+.index-zeile { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 8px 16px; align-items: baseline; padding-block: clamp(14px, 2.4vh, 26px); border-bottom: 1px solid var(--linie); }
+.index-zahl { grid-column: 1; font-weight: 600; font-size: 15px; font-variant-numeric: tabular-nums; color: var(--leise); }
+.index-wort { grid-column: 2 / span 6; font-size: clamp(40px, 7vw, 132px); line-height: 0.92; letter-spacing: -0.045em; font-weight: 200; font-variation-settings: 'wght' 200, 'wdth' 100; transition: font-variation-settings 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.index-text { grid-column: 8 / span 5; display: grid; gap: 6px; opacity: 0.35; transition: opacity 0.6s; }
+.index-frage { font-weight: 500; font-size: clamp(18px, 1.5vw, 24px); line-height: 1.2; }
+.index-statt { font-size: 16px; color: var(--leise); }
+.index-statt s { color: var(--schrift); font-weight: 700; text-decoration-thickness: 2px; }
+.index-bild { position: absolute; right: var(--rechts); top: 50%; width: clamp(120px, 14vw, 220px); aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 15%; filter: grayscale(1) contrast(1.1); translate: 0 -50%; clip-path: inset(50% 0 50% 0); transition: clip-path 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); pointer-events: none; }
+.index-zeile.ist-da .index-text, .index-zeile:hover .index-text { opacity: 1; }
+.index-zeile.ist-da .index-bild { clip-path: inset(0 0 0 0); }
+html:not(.lebt) .index-text { opacity: 1; }
+html:not(.lebt) .index-wort { font-variation-settings: 'wght' 800, 'wdth' 100; }
+/* Jede Zeile wird auf ihre eigene Weise laut */
+.ist-da[data-art='typografie'] .index-wort { font-variation-settings: 'wght' 900, 'wdth' 118; }
+.ist-da[data-art='bildsprache'] .index-wort { font-variation-settings: 'wght' 900, 'wdth' 100; }
+.ist-da[data-art='bewegung'] .index-wort { font-variation-settings: 'wght' 900, 'wdth' 100; font-style: italic; }
+.ist-da[data-art='tonalitaet'] .index-wort { font-variation-settings: 'wght' 500, 'wdth' 100; }
+.ist-da[data-art='dramaturgie'] .index-wort { font-variation-settings: 'wght' 900, 'wdth' 62; }
+.ist-da[data-art='atmosphaere'] .index-wort { font-variation-settings: 'wght' 300, 'wdth' 125; letter-spacing: 0.02em; }
+.ist-da[data-art='rhythmus'] .index-wort { font-variation-settings: 'wght' 900, 'wdth' 100; letter-spacing: 0.08em; }
+.index-wort { transition: font-variation-settings 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), letter-spacing 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
+
+/* Leistungen und Ablauf im Raster */
+.v-c .feld-titel { font-weight: 300; font-variation-settings: 'wght' 300, 'wdth' 100; }
+.v-c .schritt { border-top-width: 2px; }
+
+@media (max-width: 800px) {
+  .raster-linien { grid-template-columns: repeat(4, 1fr); }
+  .raster-linien span:nth-child(n+5) { display: none; }
+  .raster-zeile > * { grid-column: 1 / -1 !important; justify-self: start !important; }
+  .raster-aussage p { grid-column: 1 / -1; }
+  .index-zahl { grid-column: 1 / -1; }
+  .index-wort { grid-column: 1 / -1; font-size: 12vw; }
+  .index-text { grid-column: 1 / -1; }
+  .index-bild { display: none; }
+}

@@ -1,18 +1,20 @@
 ---
 import Seite from '../layouts/Seite.astro'
+import Kopf from '../components/Kopf.astro'
 
 // Information nach Art. 13 DSGVO für die Website. Übernommen aus der
 // bisherigen Erklärung; Kundenbereich und Office haben eigene Angaben.
 // Entwurf, zur Prüfung vor dem Launch.
 ---
-<Seite titel="Datenschutz · kommunikations.studio" beschreibung="Datenschutzerklärung von kommunikations.studio.">
-  <main class="recht">
+<Seite titel="Datenschutz · kommunikations.studio" ton="hell" beschreibung="Datenschutzerklärung von kommunikations.studio.">
+  <Kopf ziel="/" zielText="zur Startseite" />
+  <main class="recht" id="inhalt">
     <h1>Datenschutz</h1>
     <p class="unter">Kurz gesagt: Diese Website setzt keine Cookies und misst niemanden.</p>
 
     <h2>Verantwortlich</h2>
     <p>
-      Sebastian Knust, kommunikations.studio, Felizitas-Massenkeil-Str. 9, 65549 Limburg.<br />
+      Sebastian Knust, kommunikations.studio, Felizitas-Massenkeil-Str. 9, 65549 Limburg an der Lahn.<br />
       <a href="mailto:kontakt@kommunikations.studio">kontakt@kommunikations.studio</a>, <a href="tel:+4915678540600">0156 78540600</a>
     </p>
 

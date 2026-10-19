@@ -1,15 +1,17 @@
 ---
 import Seite from '../layouts/Seite.astro'
+import Kopf from '../components/Kopf.astro'
 ---
-<Seite titel="Impressum · kommunikations.studio" beschreibung="Impressum von kommunikations.studio, Sebastian Knust, Limburg.">
-  <main class="recht">
+<Seite titel="Impressum · kommunikations.studio" ton="hell" beschreibung="Impressum von kommunikations.studio, Sebastian Knust, Limburg.">
+  <Kopf ziel="/" zielText="zur Startseite" />
+  <main class="recht" id="inhalt">
     <h1>Impressum</h1>
     <p class="unter">Angaben gemäß § 5 DDG</p>
     <p>
       Sebastian Knust<br />
       kommunikations.studio<br />
       Felizitas-Massenkeil-Str. 9<br />
-      65549 Limburg
+      65549 Limburg an der Lahn
     </p>
     <h2>Kontakt</h2>
     <p>

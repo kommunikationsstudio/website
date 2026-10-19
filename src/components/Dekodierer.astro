@@ -1,0 +1,28 @@
+---
+import { KATEGORIEN, TITEL } from '../data/inhalt'
+interface Props { ton?: 'dunkel' | 'hell' }
+const { ton = 'hell' } = Astro.props
+const erste = KATEGORIEN[0]
+---
+<section class="dekodierer innen" data-ton={ton} aria-labelledby="k-dekodierer" data-dekodierer>
+  <h2 id="k-dekodierer" class="abschnitt-titel">{TITEL.dekodierer}</h2>
+  <div class="deko">
+    <div class="deko-zeile">
+      <span class="deko-wer">Aus dem Briefing</span>
+      <p class="deko-briefing"><span data-briefing>{erste.vor}<s>{erste.wort}</s>{erste.nach}</span></p>
+    </div>
+    <div class="deko-zeile">
+      <span class="deko-wer" data-kat>{erste.kat}</span>
+      <p class="deko-antwort" data-antwort>{erste.antwort}</p>
+    </div>
+    <form class="deko-eigenes" data-eigenes novalidate>
+      <label class="deko-wer" for="eigenes-wort">Ihr Wort</label>
+      <div class="deko-feld">
+        <input id="eigenes-wort" name="wort" type="text" autocomplete="off" maxlength="40" placeholder="zum Beispiel seriöser" aria-describedby="deko-hinweis" />
+        <button type="submit">übersetzen</button>
+      </div>
+      <p id="deko-hinweis" class="deko-hinweis" data-hinweis-feld></p>
+    </form>
+    <p class="sr-only" role="status" data-ansage></p>
+  </div>
+</section>

@@ -1,0 +1,56 @@
+/* Variante Belichtung: das Bild entwickelt sich wie in der Dunkelkammer */
+
+.dunkelkammer { position: relative; }
+.lebt .dunkelkammer { height: 190svh; }
+.dunkelkammer-innen { position: relative; height: 100svh; min-height: 560px; overflow: hidden; background: #000; }
+.lebt .dunkelkammer-innen { position: sticky; top: 0; }
+.abzug { position: absolute; inset: 0; }
+.abzug img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; filter: grayscale(1) contrast(1.15) brightness(0.55); transform-origin: 50% 30%; }
+.lebt .abzug img { filter: grayscale(1) contrast(1.4) brightness(0); }
+.abzug::after { content: ''; position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 40%, transparent 40%, rgba(0, 0, 0, 0.75)); }
+.belichtet { position: absolute; left: 0; right: 0; top: 50%; translate: 0 -50%; padding: 0 var(--rechts) 0 var(--links); color: #fff; mix-blend-mode: difference; line-height: 0.82; }
+.belichtet-gross { display: block; font-weight: 900; font-size: 15.4vw; letter-spacing: -0.05em; font-variation-settings: 'wght' 900, 'wdth' 112; white-space: nowrap; margin-left: -0.04em; }
+.belichtet-klein { display: block; font-weight: 300; font-size: clamp(36px, 6.4vw, 130px); letter-spacing: -0.04em; margin-top: 0.12em; font-variation-settings: 'wght' 300, 'wdth' 100; }
+.dunkelkammer-unter { position: absolute; left: var(--links); right: var(--rechts); bottom: clamp(28px, 7vh, 72px); display: flex; justify-content: space-between; align-items: end; gap: 12px 40px; flex-wrap: wrap; color: #fff; font-size: clamp(18px, 1.6vw, 26px); font-weight: 500; }
+.dunkelkammer-unter .leise { color: var(--grau); font-size: 16px; max-width: 24rem; font-weight: 400; }
+
+.raum { min-height: 80svh; display: grid; place-items: center; padding-block: clamp(100px, 20vh, 220px); }
+.raum-text { max-width: 24ch; text-align: center; font-weight: 300; font-size: clamp(30px, 4.4vw, 80px); line-height: 1.08; letter-spacing: -0.03em; }
+.zeile-maske { display: block; overflow: hidden; padding-bottom: 0.06em; }
+.zeile-maske > span { display: block; }
+
+/* Achsen als Filmstreifen */
+.achsen-kopf { padding-top: clamp(80px, 14vh, 160px); font-weight: 600; font-size: clamp(18px, 1.5vw, 24px); color: var(--leise); }
+.achsen-stapel { display: grid; gap: 2px; padding: clamp(32px, 6vh, 64px) var(--rechts) clamp(60px, 10vh, 120px) var(--links); }
+.achse { position: relative; background: #111; color: #fff; padding: clamp(28px, 4vw, 56px) clamp(24px, 3vw, 44px); display: grid; align-content: space-between; gap: 32px; min-height: 60svh; overflow: hidden; }
+.achse-wort { position: relative; z-index: 1; font-weight: 900; font-size: clamp(44px, 7vw, 132px); line-height: 0.9; letter-spacing: -0.04em; font-variation-settings: 'wght' 900, 'wdth' 100; }
+.achse-wort .b { display: inline-block; }
+.achse-text { position: relative; z-index: 1; display: grid; gap: 10px; max-width: 30rem; }
+.achse-frage { font-weight: 500; font-size: clamp(19px, 1.6vw, 26px); line-height: 1.2; }
+.achse-statt { color: var(--grau); font-size: 18px; }
+.achse-statt s { color: #fff; text-decoration-thickness: 2px; font-weight: 700; }
+.achse-bild { position: absolute; inset: 0; z-index: 0; }
+.achse-bild img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; filter: grayscale(1) contrast(1.2) brightness(0.55); }
+.achsen-fortschritt { display: none; }
+
+.lebt .achsen { overflow: hidden; }
+.lebt .achsen-buehne { height: 100svh; display: grid; grid-template-rows: auto 1fr; }
+.lebt .achsen-stapel { display: flex; gap: 2px; width: max-content; height: 100%; align-items: stretch; padding-block: clamp(24px, 5vh, 48px) clamp(40px, 8vh, 80px); will-change: transform; }
+.lebt .achse { width: min(78vw, 980px); min-height: 0; }
+.lebt .achse::before { content: ''; position: absolute; inset: 0; z-index: 2; background: #000; opacity: var(--dunkel, 0.85); pointer-events: none; transition: opacity 0.2s linear; }
+
+/* Bildplatte für die Person */
+.platte { position: relative; padding-bottom: clamp(80px, 14vh, 160px); }
+.platte-bild { height: 110svh; overflow: hidden; position: relative; }
+.platte-bild img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; filter: grayscale(1) contrast(1.15); }
+.lebt .platte-bild img { filter: grayscale(1) contrast(1.4) brightness(0); }
+.platte-text { margin-top: clamp(-200px, -18vh, -100px); position: relative; display: grid; gap: clamp(20px, 3vh, 36px); }
+.platte-text .person-eins { max-width: 22ch; font-size: clamp(30px, 4vw, 72px); line-height: 1.02; letter-spacing: -0.035em; }
+.platte-spalten { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 90px); align-items: start; margin-top: clamp(20px, 4vh, 48px); }
+.platte .stationen { margin-top: 0; }
+
+@media (max-width: 800px) {
+  .belichtet-gross { font-size: 16.4vw; }
+  .platte-spalten { grid-template-columns: minmax(0, 1fr); }
+  .lebt .achse { width: 86vw; }
+}

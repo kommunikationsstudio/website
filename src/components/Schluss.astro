@@ -1,0 +1,17 @@
+---
+import { MAIL, MAIL_LINK, SCHLUSS, TEL, TEL_ANZEIGE } from '../data/inhalt'
+interface Props { ton?: 'dunkel' | 'hell' }
+const { ton = 'dunkel' } = Astro.props
+---
+<section id="gespraech" class="schluss innen" data-ton={ton} aria-labelledby="k-gespraech" tabindex="-1">
+  <h2 id="k-gespraech" class="schluss-titel">{SCHLUSS.titel}</h2>
+  <div class="schluss-text">
+    <p>{SCHLUSS.text}</p>
+    <a class="knopf" href={MAIL_LINK}><span>Erstgespräch anfragen</span><span class="knopf-zusatz">45 Minuten, kostenfrei</span></a>
+    <p class="adresse">oder direkt an <a href={`mailto:${MAIL}`}>{MAIL}</a> und unter <a href={`tel:${TEL}`}>{TEL_ANZEIGE}</a></p>
+  </div>
+</section>
+<footer class="fuss innen" data-ton={ton}>
+  <span>kommunikations.studio, Sebastian Knust, Felizitas-Massenkeil-Str. 9, 65549 Limburg an der Lahn</span>
+  <nav aria-label="Rechtliches"><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a></nav>
+</footer>

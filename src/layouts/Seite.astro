@@ -1,15 +1,20 @@
 ---
-import '../styles/site.css'
+import '../styles/basis.css'
 
 interface Props {
   titel?: string
   beschreibung?: string
+  klasse?: string
+  ton?: 'dunkel' | 'hell'
 }
 
 const {
-  titel = 'Wahrnehmung gestalten | kommunikations.studio',
-  beschreibung = 'Positionierung, Erscheinungsbild und Inhalte für Unternehmen in Rhein-Main und Mittelhessen. Sebastian Knust übersetzt vage Wünsche in konkrete Gestaltung. Erstgespräch kostenfrei.',
+  titel = 'Positionierung und Corporate Design in Limburg | kommunikations.studio',
+  beschreibung = 'Positionierung, Erscheinungsbild und Inhalte für Unternehmen in Rhein-Main und Mittelhessen. Sebastian Knust, Limburg. Das Erstgespräch ist kostenfrei.',
+  klasse = '',
+  ton = 'dunkel',
 } = Astro.props
+const STUDIO_TEXT = 'Studio für Positionierung, Erscheinungsbild und Inhalte von Sebastian Knust in Limburg an der Lahn. Übersetzt vage Briefing-Wünsche in konkrete Entscheidungen über Schrift, Bild, Sprache und Bewegung.'
 
 // Bis zur Freigabe bleibt die Seite aus den Suchmaschinen heraus.
 const freigegeben = import.meta.env.PUBLIC_FREIGEGEBEN === 'true'
@@ -28,7 +33,7 @@ const jsonLd = {
       logo: 'https://www.kommunikations.studio/logo-ks-master.svg',
       image: 'https://www.kommunikations.studio/og.png',
       slogan: 'Wahrnehmung gestalten. Vom Eindruck zur Wirkung.',
-      description: beschreibung,
+      description: STUDIO_TEXT,
       email: 'kontakt@kommunikations.studio',
       telephone: '+49 156 78540600',
       address: {
@@ -39,7 +44,7 @@ const jsonLd = {
         addressRegion: 'Hessen',
         addressCountry: 'DE',
       },
-      areaServed: ['Rhein-Main', 'Mittelhessen', 'Hessen'],
+      areaServed: ['Rhein-Main', 'Mittelhessen', 'Hessen'].map((name) => ({ '@type': 'Place', name })),
       knowsAbout: ['Positionierung', 'Corporate Design', 'Webdesign', 'Markenkommunikation', 'Employer Branding', 'Interne Kommunikation', 'Wahrnehmungsanalyse'],
       founder: { '@id': PERSON },
       hasOfferCatalog: {
@@ -55,11 +60,14 @@ const jsonLd = {
       '@type': 'Person',
       '@id': PERSON,
       name: 'Sebastian Knust',
+      jobTitle: 'Gestalter für Positionierung und Erscheinungsbild',
+      knowsAbout: ['Corporate Design', 'Markenkommunikation', 'Fotografie', 'Video', 'Webentwicklung'],
       image: 'https://www.kommunikations.studio/sebastian.jpg',
       worksFor: { '@id': STUDIO },
     },
     {
       '@type': 'WebSite',
+      '@id': 'https://www.kommunikations.studio/#website',
       name: 'kommunikations.studio',
       url: 'https://www.kommunikations.studio',
       inLanguage: 'de-DE',
@@ -69,7 +77,7 @@ const jsonLd = {
 }
 ---
 <!doctype html>
-<html lang="de" data-ton="dunkel">
+<html lang="de" data-ton={ton}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -90,10 +98,10 @@ const jsonLd = {
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Wahrnehmung gestalten. Vom Eindruck zur Wirkung." />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content={ton === "hell" ? "#ffffff" : "#000000"} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
-  <body>
+  <body class={klasse}>
     <slot />
   </body>
 </html>
