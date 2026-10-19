@@ -9,7 +9,7 @@
 .lebt .abzug img { filter: grayscale(1) contrast(1.4) brightness(0); }
 .abzug::after { content: ''; position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 40%, transparent 40%, rgba(0, 0, 0, 0.75)); }
 .belichtet { position: absolute; left: 0; right: 0; top: 50%; translate: 0 -50%; padding: 0 var(--rechts) 0 var(--links); color: #fff; mix-blend-mode: difference; line-height: 0.82; }
-.belichtet-gross { display: block; font-weight: 900; font-size: 15.4vw; letter-spacing: -0.05em; font-variation-settings: 'wght' 900, 'wdth' 112; white-space: nowrap; margin-left: -0.04em; }
+.belichtet-gross { display: block; font-weight: 900; font-size: 11.6vw; letter-spacing: -0.05em; font-variation-settings: 'wght' 900, 'wdth' 112; white-space: nowrap; margin-left: -0.04em; }
 .belichtet-klein { display: block; font-weight: 300; font-size: clamp(36px, 6.4vw, 130px); letter-spacing: -0.04em; margin-top: 0.12em; font-variation-settings: 'wght' 300, 'wdth' 100; }
 .dunkelkammer-unter { position: absolute; left: var(--links); right: var(--rechts); bottom: clamp(28px, 7vh, 72px); display: flex; justify-content: space-between; align-items: end; gap: 12px 40px; flex-wrap: wrap; color: #fff; font-size: clamp(18px, 1.6vw, 26px); font-weight: 500; }
 .dunkelkammer-unter .leise { color: var(--grau); font-size: 16px; max-width: 24rem; font-weight: 400; }
@@ -44,13 +44,13 @@
 .platte-bild { height: 110svh; overflow: hidden; position: relative; }
 .platte-bild img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; filter: grayscale(1) contrast(1.15); }
 .lebt .platte-bild img { filter: grayscale(1) contrast(1.4) brightness(0); }
-.platte-text { margin-top: clamp(-200px, -18vh, -100px); position: relative; display: grid; gap: clamp(20px, 3vh, 36px); }
+.platte-text { margin-top: clamp(48px, 8vh, 96px); position: relative; display: grid; gap: clamp(20px, 3vh, 36px); }
 .platte-text .person-eins { max-width: 22ch; font-size: clamp(30px, 4vw, 72px); line-height: 1.02; letter-spacing: -0.035em; }
 .platte-spalten { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 90px); align-items: start; margin-top: clamp(20px, 4vh, 48px); }
 .platte .stationen { margin-top: 0; }
 
 @media (max-width: 800px) {
-  .belichtet-gross { font-size: 16.4vw; }
+  .belichtet-gross { font-size: 11.6vw; }
   .platte-spalten { grid-template-columns: minmax(0, 1fr); }
   .lebt .achse { width: 86vw; }
 }

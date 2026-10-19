@@ -164,6 +164,7 @@ html:not(.js) .deko-eigenes { display: none; }
   .deko-zeile, .deko-eigenes { grid-template-columns: minmax(0, 1fr); }
   .deko-hinweis { grid-column: 1; }
   .feld { grid-template-columns: minmax(0, 1fr); }
+  .feld-titel { font-size: 9.4vw; }
   .person-raster { grid-template-columns: minmax(0, 1fr); }
   .portrait { max-width: 30rem; }
   .schluss-text { margin-left: 0; }

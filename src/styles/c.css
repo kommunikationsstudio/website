@@ -42,7 +42,7 @@ html:not(.lebt) .index-wort { font-variation-settings: 'wght' 800, 'wdth' 100; }
 .ist-da[data-art='bewegung'] .index-wort { font-variation-settings: 'wght' 900, 'wdth' 100; font-style: italic; }
 .ist-da[data-art='tonalitaet'] .index-wort { font-variation-settings: 'wght' 500, 'wdth' 100; }
 .ist-da[data-art='dramaturgie'] .index-wort { font-variation-settings: 'wght' 900, 'wdth' 62; }
-.ist-da[data-art='atmosphaere'] .index-wort { font-variation-settings: 'wght' 300, 'wdth' 125; letter-spacing: 0.02em; }
+.ist-da[data-art='atmosphaere'] .index-wort { font-variation-settings: 'wght' 300, 'wdth' 112; letter-spacing: 0.01em; }
 .ist-da[data-art='rhythmus'] .index-wort { font-variation-settings: 'wght' 900, 'wdth' 100; letter-spacing: 0.08em; }
 .index-wort { transition: font-variation-settings 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), letter-spacing 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
 
@@ -51,6 +51,7 @@ html:not(.lebt) .index-wort { font-variation-settings: 'wght' 800, 'wdth' 100; }
 .v-c .schritt { border-top-width: 2px; }
 
 @media (max-width: 800px) {
+  .stimme { font-size: 14.6vw; }
   .raster-linien { grid-template-columns: repeat(4, 1fr); }
   .raster-linien span:nth-child(n+5) { display: none; }
   .raster-zeile > * { grid-column: 1 / -1 !important; justify-self: start !important; }

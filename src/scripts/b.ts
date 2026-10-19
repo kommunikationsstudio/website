@@ -54,7 +54,7 @@ export function start() {
   const bilder = [...box.querySelectorAll<HTMLElement>('[data-achse]')]
   const weg = () => stapel.scrollWidth - window.innerWidth
   ScrollTrigger.create({
-    trigger: box, start: 'top top', end: () => `+=${weg() * 1.1}`, pin: true, scrub: 0.6, invalidateOnRefresh: true,
+    trigger: box, start: 'top top', end: () => `+=${weg() * 1.1}`, pin: true, scrub: 0.6, invalidateOnRefresh: true, refreshPriority: 1,
     onUpdate: (s) => {
       stapel.style.transform = `translateX(${-weg() * s.progress}px)`
       const mitte = window.innerWidth / 2
@@ -66,6 +66,7 @@ export function start() {
     },
   })
   bilder.forEach((b) => b.style.setProperty('--dunkel', '0.85'))
+  ScrollTrigger.sort()
   ScrollTrigger.refresh()
 
   // Bildplatte entwickelt sich, sobald sie ins Bild kommt
