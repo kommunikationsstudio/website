@@ -1,4 +1,4 @@
-// Variante Schärfe: WebGL-Bühne, Wort-für-Wort-Aussage, sieben Achsen als Scroll-Bühne.
+// Startseite: WebGL-Bühne, Wort-für-Wort-Aussage, sieben Achsen als Scroll-Bühne.
 import { kern, gsap, ScrollTrigger, klemmen, weich } from './kern'
 import { schaerfe } from './schaerfe'
 

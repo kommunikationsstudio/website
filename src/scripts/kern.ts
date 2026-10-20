@@ -1,4 +1,4 @@
-// Gemeinsamer Unterbau aller Varianten: weiches Scrollen, Tonwechsel,
+// Gemeinsamer Unterbau: weiches Scrollen, Tonwechsel,
 // Dekodierer, Leistungen, Portrait und Sprungziele mit Fokus.
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'

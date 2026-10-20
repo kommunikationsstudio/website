@@ -1,4 +1,4 @@
-// Inhalte der Startseite, von allen Varianten gemeinsam genutzt.
+// Inhalte der Startseite.
 
 export const MAIL = 'kontakt@kommunikations.studio'
 export const TEL = '+4915678540600'
