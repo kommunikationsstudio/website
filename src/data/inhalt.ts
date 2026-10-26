@@ -61,10 +61,18 @@ export const SCHLUSS = {
   text: 'Im Video-Call schauen wir gemeinsam auf Ihre Website und Ihre Unterlagen. Beim Besuch komme ich zu Ihnen und erlebe Ihr Unternehmen so, wie Ihre Kundschaft es erlebt. Danach entscheiden Sie in Ruhe.',
 }
 
+export const FRAGEN = [
+  { frage: 'Kommen Sie zu uns ins Unternehmen?', antwort: 'Ja. Für das Erstgespräch und für Aufnahmen komme ich zu Ihnen, in Rhein-Main und Mittelhessen. So sehe ich Ihr Unternehmen so, wie Ihre Kundschaft es erlebt.' },
+  { frage: 'Mit wem arbeite ich zusammen?', antwort: 'Mit mir. Von der Analyse über Fotos und Texte bis zum Code der Website bleibe ich Ihr Ansprechpartner.' },
+  { frage: 'Was kostet das Erstgespräch?', antwort: 'Das Erstgespräch ist kostenfrei. Danach entscheiden Sie frei, ob wir weiterarbeiten.' },
+  { frage: 'Wie setzen Sie KI ein?', antwort: 'Für Recherche, erste Entwürfe und Programmierung. Die Entscheidungen über Ihren Auftritt treffen wir gemeinsam. Gesundheitsdaten und vertrauliche Kundendaten gebe ich in keine Cloud-KI.' },
+]
+
 export const TITEL = {
   achsen: 'sieben fragen statt eines adjektivs',
   dekodierer: 'aus einem wort wird eine entscheidung.',
   felder: 'leistungen',
   ablauf: 'so arbeite ich',
   person: 'wer ihnen gegenübersitzt',
+  fragen: 'häufige fragen',
 }

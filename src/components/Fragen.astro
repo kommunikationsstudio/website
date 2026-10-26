@@ -1,0 +1,22 @@
+---
+import { FRAGEN, TITEL } from '../data/inhalt'
+interface Props { ton?: 'dunkel' | 'hell' }
+const { ton = 'hell' } = Astro.props
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FRAGEN.map((f) => ({ '@type': 'Question', name: f.frage, acceptedAnswer: { '@type': 'Answer', text: f.antwort } })),
+}
+---
+<section class="fragen innen" data-ton={ton} aria-labelledby="k-fragen">
+  <h2 id="k-fragen" class="abschnitt-titel">{TITEL.fragen}</h2>
+  <div class="fragen-liste">
+    {FRAGEN.map((f) => (
+      <details class="frage">
+        <summary>{f.frage}</summary>
+        <p>{f.antwort}</p>
+      </details>
+    ))}
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</section>

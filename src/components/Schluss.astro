@@ -1,5 +1,6 @@
 ---
 import { MAIL, SCHLUSS, TEL, TEL_ANZEIGE, TERMINE } from '../data/inhalt'
+import { ARBEITEN_FERTIG } from '../data/arbeiten'
 interface Props { ton?: 'dunkel' | 'hell' }
 const { ton = 'dunkel' } = Astro.props
 ---
@@ -17,5 +18,5 @@ const { ton = 'dunkel' } = Astro.props
 </section>
 <footer class="fuss innen" data-ton={ton}>
   <span>kommunikations.studio, Sebastian Knust, Felizitas-Massenkeil-Str. 9, 65549 Limburg an der Lahn</span>
-  <nav aria-label="Rechtliches"><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a></nav>
+  <nav aria-label="Weitere Seiten">{ARBEITEN_FERTIG && <a href="/arbeiten/">Arbeiten</a>}<a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a></nav>
 </footer>

@@ -1,0 +1,31 @@
+---
+import Seite from '../layouts/Seite.astro'
+import Kopf from '../components/Kopf.astro'
+import { PROJEKTE } from '../data/arbeiten'
+---
+<Seite titel="Arbeiten · kommunikations.studio" ton="hell" beschreibung="Projekte von kommunikations.studio: Positionierung, Erscheinungsbild und Inhalte für Unternehmen in Rhein-Main und Mittelhessen.">
+  <Kopf ziel="/#gespraech" zielText="erstgespräch" />
+  <main class="arbeiten" id="inhalt" data-ton="hell">
+    <h1>arbeiten</h1>
+    <p class="arbeiten-einleitung">Jedes Projekt beginnt mit einem Wort aus dem Briefing. Hier sehen Sie, welche Entscheidung daraus wurde.</p>
+    {PROJEKTE.map((p) => (
+      <article class="projekt">
+        <div>
+          <h2>{p.name.toLowerCase()}</h2>
+          <p class="projekt-meta">{[p.branche, p.ort, `seit ${p.seit}`].filter(Boolean).join(', ')}</p>
+        </div>
+        {(p.briefing || p.entscheidung || p.ergebnis) && (
+          <dl>
+            {p.briefing && <div><dt>Aus dem Briefing</dt><dd><s>{p.briefing}</s></dd></div>}
+            {p.entscheidung && <div><dt>Entscheidung</dt><dd>{p.entscheidung}</dd></div>}
+            {p.ergebnis && <div><dt>Ergebnis</dt><dd>{p.ergebnis}</dd></div>}
+          </dl>
+        )}
+      </article>
+    ))}
+  </main>
+  <footer class="fuss innen" data-ton="hell">
+    <span>kommunikations.studio, Sebastian Knust, Limburg an der Lahn</span>
+    <nav aria-label="Rechtliches"><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a></nav>
+  </footer>
+</Seite>
