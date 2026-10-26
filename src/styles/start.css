@@ -46,3 +46,4 @@ html:not(.gl) .buehne-unter { position: static; padding: 40px var(--rechts) 0 va
   .achse-wort { font-size: 10.2vw; }
   .lebt .achsen { height: 420svh; }
 }
+.achse-bild picture { display: block; height: 100%; }

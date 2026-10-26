@@ -1,5 +1,6 @@
 ---
 import { PERSON, STATIONEN, TITEL } from '../data/inhalt'
+import Portraet from './Portraet.astro'
 interface Props { ton?: 'dunkel' | 'hell' }
 const { ton = 'hell' } = Astro.props
 ---
@@ -7,7 +8,7 @@ const { ton = 'hell' } = Astro.props
   <h2 id="k-person" class="abschnitt-titel">{TITEL.person}</h2>
   <div class="person-raster">
     <figure class="portrait" data-portrait>
-      <img src="/sebastian.jpg" alt="Sebastian Knust" width="1344" height="2016" loading="lazy" />
+      <Portraet alt="Sebastian Knust" sizes="(min-width: 900px) 40vw, 100vw" />
       <figcaption>Sebastian Knust, Limburg an der Lahn</figcaption>
     </figure>
     <div class="person-text">

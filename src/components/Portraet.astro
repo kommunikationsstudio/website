@@ -1,0 +1,11 @@
+---
+// Porträt in AVIF und WebP je nach Breite, JPEG als Rückfall.
+interface Props { alt?: string; sizes?: string }
+const { alt = '', sizes = '100vw' } = Astro.props
+const set = (typ: string) => [640, 1000, 1400].map((w) => `/sebastian-${w}.${typ} ${w}w`).join(', ')
+---
+<picture>
+  <source type="image/avif" srcset={set('avif')} sizes={sizes} />
+  <source type="image/webp" srcset={set('webp')} sizes={sizes} />
+  <img src="/sebastian.jpg" alt={alt} width="1200" height="1800" loading="lazy" decoding="async" />
+</picture>

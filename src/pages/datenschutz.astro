@@ -1,6 +1,8 @@
 ---
 import Seite from '../layouts/Seite.astro'
 import Kopf from '../components/Kopf.astro'
+import { BUCHUNG } from '../data/inhalt'
+const buchung = !!(BUCHUNG.video || BUCHUNG.vorOrt)
 
 // Information nach Art. 13 DSGVO für die Website. Übernommen aus der
 // bisherigen Erklärung; Kundenbereich und Office haben eigene Angaben.
@@ -38,6 +40,19 @@ import Kopf from '../components/Kopf.astro'
       Google Workspace (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland).
       Wir löschen Anfragen, wenn sie erledigt sind und keine Aufbewahrungspflicht mehr besteht.
     </p>
+
+    {buchung && (
+      <>
+        <h2>Wenn Sie einen Termin buchen</h2>
+        <p>
+          Für die Terminbuchung verlinken wir auf die Terminplanung von Google Kalender
+          (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland). Erst wenn Sie
+          dem Link folgen, gelangen Sie auf eine Seite von Google. Ihre Angaben dort verwenden wir,
+          um den Termin vorzubereiten und durchzuführen (Art. 6 Abs. 1 lit. b DSGVO). Für die Seite
+          selbst gilt die Datenschutzerklärung von Google.
+        </p>
+      </>
+    )}
 
     <h2>Ihre Rechte</h2>
     <p>

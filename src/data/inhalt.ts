@@ -3,7 +3,14 @@
 export const MAIL = 'kontakt@kommunikations.studio'
 export const TEL = '+4915678540600'
 export const TEL_ANZEIGE = '0156 78540600'
-export const MAIL_LINK = `mailto:${MAIL}?subject=${encodeURIComponent('Erstgespräch')}&body=${encodeURIComponent('Guten Tag Herr Knust,\n\nunser Unternehmen:\nunsere Website:\nworum es geht:\n\nViele Grüße\n')}`
+
+// Buchungslinks (Google-Terminbuchung). Solange leer, öffnet der Knopf eine vorbereitete E-Mail.
+export const BUCHUNG = { video: '', vorOrt: '' }
+const brief = (art: string, feld: string) => `mailto:${MAIL}?subject=${encodeURIComponent(`Erstgespräch ${art}`)}&body=${encodeURIComponent(`Guten Tag Herr Knust,\n\nich wünsche mir ein Erstgespräch ${art}.\n\nunser Unternehmen:\n${feld}\nzwei Terminvorschläge:\n\nViele Grüße\n`)}`
+export const TERMINE = [
+  { titel: 'Video-Call', zusatz: '45 Minuten, kostenfrei', link: BUCHUNG.video || brief('per Video', 'unsere Website:'), extern: !!BUCHUNG.video },
+  { titel: 'Besuch vor Ort', zusatz: 'kostenfrei, in Rhein-Main und Mittelhessen', link: BUCHUNG.vorOrt || brief('vor Ort', 'unsere Adresse:'), extern: !!BUCHUNG.vorOrt },
+]
 
 export const MOTTO = 'vom eindruck zur wirkung.'
 export const WOFUER = 'Positionierung, Erscheinungsbild und Inhalte für Unternehmen in Rhein-Main und Mittelhessen.'
@@ -27,7 +34,7 @@ export const FELDER = [
 ]
 
 export const SCHRITTE = [
-  { titel: 'Erstgespräch', text: '45 Minuten, kostenfrei. Wir schauen gemeinsam auf Ihren Auftritt, und Sie gehen mit drei konkreten Beobachtungen.' },
+  { titel: 'Erstgespräch', text: 'Kostenfrei, per Video oder bei Ihnen vor Ort. Wir schauen gemeinsam auf Ihren Auftritt, und Sie gehen mit drei konkreten Beobachtungen.' },
   { titel: 'Wahrnehmungsanalyse', text: 'Ich prüfe Ihren Auftritt in sieben Kategorien und halte die Antworten schriftlich fest. Jeder spätere Entwurf wird an diesem Papier gemessen.' },
   { titel: 'Gestaltung und Umsetzung', text: 'Aus den Antworten entstehen Erscheinungsbild, Website und Inhalte. Sie sehen Zwischenstände und entscheiden mit.' },
   { titel: 'Übergabe', text: 'Sie erhalten alle Dateien und einen Leitfaden, mit dem Ihr Team den Auftritt selbst weiterführt.' },
@@ -51,7 +58,7 @@ export const PERSON = [
 
 export const SCHLUSS = {
   titel: 'beginnen wir mit dem eindruck, den sie heute hinterlassen.',
-  text: 'Schicken Sie mir vorab Ihre Website oder Ihren Flyer. Im Erstgespräch zeige ich Ihnen, was ich darin sehe, und Sie entscheiden danach in Ruhe.',
+  text: 'Im Video-Call schauen wir gemeinsam auf Ihre Website und Ihre Unterlagen. Beim Besuch komme ich zu Ihnen und erlebe Ihr Unternehmen so, wie Ihre Kundschaft es erlebt. Danach entscheiden Sie in Ruhe.',
 }
 
 export const TITEL = {

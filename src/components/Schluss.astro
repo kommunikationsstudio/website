@@ -1,5 +1,5 @@
 ---
-import { MAIL, MAIL_LINK, SCHLUSS, TEL, TEL_ANZEIGE } from '../data/inhalt'
+import { MAIL, SCHLUSS, TEL, TEL_ANZEIGE, TERMINE } from '../data/inhalt'
 interface Props { ton?: 'dunkel' | 'hell' }
 const { ton = 'dunkel' } = Astro.props
 ---
@@ -7,7 +7,11 @@ const { ton = 'dunkel' } = Astro.props
   <h2 id="k-gespraech" class="schluss-titel">{SCHLUSS.titel}</h2>
   <div class="schluss-text">
     <p>{SCHLUSS.text}</p>
-    <a class="knopf" href={MAIL_LINK}><span>Erstgespräch anfragen</span><span class="knopf-zusatz">45 Minuten, kostenfrei</span></a>
+    <div class="knoepfe" role="group" aria-label="Erstgespräch vereinbaren">
+      {TERMINE.map((t) => (
+        <a class="knopf" href={t.link} {...(t.extern ? { target: '_blank', rel: 'noopener' } : {})}><span>{t.titel}</span><span class="knopf-zusatz">{t.zusatz}</span></a>
+      ))}
+    </div>
     <p class="adresse">oder direkt an <a href={`mailto:${MAIL}`}>{MAIL}</a> und unter <a href={`tel:${TEL}`}>{TEL_ANZEIGE}</a></p>
   </div>
 </section>

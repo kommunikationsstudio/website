@@ -1,5 +1,6 @@
 ---
 import { KATEGORIEN, TITEL } from '../data/inhalt'
+import Portraet from './Portraet.astro'
 interface Props { ton?: 'dunkel' | 'hell' }
 const { ton = 'hell' } = Astro.props
 ---
@@ -10,7 +11,7 @@ const { ton = 'hell' } = Astro.props
       {KATEGORIEN.map((k, i) => (
         <article class="achse innen" data-achse={i} data-art={k.art}>
           <h3 class="achse-wort"><span class="sr-only">{k.kat}</span>{[...k.kat.toLowerCase()].map((b) => <span class="b" aria-hidden="true">{b}</span>)}</h3>
-          {k.art === 'bildsprache' && <div class="achse-bild" aria-hidden="true"><img src="/sebastian.jpg" alt="" width="1344" height="2016" loading="lazy" /></div>}
+          {k.art === 'bildsprache' && <div class="achse-bild" aria-hidden="true"><Portraet sizes="(min-width: 900px) 50vw, 100vw" /></div>}
           <div class="achse-text">
             <p class="achse-frage">{k.frage}</p>
             <p class="achse-statt">statt <s>{k.wort}</s></p>

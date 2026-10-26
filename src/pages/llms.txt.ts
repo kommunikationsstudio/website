@@ -16,7 +16,7 @@ kommunikations.studio übersetzt Briefing-Floskeln wie „moderner“ oder „ho
 
 ## Ablauf
 
-1. Erstgespräch: 45 Minuten, kostenfrei, mit drei konkreten Beobachtungen
+1. Erstgespräch: kostenfrei, per Video oder vor Ort, mit drei konkreten Beobachtungen
 2. Wahrnehmungsanalyse in sieben Kategorien, schriftlich
 3. Gestaltung und Umsetzung, Entwurf und Code aus einer Hand
 4. Übergabe aller Dateien mit Leitfaden
@@ -27,7 +27,7 @@ Sebastian Knust kommt aus der internationalen Luxushotellerie (unter anderem Kem
 
 ## Kontakt
 
-- Erstgespräch: kostenfrei, 45 Minuten
+- Erstgespräch: kostenfrei, per Video (45 Minuten) oder als Besuch vor Ort in Rhein-Main und Mittelhessen
 - E-Mail: kontakt@kommunikations.studio
 - Telefon: +49 156 78540600
 - Adresse: Felizitas-Massenkeil-Str. 9, 65549 Limburg an der Lahn
