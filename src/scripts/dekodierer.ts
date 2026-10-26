@@ -91,7 +91,7 @@ export function dekodierer(KATEGORIEN: Kategorie[], WOERTER: Wort[], ruhig: bool
       if (nomen) briefing.replaceChildren('„Wir brauchen mehr ', strich(kern), '.“')
       else briefing.replaceChildren('„Wir wollen ', strich(roh), ' wirken.“')
       kat.textContent = treffer ? treffer[1] : 'Im Gespräch'
-      antwort.textContent = treffer ? treffer[2] : 'Dieses Wort übersetze ich gern mit Ihnen gemeinsam. Das Erstgespräch ist kostenfrei.'
+      antwort.textContent = treffer ? treffer[2] : 'Dieses Wort fehlt noch in meiner Liste. Bringen Sie es ins Erstgespräch mit.'
       ansage.textContent = `${kat.textContent}: ${antwort.textContent}`
     })
   })
