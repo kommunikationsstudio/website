@@ -44,11 +44,12 @@ export const SCHRITTE = [
 export const STATIONEN: [string, string, string][] = [
   ['2005', 'Werbeagentur in Einbeck', 'Die ersten Anzeigen, für Kunden aus der Region.'],
   ['2008', 'Staatstheater Hannover', 'Regiehospitanz bei „Die Schaukel“ von Edna Mazya im Ballhof. Seitdem denke ich Auftritte in Szenen.'],
-  ['2012', 'Aldiana, Ägypten, Kreta und Andalusien', 'Rebranding der Clubs innerhalb der Marke. Auf Kreta für eine Neueröffnung alles, was ein Logo trägt, vom Schild bis zur Website.'],
-  ['2014', 'Kempinski Hotel Frankfurt Gravenbruch', 'Ausbildung mit Zusatzqualifikation Hotelmanagement, danach Vertrieb für Botschaften und Konsulate. Die Hochzeitsmesse des Hauses habe ich weitgehend selbstständig organisiert.'],
-  ['2018', 'Falkenstein Grand, Villa Rothschild, Hotel Atlantic Hamburg', 'Für die drei Broermann-Häuser das neue Kempinski-Branding umgesetzt, 2020 die vollständige Umstellung zur Autograph Collection begleitet. Fotos und Filme dazu selbst gemacht.'],
-  ['2021', 'Sellwerk', 'Marketinganalysen für kleine und mittlere Unternehmen.'],
-  ['2022', 'Steigenberger Frankfurter Hof', 'Leitung Marketing, ab 2023 zusätzlich für das Parkhotel Düsseldorf. Branding der „Steigenberger Icons“ umgesetzt, Instagram in einem Jahr um 70 Prozent gewachsen.'],
+  ['2010', 'Aldiana Makadi Bay, Ägypten', 'Zuerst Guest Relations, ab 2012 Inhouse Marketing Manager: Corporate Design, Print, Social Media, Bewertungsportale und Werbetexte. Dazu das Rebranding der Clubs innerhalb der Marke.'],
+  ['2013', 'Aldiana Kreta und Andalusien', 'Auf Kreta für eine Neueröffnung alles, was ein Logo trägt, vom Schild bis zur Website. 2014 weiter nach Andalusien.'],
+  ['2014', 'Kempinski Hotel Frankfurt Gravenbruch', 'Ausbildung zum Hotelfachmann mit Zusatzqualifikation Hotelmanagement. Danach Sales Coordinator, unter anderem für Botschaften und Konsulate, und Organisation der jährlichen Hochzeitsmesse.'],
+  ['2018', 'Falkenstein Grand und Villa Rothschild', 'Marketing Coordinator bei Broermann Health & Heritage Hotels. Das neue Kempinski-Branding in den Häusern der Gruppe umgesetzt, auch im Hotel Atlantic Hamburg, und 2020 die Umstellung zur Autograph Collection begleitet. Fotos und Filme dazu selbst gemacht.'],
+  ['2021', 'Sellwerk', 'Abschluss als Online Marketing Manager (IHK). Danach als Sales Manager kleine und mittlere Unternehmen zu Online-Marketing, Websites und SEO beraten.'],
+  ['2022', 'Steigenberger Frankfurter Hof', 'Manager Luxury Marketing & Communication, ab 2023 in der Zentrale Field Marketing Luxury für den Frankfurter Hof und das Parkhotel Düsseldorf. Branding der „Steigenberger Icons“ umgesetzt, Instagram in einem Jahr um 70 Prozent gewachsen.'],
   ['2024', 'Öffentlicher Sektor', 'Interne Kommunikation.'],
 ]
 
