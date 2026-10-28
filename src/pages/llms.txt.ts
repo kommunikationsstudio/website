@@ -23,7 +23,7 @@ kommunikations.studio übersetzt Briefing-Floskeln wie „moderner“ oder „ho
 
 ## Person
 
-Sebastian Knust kommt aus der internationalen Luxushotellerie (unter anderem Kempinski, Villa Rothschild, Steigenberger Frankfurter Hof), hat bei Sellwerk Marketinganalysen für kleine und mittlere Unternehmen erstellt und arbeitet seit 2024 in der internen Kommunikation im öffentlichen Sektor.
+Sebastian Knust kommt aus der internationalen Luxushotellerie. Er hat Rebrandings bei Aldiana und in drei Kempinski-Häusern der Broermann-Gruppe umgesetzt, dort 2020 die Umstellung zur Autograph Collection begleitet und im Steigenberger Frankfurter Hof das Marketing geleitet. Davor war er 2008 Regiehospitant am Staatstheater Hannover. Er hat bei Sellwerk Marketinganalysen für kleine und mittlere Unternehmen erstellt und arbeitet seit 2024 in der internen Kommunikation im öffentlichen Sektor.
 
 ## Kontakt
 

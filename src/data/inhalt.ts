@@ -40,19 +40,21 @@ export const SCHRITTE = [
   { titel: 'Übergabe', text: 'Sie erhalten alle Dateien und einen Leitfaden, mit dem Ihr Team den Auftritt selbst weiterführt.' },
 ]
 
-export const STATIONEN = [
-  ['2005', 'Werbeagentur in Einbeck: erste Anzeigen für Kunden aus der Region'],
-  ['2012', 'Aldiana in Ägypten, auf Kreta und in Andalusien: Marketing und Social Media, auf Kreta der Online-Auftritt eines Clubs vor seiner Eröffnung'],
-  ['2014', 'Kempinski Hotel Frankfurt Gravenbruch: Ausbildung mit Zusatzqualifikation Hotelmanagement, danach Vertrieb für Botschaften und Konsulate'],
-  ['2018', 'Villa Rothschild und Falkenstein Grand: Marketing beider Häuser, eigene Fotos und Filme'],
-  ['2021', 'Sellwerk: Marketinganalysen für kleine und mittlere Unternehmen'],
-  ['2022', 'Steigenberger Frankfurter Hof, ab 2023 zusätzlich Parkhotel Düsseldorf: Leitung Marketing'],
-  ['2024', 'Interne Kommunikation im öffentlichen Sektor'],
+// Je Station: Jahr, Haus oder Ort, was dort entstanden ist
+export const STATIONEN: [string, string, string][] = [
+  ['2005', 'Werbeagentur in Einbeck', 'Die ersten Anzeigen, für Kunden aus der Region.'],
+  ['2008', 'Staatstheater Hannover', 'Regiehospitanz bei „Die Schaukel“ von Edna Mazya im Ballhof. Seitdem denke ich Auftritte in Szenen.'],
+  ['2012', 'Aldiana, Ägypten, Kreta und Andalusien', 'Rebranding der Clubs innerhalb der Marke. Auf Kreta für eine Neueröffnung alles, was ein Logo trägt, vom Schild bis zur Website.'],
+  ['2014', 'Kempinski Hotel Frankfurt Gravenbruch', 'Ausbildung mit Zusatzqualifikation Hotelmanagement, danach Vertrieb für Botschaften und Konsulate. Die Hochzeitsmesse des Hauses habe ich weitgehend selbstständig organisiert.'],
+  ['2018', 'Falkenstein Grand, Villa Rothschild, Hotel Atlantic Hamburg', 'Für die drei Broermann-Häuser das neue Kempinski-Branding umgesetzt, 2020 die vollständige Umstellung zur Autograph Collection begleitet. Fotos und Filme dazu selbst gemacht.'],
+  ['2021', 'Sellwerk', 'Marketinganalysen für kleine und mittlere Unternehmen.'],
+  ['2022', 'Steigenberger Frankfurter Hof', 'Leitung Marketing, ab 2023 zusätzlich für das Parkhotel Düsseldorf. Branding der „Steigenberger Icons“ umgesetzt, Instagram in einem Jahr um 70 Prozent gewachsen.'],
+  ['2024', 'Öffentlicher Sektor', 'Interne Kommunikation.'],
 ]
 
 export const PERSON = [
   'Ich komme aus der internationalen Luxushotellerie. Dort zählt der erste Satz am Telefon so viel wie die Fassade.',
-  'Im Steigenberger Frankfurter Hof habe ich das Marketing geleitet und die Agenturen gesteuert, ab 2023 auch für das Parkhotel in Düsseldorf. Bei Sellwerk habe ich davor den Auftritt kleiner und mittlerer Betriebe analysiert. Ich kenne also beide Seiten: das Markenhandbuch eines Konzerns und den Inhaber, der abends noch die eigene Website pflegt.',
+  'Ich habe Marken umgestellt, während der Betrieb weiterlief: Clubs von Aldiana, drei Kempinski-Häuser bis zur Autograph Collection, die Icons im Frankfurter Hof. Bei Sellwerk kamen die kleinen und mittleren Betriebe dazu. Ich kenne also beide Seiten: das Markenhandbuch eines Konzerns und den Inhaber, der abends noch die eigene Website pflegt.',
   'Digitale Werkzeuge und KI beschleunigen meine Arbeit. Wie Ihr Unternehmen wirken soll, entscheiden wir zusammen.',
 ]
 
@@ -63,7 +65,7 @@ export const SCHLUSS = {
 
 // Beispielblatt: die Wahrnehmungsanalyse für dieses Studio, Stand Oktober 2026
 export const BEISPIEL = {
-  kopf: 'Wahrnehmungsanalyse · kommunikations.studio · Oktober 2026',
+  kopf: 'Oktober 2026',
   dekodierung: [
     ['Anlass', 'Neubau der eigenen Website.'],
     ['Vorher', 'Das Studio wirkt über Empfehlungen. Online fehlt ein Ort, der die Methode zeigt.'],

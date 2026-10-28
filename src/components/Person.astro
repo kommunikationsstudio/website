@@ -15,7 +15,7 @@ const { ton = 'hell' } = Astro.props
       <p class="person-eins">{PERSON[0]}</p>
       {PERSON.slice(1).map((p) => <p>{p}</p>)}
       <ol class="stationen">
-        {STATIONEN.map(([jahr, was]) => <li><span>{jahr}</span>{was}</li>)}
+        {STATIONEN.map(([jahr, wo, was]) => <li data-zeile><span class="station-jahr">{jahr}</span><div><strong>{wo}</strong><p>{was}</p></div></li>)}
       </ol>
     </div>
   </div>

@@ -2,19 +2,19 @@
 import { BEISPIEL, TITEL } from '../data/inhalt'
 interface Props { ton?: 'dunkel' | 'hell' }
 const { ton = 'hell' } = Astro.props
+const [anlass, vorher, ziel, spannung] = BEISPIEL.dekodierung.map(([, v]) => v)
 ---
 <section class="beispiel innen" data-ton={ton} aria-labelledby="k-beispiel">
   <h2 id="k-beispiel" class="abschnitt-titel">{TITEL.beispiel}</h2>
-  <p class="beispiel-einleitung">Jedes Projekt beginnt mit diesem Blatt. Hier steht die Analyse, mit der diese Website entstanden ist.</p>
-  <article class="blatt" data-blatt>
-    <p class="blatt-kopf">{BEISPIEL.kopf}</p>
-    <div class="blatt-teil">
-      <h3>Briefing</h3>
-      <dl>{BEISPIEL.dekodierung.map(([k, v]) => <div data-zeile><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+  <div class="beispiel-raster">
+    <div class="beispiel-auftrag">
+      <p class="deko-wer">Briefing, {BEISPIEL.kopf}</p>
+      <p class="beispiel-spannung" data-zeile>{spannung}</p>
+      <p data-zeile>{anlass} {vorher} {ziel}</p>
+      <p class="beispiel-hinweis" data-zeile>Diese Website ist selbst ein Projekt. Jedes Projekt beginnt mit so einer Analyse.</p>
     </div>
-    <div class="blatt-teil">
-      <h3>Hypothesen</h3>
-      <dl>{BEISPIEL.hypothesen.map(([k, v]) => <div data-zeile><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-    </div>
-  </article>
+    <dl class="beispiel-entscheidungen">
+      {BEISPIEL.hypothesen.map(([k, v]) => <div data-zeile><dt>{k}</dt><dd>{v}</dd></div>)}
+    </dl>
+  </div>
 </section>

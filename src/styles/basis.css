@@ -131,8 +131,10 @@ html:not(.js) .deko-eigenes { display: none; }
 .person-text { display: grid; gap: 1.1em; max-width: 36rem; }
 .person-eins { font-weight: 700; font-size: clamp(24px, 2.6vw, 42px); line-height: 1.1; letter-spacing: -0.025em; }
 .stationen { list-style: none; margin-top: 1.4em; border-top: 1px solid var(--linie); font-size: 16px; }
-.stationen li { display: grid; grid-template-columns: 4.2rem 1fr; gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--linie); }
-.stationen span { font-weight: 700; font-variant-numeric: tabular-nums; }
+.stationen li { display: grid; grid-template-columns: 4.2rem 1fr; gap: 12px; padding-block: 16px; border-bottom: 1px solid var(--linie); }
+.station-jahr { font-weight: 700; font-variant-numeric: tabular-nums; }
+.stationen strong { display: block; font-weight: 700; font-size: 18px; line-height: 1.25; }
+.stationen li p { margin-top: 4px; line-height: 1.5; opacity: 0.8; }
 
 /* Schluss */
 .schluss { padding-top: clamp(110px, 22vh, 240px); padding-bottom: clamp(80px, 14vh, 160px); }
@@ -208,17 +210,17 @@ html:not(.js) .deko-eigenes { display: none; }
 @media (max-width: 760px) { .projekt { grid-template-columns: 1fr; } }
 .leer { min-height: 100svh; } .leer h1 { max-width: 12ch; } .leer a { text-decoration: underline; }
 
-/* Beispielblatt */
+/* Beispiel: die Analyse dieser Website */
 .beispiel { padding-block: clamp(80px, 14vh, 160px); }
-.beispiel-einleitung { margin-top: clamp(24px, 4vh, 40px); max-width: 34rem; font-size: clamp(18px, 1.4vw, 22px); }
-.blatt { margin-top: clamp(32px, 6vh, 70px); border: 2px solid currentColor; padding: clamp(20px, 3vw, 48px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: clamp(28px, 4vw, 64px); }
-.blatt-kopf { grid-column: 1 / -1; font-weight: 700; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; font-variation-settings: 'wdth' 80; padding-bottom: 14px; border-bottom: 1px solid var(--linie); }
-.blatt h3 { font-weight: 900; font-size: clamp(28px, 3vw, 52px); line-height: 0.95; letter-spacing: -0.035em; font-variation-settings: 'wght' 900, 'wdth' 82; margin-bottom: 18px; }
-.blatt dl { display: grid; }
-.blatt dl > div { display: grid; grid-template-columns: 8.5rem 1fr; gap: 16px; padding-block: 12px; border-top: 1px solid var(--linie); }
-.blatt dt { font-weight: 700; font-size: 15px; }
-.blatt dd { font-size: 16px; line-height: 1.45; }
-@media (max-width: 900px) {
-  .blatt { grid-template-columns: 1fr; }
-  .blatt dl > div { grid-template-columns: 1fr; gap: 4px; }
+.beispiel-raster { margin-top: clamp(40px, 8vh, 96px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: clamp(40px, 6vw, 110px); align-items: start; }
+.beispiel-auftrag { position: sticky; top: 14vh; display: grid; gap: 1.1em; font-size: clamp(17px, 1.3vw, 20px); line-height: 1.5; }
+.beispiel-spannung { font-weight: 700; font-size: clamp(26px, 2.6vw, 42px); line-height: 1.12; letter-spacing: -0.02em; }
+.beispiel-hinweis { color: var(--leise); }
+.beispiel-entscheidungen > div { padding-block: clamp(16px, 2.4vh, 26px); border-top: 1px solid var(--linie); display: grid; gap: 6px; }
+.beispiel-entscheidungen > div:last-child { border-bottom: 1px solid var(--linie); }
+.beispiel-entscheidungen dt { font-size: 14px; opacity: 0.7; }
+.beispiel-entscheidungen dd { font-size: clamp(19px, 1.6vw, 26px); line-height: 1.3; letter-spacing: -0.01em; }
+@media (max-width: 899px) {
+  .beispiel-raster { grid-template-columns: 1fr; }
+  .beispiel-auftrag { position: static; }
 }
