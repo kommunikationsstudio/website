@@ -61,6 +61,26 @@ export const SCHLUSS = {
   text: 'Im Video-Call schauen wir gemeinsam auf Ihre Website und Ihre Unterlagen. Beim Besuch komme ich zu Ihnen und erlebe Ihr Unternehmen so, wie Ihre Kundschaft es erlebt. Danach entscheiden Sie in Ruhe.',
 }
 
+// Beispielblatt: die Wahrnehmungsanalyse für dieses Studio, Stand Oktober 2026
+export const BEISPIEL = {
+  kopf: 'Wahrnehmungsanalyse · kommunikations.studio · Oktober 2026',
+  dekodierung: [
+    ['Anlass', 'Neubau der eigenen Website.'],
+    ['Vorher', 'Das Studio wirkt über Empfehlungen. Online fehlt ein Ort, der die Methode zeigt.'],
+    ['Ziel', 'Besuchende erleben in Sekunden, wie aus einem Eindruck eine Entscheidung wird, und vereinbaren ein Erstgespräch.'],
+    ['Spannung', 'Ein Studio aus einer Person soll die Ruhe einer etablierten Marke ausstrahlen und persönlich bleiben.'],
+  ],
+  hypothesen: [
+    ['Typografie', 'Eine einzige Grotesk in variabler Breite und Stärke trägt alles. Größe und Gewicht ordnen den Text.'],
+    ['Bildsprache', 'Eigene Schwarz-Weiß-Aufnahmen bei Tageslicht. Das Gesicht des Inhabers erscheint dort, wo es um Nähe geht.'],
+    ['Bewegung', 'Eine Signaturbewegung: Der Leitsatz wird beim Scrollen scharf, vom Eindruck zur Wirkung.'],
+    ['Tonalität', 'Kurze Hauptsätze in der Ich-Form, Sie-Ansprache, ohne Floskeln und ohne Konjunktiv.'],
+    ['Dramaturgie', 'Ein geführter Essay: These, Methode, Leistungen, Person. Das Erstgespräch folgt als logischer Schluss.'],
+    ['Atmosphäre', 'Schwarz, Weiß und Grau, viel Raum, wenige große Gesten.'],
+    ['Rhythmus', 'Harte Schnitte zwischen dunklen und hellen Kapiteln, lange ruhige Flächen vor dichten Momenten.'],
+  ],
+}
+
 export const FRAGEN = [
   { frage: 'Kommen Sie zu uns ins Unternehmen?', antwort: 'Ja. Für das Erstgespräch und für Aufnahmen komme ich zu Ihnen, in Rhein-Main und Mittelhessen. So sehe ich Ihr Unternehmen so, wie Ihre Kundschaft es erlebt.' },
   { frage: 'Mit wem arbeite ich zusammen?', antwort: 'Mit mir. Von der Analyse über Fotos und Texte bis zum Code der Website bleibe ich Ihr Ansprechpartner.' },
@@ -75,4 +95,5 @@ export const TITEL = {
   ablauf: 'so arbeite ich',
   person: 'wer ihnen gegenübersitzt',
   fragen: 'häufige fragen',
+  beispiel: 'so sieht eine analyse aus',
 }

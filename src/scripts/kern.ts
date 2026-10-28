@@ -45,6 +45,15 @@ export function kern(): Kern {
     })
   })
 
+  // Kopfzeile: weicht beim Lesen nach unten aus und kommt beim Zurückscrollen wieder
+  let zuletzt = 0
+  addEventListener('scroll', () => {
+    const y = scrollY
+    if (Math.abs(y - zuletzt) < 6) return
+    html.classList.toggle('kopf-weg', y > zuletzt && y > 160)
+    zuletzt = y
+  }, { passive: true })
+
   // Ton: jeder Abschnitt bestimmt, ob die Seite schwarz oder weiß ist
   document.querySelectorAll<HTMLElement>('[data-ton]').forEach((el) => {
     ScrollTrigger.create({
@@ -60,6 +69,9 @@ export function kern(): Kern {
         trigger: el, start: 'top 95%', end: 'top 45%', scrub: true,
         onUpdate: (s) => { const e = weich(s.progress); el.style.fontVariationSettings = `'wght' ${Math.round(120 + 780 * e)}, 'wdth' ${Math.round(62 + 50 * e)}` },
       })
+    })
+    gsap.utils.toArray<HTMLElement>('[data-zeile]').forEach((el) => {
+      gsap.from(el, { opacity: 0, x: -16, duration: 0.8, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 92%' } })
     })
     gsap.utils.toArray<HTMLElement>('[data-schritt]').forEach((el, i) => {
       gsap.from(el, { opacity: 0, y: 40, duration: 1, ease: 'expo.out', delay: (i % 4) * 0.08, scrollTrigger: { trigger: el, start: 'top 88%' } })

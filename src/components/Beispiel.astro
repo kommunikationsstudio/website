@@ -1,0 +1,20 @@
+---
+import { BEISPIEL, TITEL } from '../data/inhalt'
+interface Props { ton?: 'dunkel' | 'hell' }
+const { ton = 'hell' } = Astro.props
+---
+<section class="beispiel innen" data-ton={ton} aria-labelledby="k-beispiel">
+  <h2 id="k-beispiel" class="abschnitt-titel">{TITEL.beispiel}</h2>
+  <p class="beispiel-einleitung">Jedes Projekt beginnt mit diesem Blatt. Hier steht die Analyse, mit der diese Website entstanden ist.</p>
+  <article class="blatt" data-blatt>
+    <p class="blatt-kopf">{BEISPIEL.kopf}</p>
+    <div class="blatt-teil">
+      <h3>Briefing</h3>
+      <dl>{BEISPIEL.dekodierung.map(([k, v]) => <div data-zeile><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+    </div>
+    <div class="blatt-teil">
+      <h3>Hypothesen</h3>
+      <dl>{BEISPIEL.hypothesen.map(([k, v]) => <div data-zeile><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+    </div>
+  </article>
+</section>

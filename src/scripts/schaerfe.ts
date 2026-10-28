@@ -107,9 +107,10 @@ export function schaerfe(canvas: HTMLCanvasElement, zeilen: string[], hochkant: 
   const ctx = tafel.getContext('2d')!
 
   // Schrift auf die Tafel: linksbündig, die längste Zeile füllt die Breite.
-  // Hochkant bricht das Wort in mehr Zeilen, damit es groß bleibt.
+  // Hochkant bleibt der Satz ganz und wird schmal geschnitten, damit er groß bleibt.
   function setzen(w: number, h: number) {
     const reihe = w < h ? hochkant : zeilen
+    const schmal = w < h ? 'extra-condensed' : 'normal'
     tafel.width = w
     tafel.height = h
     ctx.fillStyle = '#000'
@@ -117,10 +118,12 @@ export function schaerfe(canvas: HTMLCanvasElement, zeilen: string[], hochkant: 
     ctx.fillStyle = '#fff'
     const rand = Math.max(20, w * 0.045)
     ctx.font = `900 100px Archivo`
+    if ('fontStretch' in ctx) ctx.fontStretch = schmal
     const breite = Math.max(...reihe.map((z) => ctx.measureText(z).width))
     let groesse = ((w - rand * 2) / breite) * 100
     groesse = Math.min(groesse, (h * 0.66) / (reihe.length * 0.86))
     ctx.font = `900 ${groesse}px Archivo`
+    if ('fontStretch' in ctx) ctx.fontStretch = schmal
     const zeilenhoehe = groesse * 0.86
     const oben = (h - zeilenhoehe * reihe.length) / 2 + groesse * 0.74
     reihe.forEach((z, i) => ctx.fillText(z, rand - groesse * 0.04, oben + i * zeilenhoehe))

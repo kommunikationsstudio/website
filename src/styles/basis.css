@@ -72,13 +72,15 @@ html:not(.js) [data-ton='dunkel'] { background: var(--schwarz); color: var(--wei
   mix-blend-mode: difference; color: #fff; pointer-events: none;
 }
 .kopf a { pointer-events: auto; }
+.kopf { transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1); }
+.kopf-weg .kopf:not(:focus-within) { transform: translateY(-110%); }
 .kopf img { height: 28px; width: auto; filter: invert(1); }
 .kopf-link { font-weight: 600; font-size: 16px; text-decoration: none; position: relative; padding-block: 8px; }
 .kopf-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 4px; height: 2px; background: currentColor; transform-origin: right; transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1); }
 .kopf-link:hover::after { transform: scaleX(0); }
 
 /* Abschnittstitel als laufende Kopfzeile: klein, damit die Größe einem Wort gehört */
-.abschnitt-titel { font-weight: 600; font-size: clamp(18px, 1.5vw, 24px); letter-spacing: -0.01em; color: var(--leise); }
+.abschnitt-titel { font-weight: 700; font-size: clamp(20px, 1.9vw, 30px); letter-spacing: -0.015em; color: var(--schrift); padding-top: 14px; border-top: 2px solid currentColor; }
 
 /* Dekodierer */
 .dekodierer { padding-block: clamp(100px, 18vh, 200px); scroll-margin-top: 96px; }
@@ -203,3 +205,18 @@ html:not(.js) .deko-eigenes { display: none; }
 .projekt dd s { text-decoration-thickness: 2px; }
 @media (max-width: 760px) { .projekt { grid-template-columns: 1fr; } }
 .leer { min-height: 100svh; } .leer h1 { max-width: 12ch; } .leer a { text-decoration: underline; }
+
+/* Beispielblatt */
+.beispiel { padding-block: clamp(80px, 14vh, 160px); }
+.beispiel-einleitung { margin-top: clamp(24px, 4vh, 40px); max-width: 34rem; font-size: clamp(18px, 1.4vw, 22px); }
+.blatt { margin-top: clamp(32px, 6vh, 70px); border: 2px solid currentColor; padding: clamp(20px, 3vw, 48px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: clamp(28px, 4vw, 64px); }
+.blatt-kopf { grid-column: 1 / -1; font-weight: 700; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; font-variation-settings: 'wdth' 80; padding-bottom: 14px; border-bottom: 1px solid var(--linie); }
+.blatt h3 { font-weight: 900; font-size: clamp(28px, 3vw, 52px); line-height: 0.95; letter-spacing: -0.035em; font-variation-settings: 'wght' 900, 'wdth' 82; margin-bottom: 18px; }
+.blatt dl { display: grid; }
+.blatt dl > div { display: grid; grid-template-columns: 8.5rem 1fr; gap: 16px; padding-block: 12px; border-top: 1px solid var(--linie); }
+.blatt dt { font-weight: 700; font-size: 15px; }
+.blatt dd { font-size: 16px; line-height: 1.45; }
+@media (max-width: 900px) {
+  .blatt { grid-template-columns: 1fr; }
+  .blatt dl > div { grid-template-columns: 1fr; gap: 4px; }
+}

@@ -6,9 +6,9 @@ export async function start() {
   const { ruhig } = kern()
   const html = document.documentElement
 
-  await document.fonts.load('900 100px Archivo').catch(() => {})
+  await Promise.all([document.fonts.load('900 100px Archivo'), document.fonts.load('900 62.5% 100px Archivo')]).catch(() => {})
   const flaeche = document.querySelector<HTMLCanvasElement>('[data-schaerfe]')!
-  const buehne = schaerfe(flaeche, ['wahrnehmung', 'gestalten.'], ['wahr-', 'nehmung', 'gestal-', 'ten.'], ruhig, () => html.classList.remove('gl'))
+  const buehne = schaerfe(flaeche, ['wahrnehmung', 'gestalten.'], ['wahrnehmung', 'gestalten.'], ruhig, () => html.classList.remove('gl'))
   if (buehne) {
     html.classList.add('gl')
     const grob = matchMedia('(pointer: coarse)').matches
@@ -57,27 +57,33 @@ function achsen() {
     bild: t.querySelector<HTMLElement>('.achse-bild'),
   }))
   const n = teile.length
-  let zeit = 0, stand = 0, aktivAbschnitt = false
+  let zeit = 0, aktivAbschnitt = false, aktiv = -1, seit = 0
 
+  // Der Scroll wählt die Achse, die Vorführung selbst läuft auf Zeit.
+  // So sieht jedes Standbild fertig aus, egal wo das Scrollen endet.
   function zeigen(p: number) {
-    stand = p
-    const pos = klemmen(p * n, 0, n - 0.0001)
-    const aktiv = Math.floor(pos)
-    const t = pos - aktiv
     balken.style.transform = `scaleX(${p})`
-    teile.forEach((teil, i) => {
-      const da = i === aktiv
-      teil.tafel.classList.toggle('ist-da', da)
-      if (!da) { teil.tafel.style.opacity = '0'; return }
-      const ein = i === 0 ? 1 : klemmen(t / 0.12)
-      const aus = i === n - 1 ? 1 : klemmen((1 - t) / 0.12)
-      teil.tafel.style.opacity = String(Math.min(ein, aus))
-      const e = weich(klemmen((t - 0.06) / 0.6))
-      const tx = klemmen((t - 0.25) / 0.2)
-      teil.text.style.opacity = String(tx)
-      teil.text.style.transform = `translateY(${(1 - tx) * 24}px)`
-      vorfuehren(teil, e)
-    })
+    const neu = Math.floor(klemmen(p * n, 0, n - 0.0001))
+    if (neu !== aktiv) {
+      aktiv = neu
+      seit = performance.now()
+      teile.forEach((teil, i) => {
+        teil.tafel.classList.toggle('ist-da', i === aktiv)
+        if (i !== aktiv) teil.tafel.style.opacity = '0'
+      })
+    }
+    malen()
+  }
+
+  function malen() {
+    const teil = teile[aktiv]
+    if (!teil) return
+    const k = (performance.now() - seit) / 1000
+    teil.tafel.style.opacity = String(klemmen(k / 0.3))
+    const tx = klemmen((k - 0.5) / 0.4)
+    teil.text.style.opacity = String(tx)
+    teil.text.style.transform = `translateY(${(1 - weich(tx)) * 24}px)`
+    vorfuehren(teil, weich(klemmen((k - 0.1) / 1.2)))
   }
 
   function vorfuehren(teil: (typeof teile)[number], e: number) {
@@ -140,7 +146,8 @@ function achsen() {
   gsap.ticker.add((t) => {
     if (!aktivAbschnitt) return
     zeit = t
-    const art = teile[Math.floor(klemmen(stand * n, 0, n - 0.0001))].art
-    if (art === 'bewegung' || art === 'rhythmus' || art === 'tonalitaet') zeigen(stand)
+    const art = teile[aktiv]?.art
+    const laeuft = performance.now() - seit < 1500
+    if (laeuft || art === 'bewegung' || art === 'rhythmus' || art === 'tonalitaet') malen()
   })
 }
