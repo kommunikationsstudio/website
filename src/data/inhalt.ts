@@ -14,7 +14,7 @@ export const TERMINE = [
 
 export const MOTTO = 'vom eindruck zur wirkung.'
 export const WOFUER = 'Positionierung, Erscheinungsbild und Inhalte für Unternehmen in Rhein-Main und Mittelhessen.'
-export const AUSSAGE = 'Briefings sprechen in Wünschen. Ich übersetze jeden davon in eine Entscheidung über Schrift, Bild, Sprache oder Bewegung, die Sie prüfen können.'
+export const AUSSAGE = 'Briefings sprechen in Wünschen. Ich übersetze jeden davon in eine prüfbare Entscheidung über Schrift, Bild, Sprache oder Bewegung.'
 
 // art bestimmt, wie das Wort sich in der Achsen-Bühne selbst vorführt
 export const KATEGORIEN = [
@@ -28,9 +28,9 @@ export const KATEGORIEN = [
 ]
 
 export const FELDER = [
-  { titel: 'positionierung', text: 'Am Anfang steht ein Satz, der sagt, wofür Sie stehen und für wen Sie arbeiten. An ihm messen wir jede weitere Entscheidung.', liefer: ['Wahrnehmungsanalyse', 'Positionierung und Markenkern', 'Sprachleitfaden'] },
+  { titel: 'positionierung', text: 'Am Anfang steht ein Satz: wofür Ihr Unternehmen eintritt und für wen es arbeitet. An ihm messen wir jede weitere Entscheidung.', liefer: ['Wahrnehmungsanalyse', 'Markenkern und Leitsatz', 'Sprachleitfaden'] },
   { titel: 'erscheinungsbild', text: 'Logo, Schrift, Raster und Bildsprache folgen denselben Regeln, auf der Visitenkarte wie auf der Website. Entwurf und Code kommen aus einer Hand.', liefer: ['Corporate Design', 'Logo und Zeichensystem', 'Webdesign und Entwicklung'] },
-  { titel: 'inhalte', text: 'Fotos und Filme drehe ich selbst, mit eigener Kamera und Drohne. Die Texte dazu schreibe ich auch: für Ihre Kundschaft, für Bewerbungen und für die Kommunikation im eigenen Haus.', liefer: ['Content-Produktion', 'Employer Branding', 'Interne Kommunikation'] },
+  { titel: 'inhalte', text: 'Fotos und Filme mache ich selbst, mit eigener Kamera und Drohne. Die Texte dazu schreibe ich auch: für Ihre Kundschaft, für künftige Mitarbeitende und für Ihr Team.', liefer: ['Foto, Film und Text', 'Employer Branding', 'Interne Kommunikation'] },
 ]
 
 export const SCHRITTE = [
@@ -43,7 +43,7 @@ export const SCHRITTE = [
 export const STATIONEN = [
   ['2005', 'Werbeagentur in Einbeck: erste Anzeigen für Kunden aus der Region'],
   ['2012', 'Aldiana in Ägypten, auf Kreta und in Andalusien: Marketing und Social Media, auf Kreta der Online-Auftritt eines Clubs vor seiner Eröffnung'],
-  ['2014', 'Kempinski Hotel Frankfurt Gravenbruch: Ausbildung mit Zusatzqualifikation Hotelmanagement, danach Sales für Botschaften und Konsulate'],
+  ['2014', 'Kempinski Hotel Frankfurt Gravenbruch: Ausbildung mit Zusatzqualifikation Hotelmanagement, danach Vertrieb für Botschaften und Konsulate'],
   ['2018', 'Villa Rothschild und Falkenstein Grand: Marketing beider Häuser, eigene Fotos und Filme'],
   ['2021', 'Sellwerk: Marketinganalysen für kleine und mittlere Unternehmen'],
   ['2022', 'Steigenberger Frankfurter Hof, ab 2023 zusätzlich Parkhotel Düsseldorf: Leitung Marketing'],
@@ -58,7 +58,7 @@ export const PERSON = [
 
 export const SCHLUSS = {
   titel: 'beginnen wir mit dem eindruck, den sie heute hinterlassen.',
-  text: 'Im Video-Call schauen wir gemeinsam auf Ihre Website und Ihre Unterlagen. Beim Besuch komme ich zu Ihnen und erlebe Ihr Unternehmen so, wie Ihre Kundschaft es erlebt. Danach entscheiden Sie in Ruhe.',
+  text: 'Im Video-Call schauen wir gemeinsam auf Ihre Website und Ihre Unterlagen. Beim Besuch komme ich zu Ihnen und sehe Ihr Unternehmen mit den Augen Ihrer Kundschaft. Danach entscheiden Sie in Ruhe.',
 }
 
 // Beispielblatt: die Wahrnehmungsanalyse für dieses Studio, Stand Oktober 2026
@@ -82,9 +82,9 @@ export const BEISPIEL = {
 }
 
 export const FRAGEN = [
-  { frage: 'Kommen Sie zu uns ins Unternehmen?', antwort: 'Ja. Für das Erstgespräch und für Aufnahmen komme ich zu Ihnen, in Rhein-Main und Mittelhessen. So sehe ich Ihr Unternehmen so, wie Ihre Kundschaft es erlebt.' },
+  { frage: 'Kommen Sie zu uns ins Unternehmen?', antwort: 'Ja, in Rhein-Main und Mittelhessen, zum Erstgespräch und für Aufnahmen. Vor Ort sehe ich, was Ihre Kundschaft sieht: Eingang, Räume und Menschen.' },
   { frage: 'Mit wem arbeite ich zusammen?', antwort: 'Mit mir. Von der Analyse über Fotos und Texte bis zum Code der Website bleibe ich Ihr Ansprechpartner.' },
-  { frage: 'Was kostet das Erstgespräch?', antwort: 'Das Erstgespräch ist kostenfrei. Danach entscheiden Sie frei, ob wir weiterarbeiten.' },
+  { frage: 'Was kostet das Erstgespräch?', antwort: 'Es ist kostenfrei. Ein Auftrag entsteht erst, wenn Sie ihn wollen.' },
   { frage: 'Wie setzen Sie KI ein?', antwort: 'Für Recherche, erste Entwürfe und Programmierung. Die Entscheidungen über Ihren Auftritt treffen wir gemeinsam. Gesundheitsdaten und vertrauliche Kundendaten gebe ich in keine Cloud-KI.' },
 ]
 

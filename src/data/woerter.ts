@@ -4,7 +4,7 @@
 export const WOERTER: [string[], string, string][] = [
   [['modern'], 'Typografie', 'Eine Grotesk in zwei Schnitten, groß gesetzt und mit viel Abstand.'],
   [['zeitgemäß', 'aktuell'], 'Typografie', 'Ein Raster und eine Schrift, die auch in fünf Jahren tragen.'],
-  [['elegant', 'stilvoll'], 'Typografie', 'Eine Serifenschrift mit feinem Kontrast, großzügig gesetzt.'],
+  [['elegant', 'stilvoll'], 'Typografie', 'Feine Strichstärken, wenige Schriftgrößen und viel Weißraum.'],
   [['auffällig', 'laut', 'stark', 'groß', 'größ', 'präsent', 'präsenz', 'sichtbarkeit'], 'Typografie', 'Große Schriftsprünge und ein Zeichen, das auch winzig funktioniert.'],
   [['emotional', 'gefühlvoll', 'emotion', 'gefühl'], 'Bildsprache', 'Eigene Aufnahmen bei Tageslicht, nah an den Menschen, die bei Ihnen arbeiten.'],
   [['menschlich', 'nahbar', 'persönlich', 'sympathisch', 'familiär', 'herzlich'], 'Bildsprache', 'Gesichter aus Ihrem Team, fotografiert dort, wo sie arbeiten.'],

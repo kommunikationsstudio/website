@@ -13,7 +13,7 @@ const { ton = 'dunkel' } = Astro.props
         <a class="knopf" href={t.link} {...(t.extern ? { target: '_blank', rel: 'noopener' } : {})}><span>{t.titel}</span><span class="knopf-zusatz">{t.zusatz}</span></a>
       ))}
     </div>
-    <p class="adresse">oder direkt an <a href={`mailto:${MAIL}`}>{MAIL}</a> und unter <a href={`tel:${TEL}`}>{TEL_ANZEIGE}</a></p>
+    <p class="adresse">oder per E-Mail an <a href={`mailto:${MAIL}`}>{MAIL}</a>, telefonisch unter <a href={`tel:${TEL}`}>{TEL_ANZEIGE}</a></p>
   </div>
 </section>
 <footer class="fuss innen" data-ton={ton}>

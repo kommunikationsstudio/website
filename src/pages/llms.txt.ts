@@ -10,9 +10,9 @@ kommunikations.studio übersetzt Briefing-Floskeln wie „moderner“ oder „ho
 
 ## Leistungen
 
-- Positionierung: Wahrnehmungsanalyse, Positionierung und Markenkern, Sprachleitfaden
+- Positionierung: Wahrnehmungsanalyse, Markenkern und Leitsatz, Sprachleitfaden
 - Erscheinungsbild: Corporate Design, Logo und Zeichensystem, Webdesign und Entwicklung
-- Inhalte: Content-Produktion, Employer Branding, interne Kommunikation
+- Inhalte: Foto, Film und Text (Content-Produktion), Employer Branding, interne Kommunikation
 
 ## Ablauf
 
