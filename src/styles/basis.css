@@ -97,7 +97,9 @@ html:not(.js) .deko-eigenes { display: none; }
 .deko-feld { display: flex; border-bottom: 2px solid currentColor; max-width: 40rem; }
 .deko-feld input { flex: 1; min-width: 0; background: none; border: 0; color: inherit; font: inherit; font-size: clamp(20px, 2vw, 30px); font-weight: 500; padding: 10px 0; }
 .deko-feld input:focus-visible { outline: none; }
-.deko-feld:focus-within { outline: 2px solid currentColor; outline-offset: 6px; }
+.deko-feld { transition: border-width 0.2s; }
+.deko-feld:focus-within { border-bottom-width: 4px; }
+.deko-feld button:focus-visible { outline: none; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
 .deko-feld input::placeholder { color: var(--leise); }
 .deko-feld button { background: none; border: 0; color: inherit; font: inherit; font-weight: 700; font-size: 17px; cursor: pointer; padding: 10px 0 10px 16px; min-height: 44px; }
 .deko-hinweis { grid-column: 2; font-size: 15px; min-height: 1.4em; }

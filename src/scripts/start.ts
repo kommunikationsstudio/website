@@ -63,6 +63,8 @@ function achsen() {
   // So sieht jedes Standbild fertig aus, egal wo das Scrollen endet.
   function zeigen(p: number) {
     balken.style.transform = `scaleX(${p})`
+    // Am Ende blendet die Linie aus, damit keine leere Linie über dem nächsten Abschnitt stehen bleibt
+    balken.style.opacity = String(1 - klemmen((p - 0.92) / 0.06))
     const neu = Math.floor(klemmen(p * n, 0, n - 0.0001))
     if (neu !== aktiv) {
       aktiv = neu

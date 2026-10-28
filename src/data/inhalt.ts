@@ -14,7 +14,7 @@ export const TERMINE = [
 
 export const MOTTO = 'vom eindruck zur wirkung.'
 export const WOFUER = 'Positionierung, Erscheinungsbild und Inhalte für Unternehmen in Rhein-Main und Mittelhessen.'
-export const AUSSAGE = 'Briefings sprechen in Wünschen. Ich übersetze jeden davon in eine prüfbare Entscheidung über Schrift, Bild, Sprache oder Bewegung.'
+export const AUSSAGE = 'Briefings sprechen in Wünschen. Ich übersetze sie in prüfbare Entscheidungen über Schrift, Bild, Sprache oder Bewegung.'
 
 // art bestimmt, wie das Wort sich in der Achsen-Bühne selbst vorführt
 export const KATEGORIEN = [

@@ -26,4 +26,25 @@ export const WOERTER: [string[], string, string][] = [
   [['schön', 'ansprechend', 'attraktiv', 'hübsch'], 'Atmosphäre', 'Zuerst klären wir, für wen. Dann entscheidet jedes Detail für diese Menschen.'],
   [['frisch', 'neu', 'peppig'], 'Rhythmus', 'Lange Pausen vor Ihrem wichtigsten Angebot, dichte Passagen danach.'],
   [['ruhig', 'gelassen', 'entspannt', 'ruhe'], 'Rhythmus', 'Lange stille Flächen, wenige dichte Momente.'],
+  [['verspielt', 'fröhlich', 'lustig', 'witzig', 'humorvoll', 'humor'], 'Tonalität', 'Humor in kleinen Dosen: ein Augenzwinkern pro Seite, immer an derselben Stelle.'],
+  [['freundlich', 'offen', 'zugänglich', 'kundennah', 'kundenorientiert', 'service'], 'Tonalität', 'Kurze Sätze, direkte Ansprache und beim Kontakt ein Name mit Gesicht.'],
+  [['sachlich', 'fundiert', 'wissenschaftlich', 'faktenbasiert', 'fakten'], 'Tonalität', 'Zahlen und Quellen im Text, jeweils mit Herkunft und Datum.'],
+  [['dezent', 'zurückhaltend', 'unaufdringlich', 'schlicht', 'reduziert', 'puristisch'], 'Typografie', 'Eine Schrift in zwei Größen und Bilder, die Platz lassen.'],
+  [['zeitlos', 'klassisch', 'beständig', 'solide'], 'Typografie', 'Eine Schrift mit langer Geschichte, sparsam gesetzt und ohne Effekte.'],
+  [['technisch', 'präzis', 'präzise', 'genau', 'exakt', 'technologisch', 'präzision'], 'Typografie', 'Ein strenges Raster und Ziffern, die in der Schrift gleich breit stehen.'],
+  [['urban', 'städtisch', 'großstädtisch'], 'Bildsprache', 'Aufnahmen aus der Stadt: Beton, Glas und Wege, die Ihre Kundschaft kennt.'],
+  [['bunt', 'farbig', 'farbenfroh', 'farbe'], 'Atmosphäre', 'Eine Hauptfarbe und eine Akzentfarbe, jede mit einer festen Aufgabe.'],
+  [['kraftvoll', 'energisch', 'sportlich', 'kraft', 'energie', 'power'], 'Bewegung', 'Schnitte im Takt, Schrift mit Gewicht und Bilder mitten aus der Handlung.'],
+  [['schnell', 'effizient', 'agil', 'flexibel'], 'Rhythmus', 'Kurze Wege: Angebot, Beleg, Kontakt, auf jeder Seite in dieser Reihenfolge.'],
+  [['leicht', 'luftig'], 'Rhythmus', 'Große Abstände und kurze Absätze. Jeder Gedanke bekommt eine eigene Fläche.'],
+  [['geheimnisvoll', 'mysteriös'], 'Dramaturgie', 'Zuerst das Bild, dann die Erklärung. Die Spannung entsteht aus der Reihenfolge.'],
+  [['führend', 'marktführer', 'erfolgreich', 'erfolg'], 'Dramaturgie', 'Belege zuerst: Jahre, Projekte, Stimmen Ihrer Kundschaft, ganz oben auf der Seite.'],
+  [['mittelständisch', 'familiengeführt', 'inhabergeführt'], 'Bildsprache', 'Die Inhaberin oder der Inhaber im Bild, dazu ein Satz in eigenen Worten.'],
+]
+
+// Wörter, die ein Briefing als Gegenteil nennt („weniger altbacken“).
+export const GEGENTEIL: [string[], string, string][] = [
+  [['langweilig', 'altbacken', 'spießig', 'verstaubt', 'altmodisch', 'bieder', 'angestaubt', 'öde'], 'Dramaturgie', 'Ein klarer Gedanke ganz am Anfang und Bilder aus Ihrem echten Alltag.'],
+  [['kitschig', 'überladen', 'unruhig', 'chaotisch', 'voll'], 'Rhythmus', 'Weniger Elemente pro Seite und eine feste Reihenfolge für alles Übrige.'],
+  [['steif', 'förmlich', 'kühl', 'kalt', 'distanziert'], 'Tonalität', 'Direkte Ansprache, Gesichter aus Ihrem Team und Sätze, die laut gelesen funktionieren.'],
 ]
