@@ -202,3 +202,4 @@ html:not(.js) .deko-eigenes { display: none; }
 .projekt dt { font-size: 14px; color: var(--leise); }
 .projekt dd s { text-decoration-thickness: 2px; }
 @media (max-width: 760px) { .projekt { grid-template-columns: 1fr; } }
+.leer { min-height: 100svh; } .leer h1 { max-width: 12ch; } .leer a { text-decoration: underline; }
