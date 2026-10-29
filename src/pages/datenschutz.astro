@@ -4,9 +4,9 @@ import Kopf from '../components/Kopf.astro'
 import { BUCHUNG } from '../data/inhalt'
 const buchung = !!(BUCHUNG.video || BUCHUNG.vorOrt)
 
-// Information nach Art. 13 DSGVO für die Website. Übernommen aus der
-// bisherigen Erklärung; Kundenbereich und Office haben eigene Angaben.
-// Entwurf, zur Prüfung vor dem Launch.
+// Information nach Art. 13 DSGVO für die Website. Kundenbereich und Office
+// haben eigene Angaben. Geprüft gegen die tatsächliche Technik am 29.10.2026:
+// keine Cookies, kein Speicher im Browser, keine Anfragen an fremde Server.
 ---
 <Seite titel="Datenschutz · kommunikations.studio" ton="hell" beschreibung="Datenschutzerklärung von kommunikations.studio.">
   <Kopf ziel="/" zielText="zur Startseite" />
@@ -23,14 +23,23 @@ const buchung = !!(BUCHUNG.video || BUCHUNG.vorOrt)
     <h2>Wenn Sie diese Website besuchen</h2>
     <p>
       Es gibt keine Cookies, keine Reichweitenmessung, keine Werbedienste und keine
-      eingebetteten Inhalte anderer Anbieter. Die Schriften liegen auf unserem eigenen Server.
+      eingebetteten Inhalte anderer Anbieter. Schriften und Skripte liegen auf unserem eigenen
+      Server, Ihr Browser lädt also nichts von fremden Servern nach. Die Verbindung ist per TLS
+      verschlüsselt.
     </p>
     <p>
       Die Website läuft bei Vercel Inc. (440 N Barranca Ave #4133, Covina, CA 91723, USA).
-      Beim Aufruf verarbeitet Vercel technisch notwendige Daten wie IP-Adresse, Zeitpunkt
-      und aufgerufene Seite, um die Seite auszuliefern und vor Angriffen zu schützen.
+      Beim Aufruf verarbeitet Vercel technisch notwendige Daten wie IP-Adresse, Zeitpunkt,
+      aufgerufene Seite und Browserkennung, um die Seite auszuliefern und vor Angriffen zu
+      schützen. Vercel speichert diese Protokolle nur kurz und löscht sie danach automatisch.
       Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren Betrieb
-      (Art. 6 Abs. 1 lit. f DSGVO). Vercel ist unter dem EU-US Data Privacy Framework zertifiziert.
+      (Art. 6 Abs. 1 lit. f DSGVO). Mit Vercel besteht ein Vertrag zur Auftragsverarbeitung
+      (Art. 28 DSGVO). Für die Übermittlung in die USA gilt der Angemessenheitsbeschluss zum
+      EU-US Data Privacy Framework (Art. 45 DSGVO), unter dem Vercel zertifiziert ist.
+    </p>
+    <p>
+      Was Sie in den Dekodierer auf der Startseite tippen, bleibt in Ihrem Browser. Die
+      Übersetzung entsteht dort, es wird nichts gesendet oder gespeichert.
     </p>
 
     <h2>Wenn Sie uns schreiben oder anrufen</h2>
@@ -47,9 +56,13 @@ const buchung = !!(BUCHUNG.video || BUCHUNG.vorOrt)
         <p>
           Für die Terminbuchung verlinken wir auf die Terminplanung von Google Kalender
           (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland). Erst wenn Sie
-          dem Link folgen, gelangen Sie auf eine Seite von Google. Ihre Angaben dort verwenden wir,
-          um den Termin vorzubereiten und durchzuführen (Art. 6 Abs. 1 lit. b DSGVO). Für die Seite
-          selbst gilt die Datenschutzerklärung von Google.
+          dem Link folgen, gelangen Sie auf eine Seite von Google. Dort geben Sie Ihren Namen,
+          Ihre E-Mail-Adresse und beim Besuch vor Ort die Adresse Ihres Unternehmens an. Diese
+          Angaben verwenden wir, um den Termin vorzubereiten und durchzuführen
+          (Art. 6 Abs. 1 lit. b DSGVO). Video-Calls laufen über Google Meet. Google verarbeitet
+          die Daten in unserem Auftrag (Art. 28 DSGVO); eine Übermittlung in die USA ist durch
+          den Angemessenheitsbeschluss zum EU-US Data Privacy Framework abgedeckt. Wir löschen
+          die Termindaten, wenn der Termin vorbei ist und keine Aufbewahrungspflicht mehr besteht.
         </p>
       </>
     )}
@@ -57,14 +70,25 @@ const buchung = !!(BUCHUNG.video || BUCHUNG.vorOrt)
     <h2>Ihre Rechte</h2>
     <p>
       Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der
-      Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15 bis 21 DSGVO). Eine
-      Einwilligung können Sie jederzeit widerrufen. Schreiben Sie dafür an
+      Verarbeitung und Datenübertragbarkeit (Art. 15 bis 20 DSGVO). Schreiben Sie dafür an
       <a href="mailto:kontakt@kommunikations.studio">kontakt@kommunikations.studio</a>.
-      Beschweren können Sie sich beim Hessischen Beauftragten für Datenschutz und
-      Informationsfreiheit.
+    </p>
+    <p>
+      <strong>Widerspruchsrecht:</strong> Wo wir Daten auf Grundlage eines berechtigten
+      Interesses verarbeiten (Art. 6 Abs. 1 lit. f DSGVO), können Sie aus Gründen, die sich aus
+      Ihrer besonderen Situation ergeben, jederzeit widersprechen (Art. 21 DSGVO).
+    </p>
+    <p>
+      Beschweren können Sie sich bei einer Aufsichtsbehörde, etwa beim Hessischen Beauftragten
+      für Datenschutz und Informationsfreiheit, Gustav-Stresemann-Ring 1, 65189 Wiesbaden.
+    </p>
+    <p>
+      Sie sind weder gesetzlich noch vertraglich verpflichtet, uns Daten zu geben. Ohne Ihre
+      Angaben können wir Ihnen aber nicht antworten. Eine automatisierte Entscheidungsfindung
+      findet nicht statt.
     </p>
 
-    <p class="unter">Stand: 17. Oktober 2026</p>
+    <p class="unter">Stand: 29. Oktober 2026</p>
     <p class="zurueck"><a href="/">kommunikations.studio</a><a href="/impressum">Impressum</a></p>
   </main>
 </Seite>
