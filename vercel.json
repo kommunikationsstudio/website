@@ -1,18 +1,200 @@
 {
+  "redirects": [
+    {
+      "source": "/m/:token",
+      "destination": "https://upload.kommunikations.studio/:token",
+      "permanent": false
+    },
+    {
+      "source": "/m/:token/:rest*",
+      "destination": "https://upload.kommunikations.studio/:token/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/upload/:token",
+      "destination": "https://upload.kommunikations.studio/:token",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "destination": "https://office.kommunikations.studio/dashboard",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard/:rest*",
+      "destination": "https://office.kommunikations.studio/dashboard/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/sign-in",
+      "destination": "https://office.kommunikations.studio/sign-in",
+      "permanent": false
+    },
+    {
+      "source": "/sign-in/:rest*",
+      "destination": "https://office.kommunikations.studio/sign-in/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/kein-zugang",
+      "destination": "https://office.kommunikations.studio/kein-zugang",
+      "permanent": false
+    },
+    {
+      "source": "/kein-zugang/:rest*",
+      "destination": "https://office.kommunikations.studio/kein-zugang/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/api",
+      "destination": "https://office.kommunikations.studio/api",
+      "permanent": false
+    },
+    {
+      "source": "/api/:rest*",
+      "destination": "https://office.kommunikations.studio/api/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/atelier",
+      "destination": "https://office.kommunikations.studio/atelier",
+      "permanent": false
+    },
+    {
+      "source": "/atelier/:rest*",
+      "destination": "https://office.kommunikations.studio/atelier/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/labor",
+      "destination": "https://office.kommunikations.studio/labor",
+      "permanent": false
+    },
+    {
+      "source": "/labor/:rest*",
+      "destination": "https://office.kommunikations.studio/labor/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/match-o-meter",
+      "destination": "https://office.kommunikations.studio/match-o-meter",
+      "permanent": false
+    },
+    {
+      "source": "/match-o-meter/:rest*",
+      "destination": "https://office.kommunikations.studio/match-o-meter/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/preview",
+      "destination": "https://office.kommunikations.studio/preview",
+      "permanent": false
+    },
+    {
+      "source": "/preview/:rest*",
+      "destination": "https://office.kommunikations.studio/preview/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/neu",
+      "destination": "https://office.kommunikations.studio/neu",
+      "permanent": false
+    },
+    {
+      "source": "/neu/:rest*",
+      "destination": "https://office.kommunikations.studio/neu/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/VBoL",
+      "destination": "https://office.kommunikations.studio/VBoL",
+      "permanent": false
+    },
+    {
+      "source": "/VBoL/:rest*",
+      "destination": "https://office.kommunikations.studio/VBoL/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/pubrechner",
+      "destination": "https://office.kommunikations.studio/pubrechner",
+      "permanent": false
+    },
+    {
+      "source": "/pubrechner/:rest*",
+      "destination": "https://office.kommunikations.studio/pubrechner/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/hotelb4",
+      "destination": "https://office.kommunikations.studio/hotelb4",
+      "permanent": false
+    },
+    {
+      "source": "/hotelb4/:rest*",
+      "destination": "https://office.kommunikations.studio/hotelb4/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/pwa",
+      "destination": "https://office.kommunikations.studio/pwa",
+      "permanent": false
+    },
+    {
+      "source": "/pwa/:rest*",
+      "destination": "https://office.kommunikations.studio/pwa/:rest*",
+      "permanent": false
+    },
+    {
+      "source": "/sw.js",
+      "destination": "https://office.kommunikations.studio/sw.js",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard-manifest.webmanifest",
+      "destination": "https://office.kommunikations.studio/dashboard-manifest.webmanifest",
+      "permanent": false
+    },
+    {
+      "source": "/kes-manifest.webmanifest",
+      "destination": "https://office.kommunikations.studio/kes-manifest.webmanifest",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=31536000" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000"
+        }
       ]
     },
     {
       "source": "/(_astro|fonts)/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }
