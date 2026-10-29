@@ -5,7 +5,7 @@ export const TEL = '+4915678540600'
 export const TEL_ANZEIGE = '0156 78540600'
 
 // Buchungslinks (Google-Terminbuchung). Solange leer, öffnet der Knopf eine vorbereitete E-Mail.
-export const BUCHUNG = { video: '', vorOrt: '' }
+export const BUCHUNG = { video: 'https://calendar.app.google/WfBr9Ayh4g9KjbBv5', vorOrt: '' }
 const brief = (art: string, feld: string) => `mailto:${MAIL}?subject=${encodeURIComponent(`Erstgespräch ${art}`)}&body=${encodeURIComponent(`Guten Tag Herr Knust,\n\nich wünsche mir ein Erstgespräch ${art}.\n\nunser Unternehmen:\n${feld}\nzwei Terminvorschläge:\n\nViele Grüße\n`)}`
 export const TERMINE = [
   { titel: 'Video-Call', zusatz: '45 Minuten, kostenfrei', link: BUCHUNG.video || brief('per Video', 'unsere Website:'), extern: !!BUCHUNG.video },
