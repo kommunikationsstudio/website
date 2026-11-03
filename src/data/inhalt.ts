@@ -64,14 +64,14 @@ export const SCHLUSS = {
   text: 'Im Video-Call schauen wir gemeinsam auf Ihre Website und Ihre Unterlagen. Beim Besuch komme ich zu Ihnen und sehe Ihr Unternehmen mit den Augen Ihrer Kundschaft. Danach entscheiden Sie in Ruhe.',
 }
 
-// Beispielblatt: die Wahrnehmungsanalyse für dieses Studio, Stand Oktober 2026
+// Beispielblatt: die Wahrnehmungsanalyse für Sebastians eigene Arbeit, Stand Oktober 2026
 export const BEISPIEL = {
   kopf: 'Oktober 2026',
   dekodierung: [
     ['Anlass', 'Neubau der eigenen Website.'],
-    ['Vorher', 'Das Studio wirkt über Empfehlungen. Online fehlt ein Ort, der die Methode zeigt.'],
+    ['Vorher', 'Ich wirke über Empfehlungen. Online fehlt ein Ort, der die Methode zeigt.'],
     ['Ziel', 'Besuchende erleben in Sekunden, wie aus einem Eindruck eine Entscheidung wird, und vereinbaren ein Erstgespräch.'],
-    ['Spannung', 'Ein Studio aus einer Person soll die Ruhe einer etablierten Marke ausstrahlen und persönlich bleiben.'],
+    ['Spannung', 'Eine Person allein soll die Ruhe einer etablierten Marke ausstrahlen und persönlich bleiben.'],
   ],
   hypothesen: [
     ['Typografie', 'Eine einzige Grotesk in variabler Breite und Stärke trägt alles. Größe und Gewicht ordnen den Text.'],
