@@ -9,7 +9,8 @@ const buchung = !!(BUCHUNG.video || BUCHUNG.vorOrt)
 // ein Cookie nur nach Eingabe des Passworts (ks_zugang, siehe middleware.ts),
 // kein Speicher im Browser, keine Anfragen an fremde Server. Gehostet bei
 // Vercel ohne feste Region (vercel.json). Aufbewahrung der Protokolle laut
-// vercel.com/docs/logs/runtime (Abschnitt Limits) und Vercels Datenschutzerklärung.
+// vercel.com/docs/logs/runtime (Abschnitt Limits, Tarif Pro: 1 Tag, Sebastian 03.11.2026)
+// und Vercels Datenschutzerklärung. Sebastian spricht als „ich“.
 // Fällt die Passwortsperre weg, gehört der Abschnitt zum Cookie wieder heraus.
 ---
 <Seite titel="Datenschutz · kommunikations.studio" ton="hell" beschreibung="Datenschutzerklärung von kommunikations.studio.">
@@ -36,14 +37,14 @@ const buchung = !!(BUCHUNG.video || BUCHUNG.vorOrt)
       Vercel liefert sie über sein weltweites Netz von Rechenzentren aus, ohne feste Region.
       Beim Aufruf verarbeitet Vercel technisch notwendige Daten wie
       IP-Adresse, Zeitpunkt, aufgerufene Seite und Browserkennung, um die Seite auszuliefern
-      und vor Angriffen zu schützen. Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren Betrieb
+      und vor Angriffen zu schützen. Rechtsgrundlage ist mein berechtigtes Interesse an einem sicheren Betrieb
       (Art. 6 Abs. 1 lit. f DSGVO). Mit Vercel besteht ein Vertrag zur Auftragsverarbeitung
       (Art. 28 DSGVO). Für die Übermittlung in die USA gilt der Angemessenheitsbeschluss zum
       EU-US Data Privacy Framework (Art. 45 DSGVO), unter dem Vercel zertifiziert ist.
     </p>
     <p>
-      Laut der Dokumentation von Vercel stehen die Protokolle je nach Tarif eine Stunde bis
-      30 Tage zur Einsicht bereit. Darüber hinaus bewahrt Vercel Daten nach eigener
+      Laut der Dokumentation von Vercel stehen die Protokolle in meinem Tarif (Pro) einen Tag
+      lang zur Einsicht bereit. Darüber hinaus bewahrt Vercel Daten nach eigener
       Datenschutzerklärung nur so lange auf, wie es für vertragliche und gesetzliche Pflichten
       nötig ist, und löscht oder anonymisiert sie danach.
     </p>
@@ -65,29 +66,29 @@ const buchung = !!(BUCHUNG.video || BUCHUNG.vorOrt)
       jederzeit in Ihrem Browser.
     </p>
 
-    <h2>Wenn Sie uns schreiben oder anrufen</h2>
+    <h2>Wenn Sie mir schreiben oder mich anrufen</h2>
     <p>
-      Wir verarbeiten, was Sie uns mitteilen, um Ihnen zu antworten und eine Anfrage oder
+      Ich verarbeite, was Sie mir mitteilen, um Ihnen zu antworten und eine Anfrage oder
       einen Auftrag zu bearbeiten (Art. 6 Abs. 1 lit. b und f DSGVO). E-Mails liegen bei
       Google Workspace (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland).
-      Google verarbeitet die E-Mails in unserem Auftrag (Art. 28 DSGVO). Dabei können Daten
+      Google verarbeitet die E-Mails in meinem Auftrag (Art. 28 DSGVO). Dabei können Daten
       auch an Google LLC in den USA gelangen; dafür gilt der Angemessenheitsbeschluss zum
       EU-US Data Privacy Framework (Art. 45 DSGVO), unter dem Google LLC zertifiziert ist.
-      Wir löschen Anfragen, wenn sie erledigt sind und keine Aufbewahrungspflicht mehr besteht.
+      Ich lösche Anfragen, wenn sie erledigt sind und keine Aufbewahrungspflicht mehr besteht.
     </p>
 
     {buchung && (
       <>
         <h2>Wenn Sie einen Termin buchen</h2>
         <p>
-          Für die Terminbuchung verlinken wir auf die Terminplanung von Google Kalender
+          Für die Terminbuchung verlinke ich auf die Terminplanung von Google Kalender
           (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland). Erst wenn Sie
           dem Link folgen, gelangen Sie auf eine Seite von Google. Dort geben Sie Ihren Namen,
           Ihre E-Mail-Adresse und beim Besuch vor Ort die Adresse Ihres Unternehmens an. Diese
-          Angaben verwenden wir, um den Termin vorzubereiten und durchzuführen
+          Angaben verwende ich, um den Termin vorzubereiten und durchzuführen
           (Art. 6 Abs. 1 lit. b DSGVO). Video-Calls laufen über Google Meet. Google verarbeitet
-          die Daten in unserem Auftrag (Art. 28 DSGVO); eine Übermittlung in die USA ist durch
-          den Angemessenheitsbeschluss zum EU-US Data Privacy Framework abgedeckt. Wir löschen
+          die Daten in meinem Auftrag (Art. 28 DSGVO); eine Übermittlung in die USA ist durch
+          den Angemessenheitsbeschluss zum EU-US Data Privacy Framework abgedeckt. Ich lösche
           die Termindaten, wenn der Termin vorbei ist und keine Aufbewahrungspflicht mehr besteht.
         </p>
       </>
@@ -100,8 +101,8 @@ const buchung = !!(BUCHUNG.video || BUCHUNG.vorOrt)
       <a href="mailto:kontakt@kommunikations.studio">kontakt@kommunikations.studio</a>.
     </p>
     <p>
-      <strong>Widerspruchsrecht:</strong> Wo wir Daten auf Grundlage eines berechtigten
-      Interesses verarbeiten (Art. 6 Abs. 1 lit. f DSGVO), können Sie aus Gründen, die sich aus
+      <strong>Widerspruchsrecht:</strong> Wo ich Daten auf Grundlage eines berechtigten
+      Interesses verarbeite (Art. 6 Abs. 1 lit. f DSGVO), können Sie aus Gründen, die sich aus
       Ihrer besonderen Situation ergeben, jederzeit widersprechen (Art. 21 DSGVO).
     </p>
     <p>
@@ -109,7 +110,7 @@ const buchung = !!(BUCHUNG.video || BUCHUNG.vorOrt)
       für Datenschutz und Informationsfreiheit, Gustav-Stresemann-Ring 1, 65189 Wiesbaden.
     </p>
     <p>
-      Sie sind weder gesetzlich noch vertraglich verpflichtet, uns Daten zu geben. Ohne Ihre
+      Sie sind weder gesetzlich noch vertraglich verpflichtet, mir Daten zu geben. Ohne Ihre
       Angaben bleibt eine Antwort aus. Automatisierte Entscheidungen gibt es keine.
     </p>
 
