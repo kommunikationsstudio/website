@@ -1,19 +1,35 @@
-import { next } from '@vercel/functions'
+import { next, rewrite } from '@vercel/functions'
 
 // Läuft in Vercels Middleware-Umgebung; Node-Typen braucht die Website sonst nicht.
 declare const process: { env: Record<string, string | undefined> }
 
-// Sperre bis zur Freigabe: Sebastian sichtet die Seite erst vollständig und
-// stellt seine Referenzarbeiten ein (03.11.2026). Bis dahin fragt der Browser
-// nach einem Passwort. Den Wert trägt Sebastian selbst in Vercel als
-// SEITE_PASSWORT ein; fehlt er, bleibt die Tür zu.
+// Sperre bis zur Freigabe (Sebastian, 03.11.2026): Er sichtet die Seite und
+// stellt seine Referenzarbeiten ein. Bis dahin sehen Besucher die 3D-Vorschau
+// unter /vorschau/. Sebastian tritt über /zugang/ mit dem Passwort ein, das er
+// selbst in Vercel als SEITE_PASSWORT einträgt; fehlt es, bleibt die Tür zu.
 //
 // Frei bleiben alle Pfade, die vercel.json ins Office weiterleitet. Sonst
-// stünden Kund*innen mit einem alten Upload-Link vor dem Passwort.
+// landeten Kund*innen mit einem alten Upload-Link auf der Vorschau.
 export const config = {
   matcher: [
     '/((?!(?:m|upload)/|(?:dashboard|sign-in|kein-zugang|api|atelier|labor|match-o-meter|preview|neu|VBoL|pubrechner|hotelb4|pwa)(?:/|$)|(?:sw\\.js|dashboard-manifest\\.webmanifest|kes-manifest\\.webmanifest)$).*)',
   ],
+}
+
+const COOKIE = 'ks_zugang'
+
+// Ohne Passwort erreichbar: die Vorschau selbst, der Eingang, Impressum und
+// Datenschutz (Pflicht für jede öffentliche Seite) und alle Dateien mit
+// Endung, die die Vorschau zum Laufen braucht. llms.txt beschreibt den Inhalt
+// der ganzen Website und bleibt deshalb gesperrt.
+const OFFEN = /^\/(?:vorschau|zugang|impressum|datenschutz)\/?$/
+function istDatei(pfad: string) {
+  return /\.[a-z0-9]+$/i.test(pfad) && !/\.html$/i.test(pfad) && pfad !== '/llms.txt' && pfad !== '/sitemap.xml'
+}
+
+async function marke(passwort: string): Promise<string> {
+  const roh = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`ks-zugang:${passwort}`))
+  return Array.from(new Uint8Array(roh), (b) => b.toString(16).padStart(2, '0')).join('')
 }
 
 function gleich(a: string, b: string): boolean {
@@ -25,32 +41,38 @@ function gleich(a: string, b: string): boolean {
   return unterschied === 0
 }
 
-function passwortAus(anfrage: Request): string | null {
-  const kopf = anfrage.headers.get('authorization') ?? ''
-  if (!kopf.startsWith('Basic ')) return null
-  try {
-    const klar = atob(kopf.slice(6))
-    // Der Name davor ist egal, es zählt nur das Passwort.
-    return klar.slice(klar.indexOf(':') + 1)
-  } catch {
-    return null
-  }
+function cookieAus(anfrage: Request): string {
+  const zeile = anfrage.headers.get('cookie') ?? ''
+  const treffer = zeile.split(/;\s*/).find((c) => c.startsWith(`${COOKIE}=`))
+  return treffer ? treffer.slice(COOKIE.length + 1) : ''
 }
 
-export default function middleware(anfrage: Request) {
+const weiter = (ziel: string, cookie?: string) => {
+  const kopf = new Headers({ Location: ziel, 'Cache-Control': 'no-store' })
+  if (cookie) kopf.append('Set-Cookie', cookie)
+  return new Response(null, { status: 303, headers: kopf })
+}
+
+export default async function middleware(anfrage: Request) {
   if (process.env.PUBLIC_FREIGEGEBEN === 'true') return next()
 
+  const url = new URL(anfrage.url)
   const soll = process.env.SEITE_PASSWORT ?? ''
-  const ist = passwortAus(anfrage)
-  if (soll && ist !== null && gleich(ist, soll)) return next()
 
-  return new Response('Diese Seite ist noch nicht freigegeben.', {
-    status: 401,
-    headers: {
-      'WWW-Authenticate': 'Basic realm="kommunikations.studio", charset="UTF-8"',
-      'Content-Type': 'text/plain; charset=utf-8',
-      'Cache-Control': 'no-store',
-      'X-Robots-Tag': 'noindex, nofollow',
-    },
+  if (url.pathname.replace(/\/$/, '') === '/zugang' && anfrage.method === 'POST') {
+    const form = await anfrage.formData().catch(() => null)
+    const ist = String(form?.get('passwort') ?? '')
+    if (soll && gleich(ist, soll)) {
+      const wert = await marke(soll)
+      return weiter('/', `${COOKIE}=${wert}; Path=/; Max-Age=2592000; HttpOnly; Secure; SameSite=Lax`)
+    }
+    return weiter('/zugang/?falsch')
+  }
+
+  if (soll && gleich(cookieAus(anfrage), await marke(soll))) return next()
+  if (OFFEN.test(url.pathname) || istDatei(url.pathname)) return next()
+
+  return rewrite(new URL('/vorschau/', url), {
+    headers: { 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow' },
   })
 }

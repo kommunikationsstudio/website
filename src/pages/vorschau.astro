@@ -1,0 +1,116 @@
+---
+// Was Besucher ohne Passwort sehen, bis Sebastian die Website freigibt.
+// Die Middleware leitet jede gesperrte Seite hierher um.
+import { MAIL } from '../data/inhalt'
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#000000" />
+    <title>kommunikations.studio, Sebastian Knust</title>
+    <meta name="description" content="Positionierung, Erscheinungsbild und Inhalte. Sebastian Knust, Limburg an der Lahn." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin />
+    <style>
+      @font-face {
+        font-family: 'Archivo';
+        src: url('/fonts/archivo.woff2') format('woff2');
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        font-display: swap;
+      }
+      :root {
+        --rand: max(20px, env(safe-area-inset-left, 0px), 4.5vw);
+        color-scheme: dark;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { height: 100%; background: #000; color: #fff; overflow: hidden; }
+      body {
+        font-family: 'Archivo', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        cursor: crosshair;
+      }
+      canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+      .korn {
+        position: fixed; inset: -50%; pointer-events: none; opacity: 0.07; mix-blend-mode: screen;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        animation: korn 0.6s steps(3) infinite;
+      }
+      @keyframes korn { 33% { transform: translate(-3%, 2%); } 66% { transform: translate(2%, -3%); } }
+      .ebene {
+        position: fixed; inset: 0; pointer-events: none;
+        display: grid; grid-template-rows: auto 1fr auto;
+        padding: max(20px, env(safe-area-inset-top, 0px), 3.5vw) var(--rand) max(20px, env(safe-area-inset-bottom, 0px), 3.5vw);
+      }
+      .ebene a { pointer-events: auto; color: inherit; }
+      .kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; font-size: 14px; letter-spacing: 0.02em; }
+      .marke { font-weight: 700; font-stretch: 110%; text-decoration: none; }
+      .zustand { color: #8b8b88; font-variant-numeric: tabular-nums; white-space: pre; text-transform: lowercase; }
+      .fuss { display: grid; gap: clamp(18px, 2.5vw, 32px); }
+      h1 {
+        font-weight: 800; font-stretch: 112%; text-transform: lowercase;
+        font-size: clamp(44px, 9.2vw, 168px); line-height: 0.88; letter-spacing: -0.035em;
+        max-width: 12ch;
+        opacity: 0; transform: translateY(24px);
+        animation: auf 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+      }
+      .zeile {
+        display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 18px 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.22); padding-top: 18px;
+        opacity: 0; animation: auf 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+      }
+      .wer { font-size: 15px; line-height: 1.45; color: #c9c9c6; max-width: 46ch; }
+      .wer strong { color: #fff; font-weight: 600; }
+      .post {
+        font-weight: 700; font-stretch: 100%; font-size: clamp(20px, 2.6vw, 38px); letter-spacing: -0.01em;
+        text-decoration: none; position: relative; padding-bottom: 4px;
+        background: linear-gradient(#fff, #fff) left bottom / 100% 2px no-repeat;
+        transition: background-size 0.6s cubic-bezier(0.65, 0, 0.35, 1), font-stretch 0.6s;
+      }
+      .post:hover, .post:focus-visible { background-size: 0% 2px; font-stretch: 118%; outline: none; }
+      .klein { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 13px; color: #8b8b88; }
+      .klein a { text-decoration: none; }
+      .klein a:hover, .klein a:focus-visible { color: #fff; }
+      .hinweis-touch { display: none; }
+      @media (hover: none) { .hinweis-maus { display: none; } .hinweis-touch { display: inline; } }
+      @keyframes auf { to { opacity: 1; transform: none; } }
+      @media (prefers-reduced-motion: reduce) {
+        .korn { animation: none; }
+        h1, .zeile { animation-duration: 0.01s; animation-delay: 0s; }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas data-buehne aria-hidden="true"></canvas>
+    <div class="korn" aria-hidden="true"></div>
+    <main class="ebene">
+      <header class="kopf">
+        <a class="marke" href="/">kommunikations.studio</a>
+        <span class="zustand" data-zustand aria-hidden="true"></span>
+      </header>
+      <div></div>
+      <div class="fuss">
+        <h1>vom eindruck zur wirkung.</h1>
+        <div class="zeile">
+          <p class="wer">
+            <strong>Sebastian Knust</strong>, Limburg an der Lahn. Positionierung, Erscheinungsbild und Inhalte.
+            Die neue Website entsteht gerade. Diese Bühne läuft live im Browser: bis zu 90.000 Punkte, eigene Shader, von Hand gebaut.
+          </p>
+          <a class="post" href={`mailto:${MAIL}`}>{MAIL}</a>
+        </div>
+        <nav class="klein" aria-label="Rechtliches">
+          <span class="hinweis-maus">Bewegen Sie die Maus, klicken Sie in die Wolke.</span>
+          <span class="hinweis-touch">Tippen Sie in die Wolke.</span>
+          <a href="/impressum/">Impressum</a>
+          <a href="/datenschutz/">Datenschutz</a>
+        </nav>
+      </div>
+    </main>
+    <script>
+      import '../scripts/vorschau.ts'
+    </script>
+  </body>
+</html>
