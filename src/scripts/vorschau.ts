@@ -1,5 +1,6 @@
 // Vorschau, solange die Website hinter dem Passwort liegt: eine Wolke aus
-// Punkten, die zwischen Formen wandert und am Ende das Zeichen k·s bildet.
+// quadratischen Punkten, die zwischen Formen wandert und am Ende Sebastians
+// Signet bildet.
 // Alles läuft auf der Grafikkarte; JavaScript liefert nur Zielpositionen und Zeit.
 import {
   AdditiveBlending,
@@ -42,16 +43,18 @@ function nebel(): Float32Array {
   return p
 }
 
-function kugel(): Float32Array {
+// Der Würfel ist das Quadrat aus dem Signet im Raum: Sebastian will das
+// Quadrat als wiederkehrendes Element (03.11.2026).
+function wuerfel(): Float32Array {
   const z = zufall(11)
   const p = new Float32Array(ANZAHL * 3)
-  const gold = Math.PI * (3 - Math.sqrt(5))
+  const a = 1.25
   for (let i = 0; i < ANZAHL; i++) {
-    const y = 1 - (i / (ANZAHL - 1)) * 2
-    const r = Math.sqrt(1 - y * y)
-    const t = gold * i
-    const d = 1.75 + (z() - 0.5) * 0.06
-    p.set([Math.cos(t) * r * d, y * d, Math.sin(t) * r * d], i * 3)
+    const seite = Math.floor(z() * 6)
+    const u = (z() * 2 - 1) * a, v = (z() * 2 - 1) * a
+    const w = (seite % 2 ? a : -a) + (z() - 0.5) * 0.04
+    const achse = seite >> 1
+    p.set(achse === 0 ? [w, u, v] : achse === 1 ? [u, w, v] : [u, v, w], i * 3)
   }
   return p
 }
@@ -154,10 +157,10 @@ const VERTEX = /* glsl */ `
 const FRAGMENT = /* glsl */ `
   varying float vNah;
   void main(){
-    vec2 c = gl_PointCoord - 0.5;
-    float r = dot(c, c);
-    if (r > 0.25) discard;
-    float k = smoothstep(0.25, 0.0, r);
+    // Jeder Punkt ist ein kleines Quadrat, wie der Punkt im Signet.
+    vec2 c = abs(gl_PointCoord - 0.5);
+    float r = max(c.x, c.y);
+    float k = 1.0 - smoothstep(0.38, 0.5, r);
     gl_FragColor = vec4(vec3(1.0), k * (0.07 + vNah * 0.33));
   }
 `
@@ -181,7 +184,7 @@ async function start() {
 
   const formen: Form[] = [
     { name: 'eindruck', punkte: nebel() },
-    { name: 'ordnung', punkte: kugel() },
+    { name: 'ordnung', punkte: wuerfel() },
     { name: 'spannung', punkte: knoten() },
     { name: 'wirkung', punkte: await zeichen() },
   ]
@@ -247,7 +250,11 @@ async function start() {
 
   let jetzt = 0
   const zeigen = (i: number) => {
-    if (anzeige) anzeige.textContent = `0${i + 1} / 0${formen.length}  ${formen[i].name}`
+    // Vier Quadrate zählen die Formen mit, das aktuelle ist gefüllt.
+    // Als echte Quadrate gezeichnet: Schriftzeichen wie ■ sind je nach Schrift
+    // keine exakten 1:1-Flächen.
+    if (!anzeige) return
+    anzeige.innerHTML = formen.map((_, j) => `<i class="q${j === i ? ' an' : ''}"></i>`).join('') + `<span>${formen[i].name}</span>`
   }
 
   if (ruhig) {
@@ -303,3 +310,14 @@ async function start() {
 }
 
 start()
+
+// Der quadratische Zeiger läuft unabhängig von WebGL.
+const zeiger = document.querySelector<HTMLElement>('[data-zeiger]')
+if (zeiger && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  addEventListener('pointermove', (e) => {
+    zeiger.style.opacity = '1'
+    zeiger.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+    zeiger.classList.toggle('gross', !!(e.target as HTMLElement).closest('a'))
+  })
+  document.documentElement.addEventListener('pointerleave', () => (zeiger.style.opacity = '0'))
+}
