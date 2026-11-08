@@ -4,7 +4,7 @@ import type { APIRoute } from 'astro'
 export const GET: APIRoute = ({ site }) => {
   const text = `# kommunikations.studio
 
-> Studio für Positionierung, Erscheinungsbild und Inhalte von Sebastian Knust in Limburg an der Lahn, für kleine und mittlere Unternehmen in Rhein-Main und Mittelhessen. Leitsatz: Wahrnehmung gestalten. Vom Eindruck zur Wirkung.
+> Sebastian Knust gestaltet Positionierung, Erscheinungsbild und Inhalte, von Limburg an der Lahn aus, für kleine und mittlere Unternehmen in Rhein-Main und Mittelhessen. Leitsatz: Wahrnehmung gestalten. Vom Eindruck zur Wirkung.
 
 kommunikations.studio übersetzt Briefing-Floskeln wie „moderner“ oder „hochwertiger“ mit einer eigenen Wahrnehmungsanalyse in konkrete Entscheidungen über sieben Kategorien: Typografie, Bildsprache, Bewegung, Tonalität, Dramaturgie, Atmosphäre und Rhythmus.
 

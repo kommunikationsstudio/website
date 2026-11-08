@@ -1,0 +1,150 @@
+---
+// Was Besucher ohne Passwort sehen, bis Sebastian die Website freigibt.
+// Die Middleware leitet jede gesperrte Seite hierher um.
+// Ohne Name, Ort und Kontakt (Sebastian, 03.11.2026). Impressum und
+// Datenschutz bleiben als kleinste Zeile: Die Pflicht gilt für die Domain,
+// auch solange die Seite leer wirkt.
+//
+// Das Quadrat aus dem Signet (21,26 × 21,26 in logo-ks-master.svg, also 1:1)
+// kehrt wieder: als Punkt der Überschrift, als Störer, als Zeiger, im Zähler.
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#000000" />
+    <title>kommunikations.studio</title>
+    <meta name="description" content="Positionierung, Erscheinungsbild und Inhalte. Die neue Website entsteht." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin />
+    <style>
+      @font-face {
+        font-family: 'Archivo';
+        src: url('/fonts/archivo.woff2') format('woff2');
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        font-display: swap;
+      }
+      :root {
+        --rand: max(20px, env(safe-area-inset-left, 0px), 4.5vw);
+        color-scheme: dark;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { height: 100%; background: #000; color: #fff; overflow: hidden; }
+      body {
+        font-family: 'Archivo', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        cursor: crosshair;
+      }
+      canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+      .korn {
+        position: fixed; inset: -50%; pointer-events: none; opacity: 0.07; mix-blend-mode: screen;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        animation: korn 0.6s steps(3) infinite;
+      }
+      @keyframes korn { 33% { transform: translate(-3%, 2%); } 66% { transform: translate(2%, -3%); } }
+      .ebene {
+        position: fixed; inset: 0; pointer-events: none;
+        display: grid; grid-template-rows: auto 1fr auto;
+        padding: max(20px, env(safe-area-inset-top, 0px), 3.5vw) var(--rand) max(20px, env(safe-area-inset-bottom, 0px), 3.5vw);
+      }
+      .ebene a { pointer-events: auto; color: inherit; }
+      .kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; font-size: 14px; letter-spacing: 0.02em; }
+      .marke { font-weight: 700; font-stretch: 110%; text-decoration: none; }
+      .zustand { color: #8b8b88; font-variant-numeric: tabular-nums; white-space: pre; text-transform: lowercase; }
+      .fuss { display: grid; gap: clamp(18px, 2.5vw, 32px); }
+      h1 {
+        font-weight: 800; font-stretch: 112%; text-transform: lowercase;
+        font-size: clamp(44px, 9.2vw, 168px); line-height: 0.88; letter-spacing: -0.035em;
+        max-width: 12ch;
+        opacity: 0; transform: translateY(24px);
+        animation: auf 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+      }
+      /* Das Signet-Quadrat als Schlusspunkt. Im Signet misst es ein Viertel
+         der Höhe des k; bei Archivo sind das rund 0,18 em. */
+      .punkt {
+        display: inline-block; width: 0.18em; height: 0.18em; margin-left: 0.07em;
+        background: currentColor; vertical-align: baseline;
+        animation: blinken 1.1s steps(1) 1.9s 3;
+      }
+      @keyframes blinken { 50% { opacity: 0; } }
+      .zeile {
+        display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 18px 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.22); padding-top: 18px;
+        font-size: 13px; color: #8b8b88;
+        opacity: 0; animation: auf 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+      }
+      .zeile p { max-width: 52ch; line-height: 1.45; }
+      .klein { display: flex; gap: 22px; }
+      .klein a { text-decoration: none; }
+      .klein a:hover, .klein a:focus-visible { color: #fff; }
+      /* Störer: ein weißes Quadrat im Seitenverhältnis des Signet-Punkts. */
+      .stoerer {
+        position: fixed; right: var(--rand); top: 38%;
+        width: clamp(86px, 9vw, 148px); aspect-ratio: 1; background: #fff; color: #000;
+        display: grid; align-content: end; padding: 10px;
+        font-weight: 800; font-stretch: 112%; font-size: clamp(13px, 1.15vw, 18px); line-height: 0.95;
+        text-transform: lowercase; letter-spacing: -0.01em;
+        transform: scale(0); transform-origin: 100% 0;
+        animation: stoss 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 1.6s forwards;
+      }
+      @keyframes stoss { to { transform: scale(1); } }
+      .zustand { display: inline-flex; align-items: center; gap: 6px; }
+      /* Vom Skript eingesetzt, deshalb global: Astro versieht nur, was im
+         Gerüst steht, mit seiner Klasse. */
+      .zustand :global(.q) { width: 8px; height: 8px; border: 1px solid #8b8b88; }
+      .zustand :global(.q.an) { background: #fff; border-color: #fff; }
+      .zustand :global(span) { margin-left: 8px; }
+      @media (max-width: 760px) { .stoerer { top: 53%; } }
+      /* Begleiter: das Quadrat folgt der Maus und kehrt die Farben darunter um.
+         Der echte Zeiger bleibt sichtbar; ihn zu verstecken werten Jurys ab. */
+      .zeiger {
+        position: fixed; left: 0; top: 0; width: 14px; height: 14px; margin: -7px 0 0 -7px;
+        background: #fff; mix-blend-mode: difference; pointer-events: none; z-index: 5;
+        transition: width 0.3s, height 0.3s, margin 0.3s; opacity: 0;
+      }
+      .zeiger.gross { width: 44px; height: 44px; margin: -22px 0 0 -22px; }
+      @media (hover: none) { .zeiger { display: none; } }
+      .hinweis-touch { display: none; }
+      @media (hover: none) { .hinweis-maus { display: none; } .hinweis-touch { display: inline; } }
+      @keyframes auf { to { opacity: 1; transform: none; } }
+      @media (prefers-reduced-motion: reduce) {
+        .korn, .punkt { animation: none; }
+        h1, .zeile, .stoerer { animation-duration: 0.01s; animation-delay: 0s; }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas data-buehne aria-hidden="true"></canvas>
+    <div class="korn" aria-hidden="true"></div>
+    <main class="ebene">
+      <header class="kopf">
+        <a class="marke" href="/">kommunikations.studio</a>
+        <span class="zustand" data-zustand aria-hidden="true"></span>
+      </header>
+      <div></div>
+      <div class="fuss">
+        <h1>vom eindruck zur wirkung<span class="punkt" aria-hidden="true"></span></h1>
+        <div class="zeile">
+          <p>
+            Positionierung, Erscheinungsbild und Inhalte. Diese Bühne läuft live im Browser:
+            bis zu 90.000 Punkte, eigene Shader, von Hand gebaut.
+            <span class="hinweis-maus">Bewegen Sie die Maus, klicken Sie in die Wolke.</span>
+            <span class="hinweis-touch">Tippen Sie in die Wolke.</span>
+          </p>
+          <nav class="klein" aria-label="Rechtliches">
+            <a href="/impressum/">Impressum</a>
+            <a href="/datenschutz/">Datenschutz</a>
+          </nav>
+        </div>
+      </div>
+    </main>
+    <div class="stoerer" aria-hidden="true">neue website im bau</div>
+    <div class="zeiger" data-zeiger aria-hidden="true"></div>
+    <script>
+      import '../scripts/vorschau.ts'
+    </script>
+  </body>
+</html>
